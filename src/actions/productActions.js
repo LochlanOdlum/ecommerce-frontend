@@ -2,37 +2,50 @@ import {
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_SUCCESS,
-  PRODUCT_GET_REQUEST,
-  PRODUCT_GET_FAIL,
-  PRODUCT_GET_SUCCESS,
+  PRODUCT_FETCH_REQUEST,
+  PRODUCT_FETCH_FAIL,
+  PRODUCT_FETCH_SUCCESS,
 } from './types';
 import productService from '../services/products-service';
 
 //Fetches list of products from backend, productList.products is set to result
-export const listProducts = () => async (dispatch, getState) => {
-  console.log('List product action creator ');
-  dispatch({
-    type: PRODUCT_LIST_REQUEST,
-  });
+export const fetchProductList = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PRODUCT_LIST_REQUEST,
+    });
 
-  const productList = await productService.getProducts();
+    const productList = await productService.fetchProducts();
 
-  dispatch({
-    type: PRODUCT_LIST_SUCCESS,
-    payload: productList,
-  });
+    dispatch({
+      type: PRODUCT_LIST_SUCCESS,
+      payload: productList,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LIST_FAIL,
+      payload: error,
+    });
+  }
 };
 
-//Fetches specific product from backend, productDetails.product is set to result
-export const getProductDetails = (id) => async (dispatch, getState) => {
-  dispatch({
-    type: PRODUCT_GET_REQUEST,
-  });
+//Will fetch product from backend and put to productList
+export const fetchProduct = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: PRODUCT_FETCH_REQUEST,
+    });
 
-  const product = await productService.getProduct(id);
+    const product = await productService.fetchProduct(id);
 
-  dispatch({
-    type: PRODUCT_GET_SUCCESS,
-    payload: product,
-  });
+    dispatch({
+      type: PRODUCT_FETCH_SUCCESS,
+      payload: product,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_FETCH_FAIL,
+      payload: error,
+    });
+  }
 };

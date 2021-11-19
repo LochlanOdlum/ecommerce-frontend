@@ -1,26 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { listProducts } from '../actions/productActions';
+import { useSelector } from 'react-redux';
+import useProducts from '../hooks/useProducts';
 
 const HomePage = () => {
-  const { isLoading, products, error } = useSelector((state) => state.productList);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log('Use effect');
-    if (!products.length) {
-      dispatch(listProducts());
-    }
-  }, []);
+  const { products, isLoaded, error } = useProducts();
 
   const renderProducts = () => {
-    if (isLoading) {
-      return <div>Loading</div>;
+    if (error) {
+      return <div>Error fetching product data!</div>;
     }
 
-    if (error) {
-      return <div>{error.message}</div>;
+    if (!isLoaded) {
+      return <div>Loading product data!</div>;
     }
 
     return products.map((product) => {
@@ -34,7 +26,13 @@ const HomePage = () => {
     });
   };
 
-  return <div>{renderProducts()}</div>;
+  return (
+    <div>
+      <Link to='/cart'>Cart</Link>
+
+      {renderProducts()}
+    </div>
+  );
 };
 
 export default HomePage;

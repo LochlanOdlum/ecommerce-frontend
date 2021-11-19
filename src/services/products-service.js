@@ -1,7 +1,7 @@
 const API_URL = 'http://localhost:5000/products/';
 
-const getProducts = async () => {
-  console.log('Getting products');
+const fetchProducts = async () => {
+  // console.log('Getting products');
   const requestOptions = {
     method: 'GET',
   };
@@ -12,7 +12,7 @@ const getProducts = async () => {
   return products;
 };
 
-const getProduct = async (id) => {
+const fetchProduct = async (id) => {
   console.log('Getting product');
   const requestOptions = {
     method: 'GET',
@@ -25,6 +25,6 @@ const getProduct = async (id) => {
 };
 
 export default {
-  getProducts,
-  getProduct,
+  fetchProducts,
+  fetchProduct,
 };

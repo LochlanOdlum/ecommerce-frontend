@@ -2,31 +2,41 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
-import { getProductDetails } from '../actions/productActions';
+import useProducts from '../hooks/useProducts';
+import { fetchProduct } from '../actions/productActions';
+import { AddCartItem } from '../actions/cartActions';
 
 const ProductPage = (props) => {
-  const { id } = useParams();
+  const id = Number(useParams().id);
   const dispatch = useDispatch();
-  const { product, isLoading, error } = useSelector((state) => state.productDetails);
+
+  const { products, isLoading, isLoaded, error } = useProducts();
 
   useEffect(() => {
-    dispatch(getProductDetails(id));
-  }, []);
+    //Causes product to be updated in product List
+    dispatch(fetchProduct(id));
+  }, [dispatch, id]);
 
-  console.log(props);
+  const handleAddToCart = () => {
+    dispatch(AddCartItem(id));
+  };
 
   const renderProduct = () => {
-    if (isLoading) {
-      return <div>Loading</div>;
-    }
     if (error) {
       return <div>Error loading product data</div>;
     }
+    if (isLoading || !isLoaded) {
+      return <div>Loading</div>;
+    }
+
+    const product = products.find((p) => p.id === id);
+
     return (
       <div>
         {product.title}
         {product.description}
         {product.price}
+        <button onClick={handleAddToCart}>Add to cart</button>
       </div>
     );
   };

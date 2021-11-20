@@ -6,7 +6,7 @@ import {
   PRODUCT_FETCH_FAIL,
   PRODUCT_FETCH_SUCCESS,
 } from './types';
-import productService from '../services/products-service';
+import productService from '../services/productsService';
 
 //Fetches list of products from backend, productList.products is set to result
 export const fetchProductList = () => async (dispatch, getState) => {

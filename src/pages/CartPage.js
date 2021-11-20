@@ -5,23 +5,21 @@ import useProducts from '../hooks/useProducts';
 import useCart from '../hooks/useCart';
 
 const CartPage = () => {
-  const { cartItems, cartTotal } = useCart();
-  const { products, isLoaded, error } = useProducts();
+  const { cartItems, cartTotal, error, isLoaded } = useCart();
 
   const renderCartItems = () => {
-    if (error) {
-      return <div>Error fetching product data!</div>;
-    }
-
     if (!isLoaded) {
-      return <div>Loading product data!</div>;
+      return <div>Loading cart data!</div>;
     }
 
-    //Could be possible that product list doesn't contain product with id of that in cart, add error handling for that case
     return cartItems.map((item) => {
       return <div key={item.id}>{item.title}</div>;
     });
   };
+
+  if (error) {
+    return <div>Error fetching cart data!</div>;
+  }
 
   return (
     <div>

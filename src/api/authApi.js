@@ -1,19 +1,6 @@
-const API_URL = 'http://localhost:5000/';
+import errorParser from './helpers.js/errorParser';
 
-const errorParser = (response, data) => {
-  if (!response.ok) {
-    if (data.message) {
-      const error = new Error(data.message);
-      throw error;
-    }
-    if (data.errors) {
-      const error = new Error();
-      error.errors = data.errors;
-      throw new Error();
-    }
-    throw new Error('Unexpected error');
-  }
-};
+const API_URL = 'https://skylight-photography.herokuapp.com/';
 
 const signup = async (firstName, surname, email, password) => {
   const response = await fetch(API_URL + 'signup', {
@@ -39,11 +26,19 @@ const login = async (email, password) => {
   });
 
   const data = await response.json();
+  const { token, isAdmin } = data;
 
   errorParser(response, data);
 
-  localStorage.setItem('user', JSON.stringify(data));
+  return { token, isAdmin };
 };
 
 // signup('Loch', 'Odlum', 'lodlum5@gmail.com', 'password');
-login('lodlum@me.com', 'password');
+// login('lodlum5@gmail.com', 'password');=
+
+const authApi = {
+  signup,
+  login,
+};
+
+export default authApi;

@@ -1,4 +1,4 @@
-import { ADD_CART_ITEM, DELETE_CART_ITEM } from './types';
+import { ADD_CART_ITEM, DELETE_CART_ITEM, EMPTY_CART } from './types';
 
 export const AddCartItem = (id) => async (dispatch) => {
   dispatch({
@@ -13,3 +13,7 @@ export const DeleteCartItem = (id) => async (dispatch) => {
     payload: Number(id),
   });
 };
+
+export const EmptyCart = () => ({
+  type: EMPTY_CART,
+});

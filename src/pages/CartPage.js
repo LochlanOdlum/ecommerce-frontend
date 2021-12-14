@@ -23,9 +23,10 @@ const CartPage = () => {
 
   return (
     <div>
-      <Link to='/'>Home</Link>
       {renderCartItems()}
       Cart total: {cartTotal}
+      <br />
+      <Link to='/payment'>Continue to purchase</Link>
     </div>
   );
 };

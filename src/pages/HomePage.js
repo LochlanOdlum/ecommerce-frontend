@@ -28,7 +28,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <Link to='/cart'>Cart</Link>
+      <div>Products:</div>
 
       {renderProducts()}
     </div>

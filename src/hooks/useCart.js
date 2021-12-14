@@ -10,8 +10,8 @@ const useCart = () => {
 
   let missingProduct = false;
 
-  const cartItemsWithInfo = cart.items.map((item) => {
-    const prod = products.find((p) => p.id === item.id);
+  const cartItemsWithInfo = cart.itemIds.map((itemId) => {
+    const prod = products.find((p) => p.id === itemId);
 
     if (!prod) {
       missingProduct = true;

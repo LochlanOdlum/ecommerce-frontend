@@ -10,7 +10,7 @@ const ProductPage = (props) => {
   const id = Number(useParams().id);
   const dispatch = useDispatch();
 
-  const { products, isLoading, isLoaded, error } = useProducts();
+  const { products, isLoaded, error } = useProducts();
 
   useEffect(() => {
     //Causes product to be updated in product List
@@ -25,7 +25,7 @@ const ProductPage = (props) => {
     if (error) {
       return <div>Error loading product data</div>;
     }
-    if (isLoading || !isLoaded) {
+    if (!isLoaded) {
       return <div>Loading</div>;
     }
 

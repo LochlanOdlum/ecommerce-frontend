@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/products/';
+const API_URL = 'https://skylight-photography.herokuapp.com/shop/products/';
 
 const fetchProducts = async () => {
   // console.log('Getting products');

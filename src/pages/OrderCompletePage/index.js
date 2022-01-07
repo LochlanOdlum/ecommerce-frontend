@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ordersApi from '../api/ordersApi';
+import ordersApi from '../../api/ordersApi';
 
-const PaymentSuccessPage = () => {
-  const paymentIntentId = useParams().paymentIntentId;
+const OrderCompletePage = () => {
+  const orderId = useParams().orderId;
   const [order, setOrder] = useState({ orderInfo: null, isLoading: true });
 
   useEffect(() => {
     const getOrderInfo = async () => {
       try {
-        const orderInfo = await ordersApi.orderSuccess(paymentIntentId);
+        const orderInfo = await ordersApi.fetchOrder(orderId);
         setOrder({ orderInfo, isLoading: false });
       } catch (error) {
         console.log(error);
@@ -19,7 +19,7 @@ const PaymentSuccessPage = () => {
     getOrderInfo();
   }, []);
 
-  console.log(paymentIntentId);
+  console.log(orderId);
 
   console.log(order);
 
@@ -28,7 +28,10 @@ const PaymentSuccessPage = () => {
   }
 
   const calculateOrderTotal = (orderItems) =>
-    orderItems.reduce((accumulator, currentItem) => accumulator + Number(currentItem.price), 0);
+    orderItems.reduce(
+      (accumulator, currentItem) => accumulator + Number(currentItem.price),
+      0
+    );
 
   return (
     <div>
@@ -39,4 +42,4 @@ const PaymentSuccessPage = () => {
   );
 };
 
-export default PaymentSuccessPage;
+export default OrderCompletePage;

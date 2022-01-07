@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
-import useProducts from '../hooks/useProducts';
-import { fetchProduct } from '../actions/productActions';
-import { AddCartItem } from '../actions/cartActions';
+import useProducts from '../../hooks/useProducts';
+import { fetchProduct } from '../../actions/productActions';
+import { AddCartItem } from '../../actions/cartActions';
 
-const ProductPage = (props) => {
+const PhotoDetailsPage = (props) => {
   const id = Number(useParams().id);
   const dispatch = useDispatch();
 
@@ -36,6 +36,10 @@ const ProductPage = (props) => {
         {product.title}
         {product.description}
         {product.price}
+        <img
+          style={{ width: '500px' }}
+          src={product.mediumWatermarkedImagePublicURL}
+        />
         <button onClick={handleAddToCart}>Add to cart</button>
       </div>
     );
@@ -43,10 +47,10 @@ const ProductPage = (props) => {
 
   return (
     <div>
-      <Link to='/'>Home</Link>
+      <Link to="/">Home</Link>
       {renderProduct()}
     </div>
   );
 };
 
-export default ProductPage;
+export default PhotoDetailsPage;

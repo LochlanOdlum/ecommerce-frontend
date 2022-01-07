@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
-import { signup } from '../actions/authActions';
+import { signup } from '../../actions/authActions';
 
 const SignupPage = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -13,12 +13,14 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
 
   if (isLoggedIn) {
-    return <Navigate to='/' />;
+    return <Navigate to="/" />;
   }
 
   const onSignupSubmit = async (e) => {
     e.preventDefault();
-    const isSignedup = await dispatch(signup(firstName, surname, email, password));
+    const isSignedup = await dispatch(
+      signup(firstName, surname, email, password)
+    );
 
     if (isSignedup) {
       navigate('/login');
@@ -30,10 +32,10 @@ const SignupPage = () => {
       <div>
         <form onSubmit={onSignupSubmit}>
           <div>
-            <label htmlFor='firstName'>First name</label>
+            <label htmlFor="firstName">First name</label>
             <input
-              id='firstName'
-              type='text'
+              id="firstName"
+              type="text"
               value={firstName}
               onChange={(e) => {
                 setFirstName(e.target.value);
@@ -41,10 +43,10 @@ const SignupPage = () => {
             />
           </div>
           <div>
-            <label htmlFor='emailInput'>Surname</label>
+            <label htmlFor="emailInput">Surname</label>
             <input
-              id='surname'
-              type='text'
+              id="surname"
+              type="text"
               value={surname}
               onChange={(e) => {
                 setSurname(e.target.value);
@@ -52,10 +54,10 @@ const SignupPage = () => {
             />
           </div>
           <div>
-            <label htmlFor='emailInput'>Email</label>
+            <label htmlFor="emailInput">Email</label>
             <input
-              id='emailInput'
-              type='email'
+              id="emailInput"
+              type="email"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -63,17 +65,17 @@ const SignupPage = () => {
             />
           </div>
           <div>
-            <label htmlFor='passwordInput'>Password</label>
+            <label htmlFor="passwordInput">Password</label>
             <input
-              id='passwordInput'
-              type='password'
+              id="passwordInput"
+              type="password"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
             />
           </div>
-          <button type='submit'>Login</button>
+          <button type="submit">Login</button>
         </form>
       </div>
     </>

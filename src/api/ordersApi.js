@@ -3,7 +3,7 @@ import errorParser from './helpers.js/errorParser';
 
 const API_URL = 'https://skylight-photography.herokuapp.com/shop/';
 
-const startOrder = async (stripeReceiptEmail, itemIds) => {
+const startOrder = async (itemIds) => {
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -11,7 +11,6 @@ const startOrder = async (stripeReceiptEmail, itemIds) => {
       ...authHeader(),
     },
     body: JSON.stringify({
-      stripeReceiptEmail,
       itemIds,
     }),
   };
@@ -21,24 +20,7 @@ const startOrder = async (stripeReceiptEmail, itemIds) => {
 
   errorParser(res, data);
 
-  return data.clientSecret;
-};
-
-const orderSuccess = async (paymentIntentId) => {
-  const requestOptions = {
-    method: 'GET',
-    headers: {
-      ...authHeader(),
-    },
-  };
-
-  const res = await fetch(`${API_URL}order/success/${paymentIntentId}`, requestOptions);
-
-  const data = await res.json();
-
-  errorParser(res, data);
-
-  return data.order;
+  return { clientSecret: data.clientSecret, orderId: data.orderId };
 };
 
 const fetchOrders = async () => {
@@ -77,7 +59,7 @@ const fetchOrder = async (orderId) => {
 
 const ordersApi = {
   startOrder,
-  orderSuccess,
+  // orderSuccess,
   fetchOrders,
   fetchOrder,
 };

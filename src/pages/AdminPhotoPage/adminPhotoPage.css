@@ -1,0 +1,61 @@
+.admin-table-add-photo-button {
+  margin-left: auto;
+  margin-right: 1.45em;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+  border: 0px solid transparent;
+  font-size: 0.9rem;
+  border-radius: 0.2rem;
+  padding: 0.4rem 0.7rem;
+  background: #36c74c;
+  vertical-align: middle;
+  user-select: none;
+}
+
+.ap-image-upload-modal-container {
+  padding-left: 270px;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.ap-image-upload-input-container {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  height: 250px;
+  background-color: #eaeaea;
+}
+
+#ap-image-upload-input {
+  display: none;
+}
+
+.ap-image-upload-input-label {
+  display: block;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.ap-image-upload-submit-button {
+  border: 0px solid transparent;
+  background: #eaeaea;
+  border-top: 1px solid #cfcfcf;
+  margin-top: auto;
+  color: inherit;
+  font: inherit;
+  height: 40px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.ap-image-upload-submit-button:hover {
+  background: #c5c5c5;
+}

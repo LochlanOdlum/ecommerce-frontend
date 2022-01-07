@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../actions/authActions';
+import { logout } from '../../actions/authActions';
 
 {
   /* <Link to='/login'>Login</Link>
@@ -19,9 +19,9 @@ const NavBar = () => {
   return (
     <>
       <div>
-        <Link to='/'>Home |</Link>
-        <Link to='/cart'>| Cart </Link>
-        {!isLoggedIn && <Link to='/login'>|| Login</Link>}
+        <Link to="/">Home |</Link>
+        <Link to="/cart">| Cart </Link>
+        {!isLoggedIn && <Link to="/login">|| Login</Link>}
         {isLoggedIn && <button onClick={handleLogOut}>Logout</button>}
       </div>
       <br />

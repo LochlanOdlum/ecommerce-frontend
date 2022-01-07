@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import useProducts from '../hooks/useProducts';
+import useProducts from '../../hooks/useProducts';
 
-const HomePage = () => {
+const ShopPage = () => {
   const { products, isLoaded, error } = useProducts();
+
+  const priceToPounds = (pence) => {
+    const array = Array.from(String(pence));
+    array.splice(array.length - 2, 0, '.');
+
+    return array.join('');
+  };
 
   const renderProducts = () => {
     if (error) {
@@ -19,8 +26,8 @@ const HomePage = () => {
       return (
         <div key={product.id}>
           <div>{product.title}</div>
-          <div>{product.price}</div>
-          <Link to={`/product/${product.id}`}>Click me!</Link>
+          <div>{priceToPounds(product.price)}</div>
+          <Link to={`/photo/${product.id}`}>Click me!</Link>
         </div>
       );
     });
@@ -35,4 +42,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default ShopPage;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { login } from '../actions/authActions';
+import { login } from '../../actions/authActions';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +18,7 @@ const LoginPage = () => {
   };
 
   if (isLoggedIn) {
-    return <Navigate to='/' />;
+    return <Navigate to="/" />;
   }
 
   return (
@@ -26,10 +26,10 @@ const LoginPage = () => {
       <div>
         <form onSubmit={onLoginSubmit}>
           <div>
-            <label htmlFor='emailInput'>Email</label>
+            <label htmlFor="emailInput">Email</label>
             <input
-              id='emailInput'
-              type='email'
+              id="emailInput"
+              type="email"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -37,20 +37,20 @@ const LoginPage = () => {
             />
           </div>
           <div>
-            <label htmlFor='passwordInput'>Password</label>
+            <label htmlFor="passwordInput">Password</label>
             <input
-              id='passwordInput'
-              type='password'
+              id="passwordInput"
+              type="password"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
             />
           </div>
-          <button type='submit'>Login</button>
+          <button type="submit">Login</button>
         </form>
         <br />
-        Or <Link to='/signup'>Signup</Link>
+        Or <Link to="/signup">Signup</Link>
       </div>
     </>
   );

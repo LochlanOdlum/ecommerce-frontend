@@ -4,18 +4,22 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
 import NavBar from './components/NavBar';
-import HomePage from './pages/HomePage';
-import ProductPage from './pages/ProductPage';
+import LandingPage from './pages/LandingPage';
+import ShopPage from './pages/ShopPage';
+import PhotoDetailsPage from './pages/PhotoDetailsPage';
 import CartPage from './pages/CartPage';
 import MyOrdersPage from './pages/MyOrdersPage';
 import MyOrderPage from './pages/MyOrderPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import PaymentPage from './pages/PaymentPage';
-import PaymentSuccessPage from './pages/PaymentSuccessPage';
-import AdminLoginPage from './pages/AdminLoginPage';
-import AdminDashboard from './pages/AdminDashboard';
+import OrderCompletePage from './pages/OrderCompletePage';
+import MyPhotosPage from './pages/MyPhotosPage';
+
 import AdminNavSideBar from './components/AdminNavSideBar';
+import AdminLoginPage from './pages/AdminLoginPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
+import AdminPhotoPage from './pages/AdminPhotoPage';
 
 const STRIPE_PUBLISHABLE_KEY =
   'pk_test_51JmjyLBxc7UTHklpkl2msXfRPXO5UmEfW2b33xIk4S0y5Pc9oKObZibwotF3S626UWjGdGFQSJ7JGRZfVIwITrt800sVddKcVx';
@@ -52,20 +56,26 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           {/* Routes nested in this Route Component will have nav bar */}
-          <Route path='/' element={<LayoutsWithNavBar />}>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/product/:id' element={<ProductPage />} />
-            <Route path='/cart' element={<CartPage />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/signup' element={<SignupPage />} />
-            <Route path='/payment' element={<PaymentPage />} />
-            <Route path='/payment/success/:paymentIntentId' element={<PaymentSuccessPage />} />
-            <Route path='/myOrders' element={<MyOrdersPage />} />
-            <Route path='/myOrder/:orderId' element={<MyOrderPage />} />
+          <Route path="/" element={<LayoutsWithNavBar />}>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/photo/:id" element={<PhotoDetailsPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route
+              path="/order/success/:orderId"
+              element={<OrderCompletePage />}
+            />
+            <Route path="/myOrders" element={<MyOrdersPage />} />
+            <Route path="/myOrder/:orderId" element={<MyOrderPage />} />
+            <Route path="/myPhotos" element={<MyPhotosPage />} />
           </Route>
-          <Route path='/admin' element={<LayoutsWithAdminNavSideBar />}>
-            <Route path='/admin/login' element={<AdminLoginPage />} />
-            <Route path='/admin' element={<AdminDashboard />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin" element={<LayoutsWithAdminNavSideBar />}>
+            <Route path="/admin" element={<AdminDashboardPage />} />
+            <Route path="/admin/photos" element={<AdminPhotoPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,13 +1,15 @@
 import React from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import ordersApi from '../api/ordersApi';
-import useCart from '../hooks/useCart';
-import { EmptyCart } from '../actions/cartActions';
+import ordersApi from '../../api/ordersApi';
+import useCart from '../../hooks/useCart';
+import { EmptyCart } from '../../actions/cartActions';
 
 const PaymentPage = () => {
   const elements = useElements();
   const stripe = useStripe();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cartItems, cartTotal, error, isLoaded } = useCart();
 
@@ -26,16 +28,20 @@ const PaymentPage = () => {
     }
 
     try {
-      const clientSecret = await ordersApi.startOrder('lodlum5@gmail.com', cartItemIds);
+      const { clientSecret, orderId } = await ordersApi.startOrder(cartItemIds);
 
-      const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
-      });
+      const { paymentIntent, error } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: {
+            card: elements.getElement(CardElement),
+          },
+        }
+      );
 
       if (!error) {
         dispatch(EmptyCart());
+        navigate(`/order/success/${orderId}`);
       }
     } catch (error) {
       //TODO: Add error handling. error component to display error at top of payment page????
@@ -47,10 +53,10 @@ const PaymentPage = () => {
   return (
     <>
       <h1>Payment</h1>
-      <form id='payment-form' onSubmit={onPaymentSubmit}>
-        <label htmlFor='card-element'>Card</label>
-        <CardElement id='card-element' />
-        <button type='submit'>Pay</button>
+      <form id="payment-form" onSubmit={onPaymentSubmit}>
+        <label htmlFor="card-element">Card</label>
+        <CardElement id="card-element" />
+        <button type="submit">Pay</button>
       </form>
     </>
   );

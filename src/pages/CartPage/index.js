@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import useProducts from '../hooks/useProducts';
-import useCart from '../hooks/useCart';
+import useProducts from '../../hooks/useProducts';
+import useCart from '../../hooks/useCart';
 
 const CartPage = () => {
   const { cartItems, cartTotal, error, isLoaded } = useCart();
@@ -26,7 +26,7 @@ const CartPage = () => {
       {renderCartItems()}
       Cart total: {cartTotal}
       <br />
-      <Link to='/payment'>Continue to purchase</Link>
+      <Link to="/payment">Continue to purchase</Link>
     </div>
   );
 };

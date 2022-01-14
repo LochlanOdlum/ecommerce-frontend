@@ -1,0 +1,141 @@
+.cp-container {
+  /* display: flex;
+  justify-content: center; */
+}
+
+.cp {
+  margin-top: 73px;
+  padding: 0 95px;
+  flex-grow: 1;
+  max-width: 1366px;
+}
+
+.cp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: black;
+}
+
+.cp-cart-info-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 50px;
+}
+
+.cp-table {
+  margin-top: 10px;
+  table-layout: fixed;
+  width: 100%;
+  table-layout: fixed;
+  margin-right: 40px;
+  width: 65%;
+}
+
+.cp-thead {
+  height: 20px;
+}
+
+.cp-th {
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+  padding-bottom: 25px;
+}
+
+.cp-th-photo {
+  width: 45%;
+}
+
+.cp-th-price {
+  width: 40%;
+}
+
+.cp-cell {
+  padding-top: 65px;
+  color: black;
+  vertical-align: top;
+}
+
+.cp-cart-table-row {
+  height: 200px;
+  border-top: 2px solid #8d8a8a;
+  padding: 45px 0 55px 0;
+}
+
+.cp-photo-cell {
+  display: flex;
+  margin: 45px 0 0 5px;
+  /* align-items: center; */
+}
+
+.cp-photo-img {
+  width: 120px;
+  border-radius: 3px;
+  margin-bottom: 55px;
+  margin-left: 5px;
+}
+
+.cp-photo-cell-info {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+.cp-photo-title {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.cp-photo-collection-name {
+  color: black;
+  font-size: 15px;
+  margin-top: 13px;
+}
+
+.cp-order-summary {
+  background: #fff6ef;
+  padding: 38px 38px 20px 35px;
+  width: 32%;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-order-summary-inner-content {
+  padding-left: 4%;
+  row-gap: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-order-summary-title {
+  font-weight: 600;
+  font-size: 27px;
+
+  color: black;
+}
+
+.cp-order-summary-subtotal,
+.cp-order-summary-total {
+  display: flex;
+  align-items: center;
+}
+
+.cb-order-summary-subtotal-title,
+.cb-order-summary-total-title {
+  font-size: 20px;
+  color: black;
+}
+
+.cb-order-summary-subtotal-price,
+.cb-order-summary-total-price {
+  font-size: 14px;
+  color: black;
+  margin-left: auto;
+}
+
+.cp-order-checkout-button {
+  margin-top: auto;
+  height: 52px;
+}

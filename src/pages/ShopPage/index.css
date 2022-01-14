@@ -1,0 +1,130 @@
+.main-shop-container {
+  min-height: 100vh;
+  background: #fff6ef;
+}
+
+.main-shop {
+  max-width: 1366px;
+  padding: 0 100px;
+  margin: 75px auto 0 auto;
+  flex-grow: 1;
+}
+
+.shop-sort-by-button {
+  background: none;
+  border: 1px solid #8d8a8a;
+  font-size: 18px;
+  margin-left: auto;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 46px;
+  position: relative;
+}
+
+.shop-sort-by-text {
+  position: absolute;
+  /* margin: auto 0; */
+  left: 19px;
+}
+
+.shop-sort-by-arrow {
+  position: absolute;
+  right: 20px;
+}
+
+.shop-lower {
+  margin-top: 22px;
+  display: flex;
+}
+
+.content-left {
+  width: 19.3%;
+}
+
+.shop-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 45px;
+  line-height: 60px;
+  color: black;
+}
+
+.shop-filter-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: black;
+}
+
+.shop-filter-container {
+  margin-top: 60px;
+}
+
+.content-right {
+  display: flex;
+  column-gap: 27px;
+  margin-left: 62px;
+  row-gap: 70px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.photo-container {
+  width: calc((100% - (27px * 2)) / 3);
+}
+
+.sp-photo-img-container {
+  width: 100%;
+  padding-bottom: 140%;
+  overflow: hidden;
+  position: relative;
+}
+
+.sp-photo-img {
+  min-height: 100%;
+  min-width: 100%;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+}
+
+.shop-photo-bottom {
+  margin-top: 19px;
+  display: flex;
+  align-items: center;
+}
+
+.orange-brown-button {
+  width: 133px;
+  height: 48px;
+}
+
+.sp-photo-title {
+  margin-top: 18px;
+  font-size: 24px;
+  color: black;
+}
+
+.shop-add-to-cart {
+  font-weight: 16px;
+}
+
+.shop-photo-price {
+  margin-left: auto;
+  color: black;
+  font-size: 25px;
+}
+
+.sp-page-arrows {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  column-gap: 19px;
+  margin-bottom: 30px;
+}
+
+.sp-arrow-right {
+  /* transform: rotate(180deg); */
+}

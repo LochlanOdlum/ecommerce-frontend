@@ -1,0 +1,90 @@
+.lip-container {
+  min-height: 100vh;
+  background: #fff6ef;
+}
+
+.lip {
+  max-width: 1366px;
+  padding: 0 97px 0 97px;
+  margin: 40px auto 0 auto;
+  display: flex;
+}
+
+.lip-email-input-container {
+  margin-top: 55px;
+}
+
+.lip-email-input-container,
+.lip-password-input-container {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #b1adad;
+}
+
+.lip-password-input-container {
+  margin-top: 20px;
+}
+
+#lipemailInput,
+#lippasswordInput {
+  margin-left: 25px;
+  font-size: 18px;
+  background: none;
+  border: none;
+  width: 100%;
+}
+
+#lipemailInput:focus,
+#lippasswordInput:focus {
+  outline: none;
+}
+
+#lipemailInput::placeholder,
+#lippasswordInput::placeholder {
+  color: #b1adad;
+  opacity: 1;
+}
+
+.lip-label {
+  display: flex;
+}
+
+.lip-image {
+  width: 40%;
+}
+
+.lip-form {
+  margin: auto 0 auto 11%;
+  width: 36%;
+}
+
+.lip-login-button {
+  margin-top: 49px;
+  width: 133px;
+  height: 48px;
+}
+
+.lip-signup-link-container {
+  margin-top: 20px;
+}
+
+.lip-signup-pretext {
+  color: black;
+  font-size: 14px;
+  font-family: 'Martel Sans', sans-serif;
+}
+
+.lip-signup-link {
+  color: black;
+  font-size: 22px;
+  font-family: 'Playfair Display', serif;
+  padding-left: 5px;
+}
+
+.lip-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  color: black;
+  line-height: 40px;
+}

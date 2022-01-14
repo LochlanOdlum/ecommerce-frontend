@@ -8,7 +8,7 @@ import {
   LOGOUT,
 } from '../actions/types';
 
-const initialState = { isLoggedIn: false, token: null, isAdmin: false };
+const initialState = { isLoggedIn: false, token: null, isAdmin: false, name: null };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -16,6 +16,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        name: null,
         token: null,
         isAdmin: null,
       };
@@ -23,6 +24,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        name: null,
         token: null,
         isAdmin: null,
       };
@@ -30,6 +32,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        name: null,
         token: null,
         isAdmin: null,
       };
@@ -37,6 +40,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        name: null,
         token: null,
         isAdmin: null,
       };
@@ -44,6 +48,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
+        name: action.payload.name,
         token: action.payload.token,
         isAdmin: action.payload.isAdmin,
       };
@@ -51,6 +56,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        name: null,
         token: null,
         isAdmin: null,
       };
@@ -58,6 +64,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        name: null,
         token: null,
         isAdmin: null,
       };

@@ -32,12 +32,7 @@ const AdminAddOrEditPhotoModal = ({ isEditMode = false }) => {
   const handleAddOrEditPhoto = () => {
     //Handle adding a new photo
     if (!isEditMode) {
-      adminApi.addPhoto(
-        photoFile,
-        photoTitle,
-        photoDescription,
-        photoPrice * 100
-      );
+      adminApi.addPhoto(photoFile, photoTitle, photoDescription, photoPrice * 100);
     }
 
     //Handle editing an existing photo
@@ -46,52 +41,37 @@ const AdminAddOrEditPhotoModal = ({ isEditMode = false }) => {
   };
 
   return (
-    <div className="ap-image-upload-modal">
-      <div className="ap-image-upload-input-container">
+    <div className='ap-image-upload-modal'>
+      <div className='ap-image-upload-input-container'>
         <label
-          htmlFor="ap-image-upload-input"
-          className="ap-image-upload-input-label"
+          htmlFor='ap-image-upload-input'
+          className='ap-image-upload-input-label'
           ref={imageUploadInputLabelEle}
           style={{ backgroundImage: `url('${photoURL}')` }}
         >
           {!photoURL && <div>+ Select Photo</div>}
         </label>
         <input
-          type="file"
-          accept="image/png, image/jpg, image/jpeg"
+          type='file'
+          accept='image/png, image/jpg, image/jpeg, image/webp'
           onChange={handleImageUploadChange}
-          id="ap-image-upload-input"
+          id='ap-image-upload-input'
         />
       </div>
       <div>
         <label>Title</label>
-        <input
-          type="text"
-          value={photoTitle}
-          onChange={(e) => setPhotoTitle(e.target.value)}
-        />
+        <input type='text' value={photoTitle} onChange={(e) => setPhotoTitle(e.target.value)} />
       </div>
       <div>
         <label>Description</label>
-        <input
-          type="text"
-          value={photoDescription}
-          onChange={(e) => setPhotoDescription(e.target.value)}
-        />
+        <input type='text' value={photoDescription} onChange={(e) => setPhotoDescription(e.target.value)} />
       </div>
       <div>
         <label>Price</label>
-        <input
-          type="number"
-          value={photoPrice}
-          onChange={(e) => setPhotoPrice(e.target.value)}
-        />
+        <input type='number' value={photoPrice} onChange={(e) => setPhotoPrice(e.target.value)} />
       </div>
 
-      <button
-        onClick={handleAddOrEditPhoto}
-        className="ap-image-upload-submit-button"
-      >
+      <button onClick={handleAddOrEditPhoto} className='ap-image-upload-submit-button'>
         {isEditMode ? 'Edit' : 'Add Photo'}
       </button>
     </div>

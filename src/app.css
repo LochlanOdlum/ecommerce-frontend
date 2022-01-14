@@ -1,0 +1,27 @@
+html {
+  width: 100vw;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.grey-blue-button,
+.orange-brown-button {
+  border: none;
+  color: #ffffff;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.grey-blue-button {
+  background: #7f9296;
+}
+
+.orange-brown-button {
+  background: #ddb091;
+}

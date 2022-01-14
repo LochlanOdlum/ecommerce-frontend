@@ -1,13 +1,13 @@
 import React from 'react';
 import NavBar from '../../components/NavBar';
 
-const MyPhotosPage = () => {
+const MyAccountPage = () => {
   return (
     <>
       <NavBar />
-      <div>My Photos!</div>
+      <div>My account page</div>
     </>
   );
 };
 
-export default MyPhotosPage;
+export default MyAccountPage;

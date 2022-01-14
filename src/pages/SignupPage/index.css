@@ -1,0 +1,88 @@
+.sup-container {
+  min-height: 100vh;
+  background: #fff6ef;
+}
+
+.sup {
+  max-width: 1366px;
+  padding: 0 97px 0 97px;
+  margin: 40px auto 0 auto;
+  display: flex;
+}
+
+/* .sup-name-input-container {
+  margin-top: 55px;
+} */
+
+.sup-input-container {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #b1adad;
+}
+
+.sup-input-container {
+  margin-top: 20px;
+}
+
+.supInput {
+  margin-left: 25px;
+  font-size: 18px;
+  background: none;
+  border: none;
+  width: 100%;
+}
+
+.supInput:focus {
+  outline: none;
+}
+
+.supInput::placeholder {
+  color: #b1adad;
+  opacity: 1;
+}
+
+.sup-label {
+  display: flex;
+}
+
+.sup-image {
+  margin-left: auto;
+  width: 40%;
+}
+
+.sup-form {
+  margin: auto 0 auto 10.6%;
+  width: 36%;
+}
+
+.sup-login-button {
+  margin-top: 49px;
+  width: 133px;
+  height: 48px;
+}
+
+.sup-signup-link-container {
+  margin-top: 20px;
+}
+
+.sup-signup-pretext {
+  color: black;
+  font-size: 14px;
+  font-family: 'Martel Sans', sans-serif;
+}
+
+.sup-signup-link {
+  color: black;
+  font-size: 22px;
+  font-family: 'Playfair Display', serif;
+  padding-left: 5px;
+}
+
+.sup-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  margin-bottom: 48px;
+  color: black;
+  line-height: 40px;
+}

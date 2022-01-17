@@ -1,0 +1,46 @@
+/* .mail-list-container {
+
+} */
+
+.mail-list {
+  max-width: 1366px;
+  margin: auto;
+  padding: min(147px, 10.76vw) min(193px, 14.1vw);
+  /* padding: 20px, 20px; */
+}
+
+.mail-list-title {
+  color: black;
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+}
+
+.mail-list-form {
+  margin-top: min(13px, 0.95vw);
+  display: flex;
+}
+
+.mail-list-email-input {
+  font-family: 'Martel Sans', sans-serif;
+  color: black;
+  font-size: 18px;
+  padding-left: 2.4%;
+  padding-top: 0.5%;
+  width: 84%;
+}
+
+.mail-list-email-input:focus {
+  outline: none;
+}
+
+.mail-list-email-input::placeholder {
+  font-family: 'Martel Sans', sans-serif;
+  opacity: 1;
+  color: #b1adad;
+  font-size: 18px;
+}
+
+.mail-list-email-signup-button {
+  margin-left: auto;
+  width: 13.6%;
+}

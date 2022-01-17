@@ -1,0 +1,35 @@
+.footer-container {
+  background: #fff6ef;
+}
+
+.footer-content {
+  margin: auto;
+  max-width: 1366px;
+  padding: 0 97px;
+  height: min(400px, 29.94vw);
+}
+
+.footer-content-left {
+  padding-top: min(117px, 8.76vw);
+  width: 28.5%;
+}
+
+.footer-left-text {
+  color: black;
+  font-size: 12px;
+  margin-top: min(13px, 0.97vw);
+}
+
+.footer-left-logos {
+  margin-top: min(13px, 0.97vw);
+  display: flex;
+  column-gap: 7px;
+}
+
+.footer-copyright {
+  color: white;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 15px;
+  background: #7f9296;
+}

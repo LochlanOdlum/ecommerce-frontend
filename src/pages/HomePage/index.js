@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
+import MailingList from '../../components/MailingList';
+import Footer from '../../components/Footer';
 
 import './index.css';
 
@@ -25,6 +27,11 @@ const LandingPage = () => {
     isFromLeft: false,
     isFromRight: false,
   });
+
+  const [formEmail, setFormEmail] = useState('');
+  const [formName, setFormName] = useState('');
+  const [formSubject, setFormSubject] = useState('');
+  const [formMessage, setFormMessage] = useState('');
 
   const getNextStartingIndex = (change) => {
     const newIndex = imageSliderState.startingImageIndex + change;
@@ -139,6 +146,11 @@ const LandingPage = () => {
     );
   };
 
+  const handleContactUsSubmit = (e) => {
+    e.preventDefault();
+    return;
+  };
+
   return (
     <div className='home-page'>
       <NavBar />
@@ -171,12 +183,12 @@ const LandingPage = () => {
         <div className='sp-section-2'>
           <div className='sp-s2-content-left'>
             <div className='sp-s2-title'>Featured Photos</div>
-            <div>
+            <div className='sp-s2-description'>
               It is a long established fact that a reader will be distracted by the readable content of a page when
               looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
               letters, as opposed to using 'Content here, content
             </div>
-            <button className='orange-brown-button'>
+            <button className='orange-brown-button sp-s2-shop-all-button'>
               <Link to='/shop'>Shop All</Link>
             </button>
           </div>
@@ -186,7 +198,100 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-      <div className='section-3'></div>
+      <div className='section-3-container'>
+        <div className='section-3'>
+          <div className='s3-about-us-container'>
+            <div className='s3-about-us-title'>About Us</div>
+            <div className='s3-about-us-text s3-about-us-text-1'>
+              It is a long established fact that a reader will be distracted by the readable content of a page when
+              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
+              letters, as opposed to using 'Content here, content here', making it look like readable English. Many
+              desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
+              search for 'lorem ipsum' will uncover many web sites still in their infancy
+            </div>
+            <div className='s3-about-us-text s3-about-us-text-2'>
+              It is a long established fact that a reader will be distracted by the readable content of a page when
+              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
+              letters, as opposed to using 'Content here, content here', making it look like readable English. Ma
+            </div>
+          </div>
+          <div className='s3-images-container'>
+            <img className='s3-image-behind' src='/images/s3-temp-2.png' />
+            <img className='s3-image-top' src='/images/s3-temp-1.png' />
+          </div>
+        </div>
+      </div>
+      <div className='section-4-container'>
+        <div className='section-4'>
+          <div className='s4-line s4-line-top'></div>
+          <div className='s4-title'>Contact Us</div>
+          <div className='s4-contact-us-container'>
+            <form className='s4-cu-form' onSubmit={handleContactUsSubmit}>
+              <input
+                className='s4-cu-form-input'
+                name='email'
+                type='email'
+                placeholder='E-mail Address'
+                value={formEmail}
+                onChange={(e) => {
+                  setFormEmail(e.target.value);
+                }}
+              />
+              <input
+                className='s4-cu-form-input'
+                name='name'
+                type='text'
+                placeholder='Name'
+                value={formName}
+                onChange={(e) => {
+                  setFormName(e.target.value);
+                }}
+              />
+              <input
+                className='s4-cu-form-input'
+                name='subject'
+                type='text'
+                placeholder='Subject'
+                value={formSubject}
+                onChange={(e) => {
+                  setFormSubject(e.target.value);
+                }}
+              />
+              <input
+                className='s4-cu-form-input'
+                name='message'
+                type='text'
+                placeholder='Message'
+                value={formMessage}
+                onChange={(e) => {
+                  setFormMessage(e.target.value);
+                }}
+              />
+              <button className='orange-brown-button s4-cu-submit-button' type='submit'>
+                Send
+              </button>
+            </form>
+            <div className='s4-cu-right'>
+              <div className='s4-cu-subtitle'>Let’s Connect</div>
+              <div className='s4-cu-text'>
+                It is a long established fact that a reader will be distracted by the readable content of a page when
+                looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
+                of letters, as opposed to using 'Content here, content here', making it look like readable English. Many
+                desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
+                search for 'lorem ipsum' will uncover many web sites still in their infancy
+              </div>
+              <div className='s4-cu-text'>
+                It is a long established fact that a reader will be distracted by the readable content of a page when
+                looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
+                of letters, as opposed to using 'Content in their infancy
+              </div>
+            </div>
+          </div>
+          <div className='s4-line s4-line-bottom'></div>
+        </div>
+        <MailingList />
+        <Footer />
+      </div>
     </div>
   );
 };

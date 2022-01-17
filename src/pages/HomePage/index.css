@@ -18,16 +18,72 @@
   padding-top: 40px;
 }
 
+.hp-1-images-container {
+  position: relative;
+  width: 50.8%;
+}
+
+.hp-1-image-under {
+  width: 83%;
+  position: absolute;
+}
+
+.hp-1-image-over {
+  width: 63%;
+  position: absolute;
+  border: 1.83vw solid white;
+  box-sizing: content-box;
+  right: 0;
+  /* Cant set top value below to percentage as container has 0 height
+   due to absolute positioning, so maybe change depending on view width with media */
+  top: 4.565vw;
+}
+
+.hp-1-content-right {
+  position: relative;
+  left: 54.7%;
+  width: 45%;
+  margin-top: 8vw;
+}
+
+.hp-1-welcome-text {
+  font-family: 'Martel Sans', sans-serif;
+  color: black;
+  font-size: 16px;
+  line-height: 5px;
+}
+
+.hp-1-sp {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  font-weight: 700;
+  font-size: 45px;
+}
+
+.hp-1-description {
+  margin-top: 20px;
+}
+
+.hp-1-shop-button {
+  /* width: 25.1%;
+  padding: 2%; */
+  margin-top: 20px;
+  width: 133px;
+  height: 48px;
+  font-weight: 16px;
+}
+
 .sp-section-2-container {
   background: #ffffff;
   padding-top: min(10vw, 157px);
-  height: 80vw;
+  height: 63vw;
   max-height: 836px;
 }
 
 .sp-section-2 {
   display: flex;
   position: relative;
+  padding-left: min(95px, 6.95%);
   margin: auto;
   max-width: 1366px;
 }
@@ -35,7 +91,8 @@
 .sp-s2-content-left {
   display: flex;
   flex-direction: column;
-  width: 34%;
+  margin-top: min(21px, 1.4vw);
+  width: 28%;
 }
 
 .sp-s2-title {
@@ -97,64 +154,162 @@
   column-gap: 19px;
 }
 
-.section-3 {
+.sp-s2-description {
+  margin-top: min(22px, 1.6vw);
+}
+
+.sp-s2-shop-all-button {
+  margin-top: min(27px, 2.02vw);
+}
+
+.section-3-container {
   background: #7f9296;
-  height: 707px;
+  height: 55.3vw;
+  max-height: 755px;
 }
 
-.hp-1-images-container {
+.section-3 {
+  max-width: 1366px;
+  display: flex;
+  margin: auto;
+  height: 100%;
+  padding: min(103px, 7.54vw) 84px 0 84px;
+}
+
+.s3-about-us-container {
+  width: 46.7%;
+  margin-top: min(59px, 4.42vw);
+  margin-left: min(13px, 0.95vw);
+}
+
+.s3-about-us-title {
+  font-family: 'Playfair Display', serif;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 60px;
+}
+
+.s3-about-us-text {
+  color: white;
+  font-size: 14px;
+  line-height: 18.48px;
+  margin-top: min(29px, 2.12vw);
+}
+
+/* .s3-about-us-text-2 {
+
+} */
+
+.s3-images-container {
+  margin-left: auto;
   position: relative;
-  width: 50.8%;
+  width: 47.58%;
 }
 
-.hp-1-image-under {
-  width: 83%;
+.s3-image-behind {
   position: absolute;
-}
-
-.hp-1-image-over {
-  width: 63%;
-  position: absolute;
-  border: 1.83vw solid white;
-  box-sizing: content-box;
+  width: 86.8%;
   right: 0;
-  /* Cant set top value below to percentage as container has 0 height
-   due to absolute positioning, so maybe change depending on view width with media */
-  top: 4.565vw;
 }
 
-.hp-1-content-right {
-  position: relative;
-  left: 54.7%;
-  width: 45%;
-  margin-top: 11vw;
+.s3-image-top {
+  position: absolute;
+  border: 1.64vw solid white;
+  width: 66.14%;
+  border-radius: 3px;
+  top: min(6.5vw, 87px);
+  left: 0;
 }
 
-.hp-1-welcome-text {
-  font-family: 'Martel Sans', sans-serif;
-  color: black;
-  font-size: 16px;
-  line-height: 5px;
+.section-4-container {
+  height: 67.94vw;
+  background: #fff6ef;
+
+  max-height: 928px;
 }
 
-.hp-1-sp {
+.section-4 {
+  display: flex;
+  max-width: 1366px;
+  padding: 0 97px;
+  height: 100%;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+}
+
+.s4-line {
+  height: 9.15vw;
+  max-height: 125px;
+  width: 2px;
+  background: #b1adad;
+}
+
+.s4-line-bottom {
+  margin-top: auto;
+}
+
+.s4-title {
   font-family: 'Playfair Display', serif;
   color: black;
   font-weight: 700;
   font-size: 45px;
 }
 
-.hp-1-description {
-  margin-top: 20px;
+.s4-contact-us-container {
+  margin-top: min(94px, 7.04vw);
+  display: flex;
 }
 
-.hp-1-shop-button {
-  /* width: 25.1%;
-  padding: 2%; */
-  margin-top: 20px;
-  width: 133px;
-  height: 48px;
-  font-weight: 16px;
+.s4-cu-form {
+  display: flex;
+  flex-direction: column;
+  width: 42%;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.s4-cu-form-input {
+  margin-bottom: min(62px, 4.54vw);
+  background: none;
+  border: none;
+  border-bottom: 2px solid #b1adad;
+  /* padding: 0px; */
+  font-family: 'Martel Sans', sans-serif;
+  color: black;
+  opacity: 1;
+  font-size: 22px;
+  line-height: 40px;
+}
+
+.s4-cu-form-input::placeholder {
+  font-family: 'Martel Sans', sans-serif;
+  color: #b1adad;
+  opacity: 1;
+  font-size: 22px;
+  line-height: 40px;
+}
+
+.s4-cu-form-input:focus {
+  outline: none;
+}
+
+.s4-cu-right {
+  margin-left: 14.7%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: 46.5%;
+}
+
+.s4-cu-subtitle {
+  font-family: 'Spartan', sans-serif;
+  color: black;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.s4-cu-text {
+  margin-top: min(24px, 1.98vw);
 }
 
 @media (min-width: 1366px) {
@@ -164,6 +319,13 @@
   }
   .hp-1-content-right {
     margin-top: 150px;
+  }
+}
+
+@media (min-width: 1473px) {
+  .hp-s2-photo-arrows {
+    bottom: -75px;
+    right: 0px;
   }
 }
 

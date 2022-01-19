@@ -174,7 +174,7 @@ const ShopPage = () => {
         <div className='shop-lower'>
           <div className='content-left'>
             <div className='shop-title'>
-              OUR <br /> PRODUCTS
+              OUR <br /> ARTWORK
             </div>
             <div className='shop-filter-container'>
               <div className='shop-filter-title'>Filter by</div>

@@ -17,7 +17,7 @@ const featuredPhotos = [
   null,
 ];
 
-const animationTime = 500;
+// const animationTime = 500;
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -91,6 +91,7 @@ const LandingPage = () => {
 
       renderedFeaturedPhotos.push(
         <img
+          alt='slider'
           className={`s2-img-slider-img ${fromLeftClass} ${fromRightClass} ${imageSliderState.startingImageIndex}`}
           src={`/images/${featuredPhotos[i + imageSliderState.startingImageIndex]}`}
           key={+new Date() + i}
@@ -157,8 +158,8 @@ const LandingPage = () => {
       <div className='section-1-container'>
         <div className='section-1'>
           <div className='hp-1-images-container'>
-            <img src='/images/clouds-photo-2.png' className='hp-1-image-under' />
-            <img src='/images/finger-photo-2.png' className='hp-1-image-over' />
+            <img src='/images/clouds-photo-2.png' alt='skylight-photography' className='hp-1-image-under' />
+            <img src='/images/finger-photo-2.png' alt='skylight-photography' className='hp-1-image-over' />
           </div>
           <div className='hp-1-content-right'>
             <div className='hp-1-welcome-text'>Welcome To</div>
@@ -216,8 +217,8 @@ const LandingPage = () => {
             </div>
           </div>
           <div className='s3-images-container'>
-            <img className='s3-image-behind' src='/images/s3-temp-2.png' />
-            <img className='s3-image-top' src='/images/s3-temp-1.png' />
+            <img className='s3-image-behind' alt='skylight-photography' src='/images/s3-temp-2.png' />
+            <img className='s3-image-top' alt='skylight-photography' src='/images/s3-temp-1.png' />
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
 import { store } from '../../index';
 
-export default () => {
+const authHeader = () => {
   const userToken = store.getState().auth.token;
 
   return userToken ? { Authorization: `Bearer ${userToken}` } : {};
 };
+
+export default authHeader;

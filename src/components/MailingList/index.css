@@ -1,6 +1,6 @@
-/* .mail-list-container {
-
-} */
+.mail-list-container {
+  background: white;
+}
 
 .mail-list {
   max-width: 1366px;

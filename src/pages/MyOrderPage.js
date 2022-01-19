@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchOrder } from '../actions/orderActions';
 import useOrders from '../hooks/useOrders';
@@ -7,7 +7,8 @@ import useOrders from '../hooks/useOrders';
 const MyOrderPage = () => {
   const dispatch = useDispatch();
   const orderId = Number(useParams().orderId);
-  const { orders, isLoaded, error } = useOrders();
+  // const { orders, isLoaded, error } = useOrders();
+  const { orders } = useOrders();
 
   useEffect(() => {
     dispatch(fetchOrder(orderId));

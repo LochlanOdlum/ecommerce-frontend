@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import useProducts from '../../hooks/useProducts';
@@ -36,10 +36,7 @@ const PhotoDetailsPage = (props) => {
         {product.title}
         {product.description}
         {product.price}
-        <img
-          style={{ width: '500px' }}
-          src={product.mediumWatermarkedImagePublicURL}
-        />
+        <img alt='skylight-photography' style={{ width: '500px' }} src={product.mediumWatermarkedImagePublicURL} />
         <button onClick={handleAddToCart}>Add to cart</button>
       </div>
     );
@@ -47,7 +44,7 @@ const PhotoDetailsPage = (props) => {
 
   return (
     <div>
-      <Link to="/">Home</Link>
+      <Link to='/'>Home</Link>
       {renderProduct()}
     </div>
   );

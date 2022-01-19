@@ -134,7 +134,7 @@ const SignupPage = () => {
             </span>
           </div>
         </form>
-        <img className='sup-image' src='/images/login-page-img.png' />
+        <img className='sup-image' alt='skylight-photography' src='/images/login-page-img.png' />
       </div>
     </div>
   );

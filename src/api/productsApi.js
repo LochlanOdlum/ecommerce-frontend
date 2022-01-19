@@ -24,7 +24,9 @@ const fetchProduct = async (id) => {
   return product;
 };
 
-export default {
+const productsApi = {
   fetchProducts,
   fetchProduct,
 };
+
+export default productsApi;

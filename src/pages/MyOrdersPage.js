@@ -2,7 +2,8 @@ import React from 'react';
 import useOrders from '../hooks/useOrders';
 
 const MyOrdersPage = () => {
-  const { orders, isLoaded, error } = useOrders();
+  // const { orders, isLoaded, error } = useOrders();
+  const { orders, isLoaded } = useOrders();
 
   console.log(orders);
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import AdminSummaryWidget from '../../components/AdminSummaryWidget';
-import AdminNavSideBar from '../../components/AdminNavSideBar';
+// import AdminNavSideBar from '../../components/AdminNavSideBar';
 import './adminDashboardPage.css';
 
 const AdminPage = () => {
@@ -32,7 +32,7 @@ const AdminPage = () => {
                   <td className='text-center'>#327</td>
                   <td className='admin-table-cell'>
                     <div className='admin-table-cell-name-wrapper'>
-                      <img src='/images/user.png' className='admin-table-cell-user-icon'></img>
+                      <img src='/images/user.png' alt='user-icon' className='admin-table-cell-user-icon'></img>
                       Lochlan Odlum
                     </div>
                   </td>
@@ -46,7 +46,7 @@ const AdminPage = () => {
                   <td className='text-center'>#326</td>
                   <td className='admin-table-cell'>
                     <div className='admin-table-cell-name-wrapper'>
-                      <img src='/images/user.png' className='admin-table-cell-user-icon'></img>
+                      <img src='/images/user.png' alt='user-icon' className='admin-table-cell-user-icon'></img>
                       George Ward
                     </div>
                   </td>
@@ -60,7 +60,7 @@ const AdminPage = () => {
                   <td className='text-center'>#325</td>
                   <td className='admin-table-cell'>
                     <div className='admin-table-cell-name-wrapper'>
-                      <img src='/images/user.png' className='admin-table-cell-user-icon'></img>
+                      <img src='/images/user.png' alt='user-icon' className='admin-table-cell-user-icon'></img>
                       George Goldsmith
                     </div>
                   </td>
@@ -74,7 +74,7 @@ const AdminPage = () => {
                   <td className='text-center'>#324</td>
                   <td className='admin-table-cell'>
                     <div className='admin-table-cell-name-wrapper'>
-                      <img src='/images/user.png' className='admin-table-cell-user-icon'></img>
+                      <img src='/images/user.png' alt='user-icon' className='admin-table-cell-user-icon'></img>
                       Eddie Hall
                     </div>
                   </td>
@@ -87,9 +87,9 @@ const AdminPage = () => {
               </tbody>
             </table>
             <div className='ap-main-users-table-footer'>
-              <a className='ap-main-users-table-footer-link'>
+              <div className='ap-main-users-table-footer-link'>
                 <Link to='/admin/orders'>{'All Orders >'}</Link>
-              </a>
+              </div>
             </div>
           </div>
         </div>

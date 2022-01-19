@@ -13,6 +13,7 @@ const useProducts = () => {
     if (!isLoading && !isLoaded) {
       dispatch(fetchProductList());
     }
+    // eslint-disable-next-line
   }, []);
 
   return { products, isLoaded, error };

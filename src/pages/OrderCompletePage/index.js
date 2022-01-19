@@ -17,7 +17,7 @@ const OrderCompletePage = () => {
     };
 
     getOrderInfo();
-  }, []);
+  }, [orderId]);
 
   console.log(orderId);
 
@@ -28,10 +28,7 @@ const OrderCompletePage = () => {
   }
 
   const calculateOrderTotal = (orderItems) =>
-    orderItems.reduce(
-      (accumulator, currentItem) => accumulator + Number(currentItem.price),
-      0
-    );
+    orderItems.reduce((accumulator, currentItem) => accumulator + Number(currentItem.price), 0);
 
   return (
     <div>

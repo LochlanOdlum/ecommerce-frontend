@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import NavBar from '../../components/NavBar';
 
-import { login, logout } from '../../actions/authActions';
+import { login } from '../../actions/authActions';
 
 import './index.css';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const { isLoading, errorMessage } = useSelector((state) => state.login);
+  // const { isLoading, errorMessage } = useSelector((state) => state.login);
   const dispatch = useDispatch();
 
   // dispatch(logout());
@@ -30,7 +30,7 @@ const LoginPage = () => {
     <div className='lip-container'>
       <NavBar />
       <div className='lip'>
-        <img className='lip-image' src='/images/login-page-img.png' />
+        <img className='lip-image' alt='skylight-photography' src='/images/login-page-img.png' />
         <form class='lip-form' onSubmit={onLoginSubmit}>
           <div className='lip-title'>Login</div>
           <div className='lip-email-input-container'>

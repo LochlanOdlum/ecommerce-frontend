@@ -11,7 +11,8 @@ const PaymentPage = () => {
   const stripe = useStripe();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { cartItems, cartTotal, error, isLoaded } = useCart();
+  // const { cartItems, cartTotal, error, isLoaded } = useCart();
+  const { cartItems, isLoaded } = useCart();
 
   if (!isLoaded) {
     return <div>Loading data!</div>;
@@ -30,14 +31,11 @@ const PaymentPage = () => {
     try {
       const { clientSecret, orderId } = await ordersApi.startOrder(cartItemIds);
 
-      const { paymentIntent, error } = await stripe.confirmCardPayment(
-        clientSecret,
-        {
-          payment_method: {
-            card: elements.getElement(CardElement),
-          },
-        }
-      );
+      const { error } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      });
 
       if (!error) {
         dispatch(EmptyCart());
@@ -53,10 +51,10 @@ const PaymentPage = () => {
   return (
     <>
       <h1>Payment</h1>
-      <form id="payment-form" onSubmit={onPaymentSubmit}>
-        <label htmlFor="card-element">Card</label>
-        <CardElement id="card-element" />
-        <button type="submit">Pay</button>
+      <form id='payment-form' onSubmit={onPaymentSubmit}>
+        <label htmlFor='card-element'>Card</label>
+        <CardElement id='card-element' />
+        <button type='submit'>Pay</button>
       </form>
     </>
   );

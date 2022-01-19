@@ -13,6 +13,7 @@ const useOrders = () => {
     if (!isLoading && !isLoaded) {
       dispatch(fetchOrderList());
     }
+    // eslint-disable-next-line
   }, []);
 
   return { orders, isLoaded, error };

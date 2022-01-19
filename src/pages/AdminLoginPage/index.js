@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../actions/authActions';
 
 const AdminLoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { isLoggedIn, isAdmin } = useSelector((state) => state.auth);
-  const { isLoading, errorMessage } = useSelector((state) => state.login);
+  // const { isLoading, errorMessage } = useSelector((state) => state.login);
   const dispatch = useDispatch();
 
   const onLoginSubmit = (e) => {

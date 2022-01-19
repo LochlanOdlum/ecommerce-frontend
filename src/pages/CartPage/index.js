@@ -1,10 +1,11 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import useProducts from '../../hooks/useProducts';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+// import useProducts from '../../hooks/useProducts';
 import { DeleteCartItem } from '../../actions/cartActions';
 import useCart from '../../hooks/useCart';
 import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer';
 
 import './index.css';
 
@@ -26,7 +27,11 @@ const CartPage = () => {
       return (
         <tr className='cp-cart-table-row' key={item.id}>
           <td className='cp-photo-cell'>
-            <img className='cp-photo-img' src={`${item.mediumCroppedSquareWatermarkedImagePublicURL}`} />
+            <img
+              className='cp-photo-img'
+              alt='cart-item'
+              src={`${item.mediumCroppedSquareWatermarkedImagePublicURL}`}
+            />
             <div className='cp-photo-cell-info'>
               <div className='cp-photo-title'>{item.title}</div>
               <div className='cp-photo-collection-name'>Wildlife</div>
@@ -35,6 +40,7 @@ const CartPage = () => {
           <td className='text-center cp-cell'>£{item.price}</td>
           <td className='text-center cp-cell'>
             <img
+              alt='del-icon'
               src='/images/del-icon.png'
               onClick={() => {
                 dispatch(DeleteCartItem(item.id));
@@ -94,6 +100,7 @@ const CartPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

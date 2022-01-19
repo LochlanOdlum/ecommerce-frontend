@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
-import NavBar from './components/NavBar';
+// import NavBar from './components/NavBar';
 import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
 import PhotoDetailsPage from './pages/PhotoDetailsPage';
@@ -29,14 +29,14 @@ const STRIPE_PUBLISHABLE_KEY =
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
-const LayoutsWithNavBar = () => {
-  return (
-    <>
-      <NavBar />
-      <Outlet />
-    </>
-  );
-};
+// const LayoutsWithNavBar = () => {
+//   return (
+//     <>
+//       <NavBar />
+//       <Outlet />
+//     </>
+//   );
+// };
 
 const LayoutsWithAdminNavSideBar = () => {
   return (

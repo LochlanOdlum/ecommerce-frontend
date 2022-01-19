@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { AddCartItem } from '../../actions/cartActions';
 import useProducts from '../../hooks/useProducts';
 import NavBar from '../../components/NavBar';
+import MailingList from '../../components/MailingList';
+import Footer from '../../components/Footer';
 
 import './index.css';
 
@@ -184,6 +186,8 @@ const ShopPage = () => {
           </div>
         </div>
       </div>
+      <MailingList />
+      <Footer />
     </div>
   );
 };

@@ -4,13 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../actions/authActions';
 
 import './index.css';
-import { render } from '@testing-library/react';
+// import { render } from '@testing-library/react';
 
-{
-  /* <Link to='/login'>Login</Link>
+/* <Link to='/login'>Login</Link>
 <br />
 <Link to='/cart'>Cart</Link> */
-}
+
 const NavBar = () => {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const modalToggleButton = useRef(null);
@@ -42,9 +41,9 @@ const NavBar = () => {
     };
   }, []);
 
-  const handleLogOut = () => {
-    dispatch(logout());
-  };
+  // const handleLogOut = () => {
+  //   dispatch(logout());
+  // };
 
   const renderRightElements = () => {
     const signupElement = (
@@ -72,6 +71,7 @@ const NavBar = () => {
       <img
         className='navBar-cart-icon'
         src='/images/cart-icon.svg'
+        alt='cart-icon'
         onClick={() => {
           navigate('/cart');
         }}
@@ -170,6 +170,7 @@ const NavBar = () => {
           </div>
         </div>
         <img
+          alt='skylight-photography-logo'
           src='/images/logo.png'
           className='navBar-logo'
           onClick={() => {

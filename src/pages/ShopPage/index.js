@@ -12,17 +12,12 @@ import './index.css';
 const PRODS_PER_PAGE = 9;
 
 const ShopPage = () => {
-  const { products, isLoaded, error } = useProducts();
+  const { products, collections, isLoaded, error } = useProducts();
+  //Set active collection id for filtering, null means all collections
+  const [activeCollection, setActiveCollection] = useState(null);
   const [pageNum, setPageNum] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const priceToPounds = (pence) => {
-    const array = Array.from(String(pence));
-    array.splice(array.length - 2, 0, '.');
-
-    return array.join('');
-  };
 
   const changePageNum = (amount) => {
     const finalPageNum = Math.floor(products.length / PRODS_PER_PAGE);
@@ -40,30 +35,17 @@ const ShopPage = () => {
       return <div>Loading product data!</div>;
     }
 
-    // return products.map((product) => {
-    //   return (
-    //     <div className='photo-container' key={product.id}>
-    //       <div className='sp-photo-img-container'>
-    //         <div
-    //           className='sp-photo-img'
-    //           style={{ backgroundImage: `url('${product.mediumCroppedSquareWatermarkedImagePublicURL}')` }}
-    //           // stlye={{ backgroundImage: product.mediumCroppedSquareWatermarkedImagePublicURL }}
-    //         />
-    //       </div>
-    //       <div className='sp-photo-title'>{product.title}</div>
-    //       <div className='shop-photo-bottom'>
-    //         <button className='orange-brown-button shop-add-to-cart'>Add To Cart</button>
-    //         <div className='shop-photo-price'>£{priceToPounds(product.price)}</div>
-    //       </div>
-    //       {/* <Link to={`/photo/${product.id}`}>Click me!</Link> */}
-    //     </div>
-    //   );
-    // });
+    const filteredProducts = products.filter((prod) => {
+      if (activeCollection === null) {
+        return true;
+      }
+      return prod.collectionId === activeCollection;
+    });
 
     const renderedProductElements = [];
 
     for (let i = PRODS_PER_PAGE * pageNum; i < PRODS_PER_PAGE * (pageNum + 1); i++) {
-      const product = products[i];
+      const product = filteredProducts[i];
       if (!product) {
         continue;
       }
@@ -89,7 +71,7 @@ const ShopPage = () => {
             >
               Add To Cart
             </button>
-            <div className='shop-photo-price'>£{priceToPounds(product.price)}</div>
+            <div className='shop-photo-price'>£{product.price}</div>
           </div>
           {/* <Link to={`/photo/${product.id}`}>Click me!</Link> */}
         </div>
@@ -97,6 +79,19 @@ const ShopPage = () => {
     }
 
     return renderedProductElements;
+  };
+
+  const renderCollectionFilters = () => {
+    return collections.map((collection) => (
+      <div
+        className={`shop-filter-block-filter ${activeCollection === collection.id ? 'active' : ''}`}
+        onClick={() => {
+          setActiveCollection(collection.id);
+        }}
+      >
+        {collection.name}
+      </div>
+    ));
   };
 
   const renderPageArrows = () => {
@@ -178,6 +173,27 @@ const ShopPage = () => {
             </div>
             <div className='shop-filter-container'>
               <div className='shop-filter-title'>Filter by</div>
+              <div className='shop-filter-list'>
+                <div className='shop-filter-block'>
+                  <div className='shop-filter-block-title'>Collection</div>
+                  {isLoaded && (
+                    <div className='shop-filter-block-filters'>
+                      <div
+                        className={`shop-filter-block-filter ${activeCollection === null ? 'active' : ''}`}
+                        onClick={() => {
+                          setActiveCollection(null);
+                        }}
+                      >
+                        All
+                      </div>
+                      {renderCollectionFilters()}
+                    </div>
+                  )}
+                </div>
+                <div className='shop-filter-block'>
+                  <div className='shop-filter-block-title'>Price</div>
+                </div>
+              </div>
             </div>
           </div>
           <div className='content-right'>

@@ -16,14 +16,26 @@ const ShopPage = () => {
   //Set active collection id for filtering, null means all collections
   const [activeCollection, setActiveCollection] = useState(null);
   const [pageNum, setPageNum] = useState(0);
+  const [isCollectionsFilterOpen, setIsCollectionsFilterOpen] = useState(true);
+  const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   let filteredProductsLength = 0;
 
+  const scrollToTop = () => {
+    const scrollPos = window.scrollY || window.scrollTop || document.getElementsByTagName('html')[0].scrollTop;
+
+    if (scrollPos > 460) {
+      window.scrollTo(0, 0);
+    }
+  };
+
   const changePageNum = (amount) => {
     const finalPageNum = Math.floor(products.length / PRODS_PER_PAGE);
     if (pageNum + amount >= 0 && pageNum + amount <= finalPageNum) {
+      window.scrollTo(0, 0);
       setPageNum(pageNum + amount);
     }
   };
@@ -91,6 +103,7 @@ const ShopPage = () => {
         className={`shop-filter-block-filter ${activeCollection === collection.id ? 'active' : ''}`}
         onClick={() => {
           setActiveCollection(collection.id);
+          scrollToTop();
         }}
       >
         {collection.name}
@@ -179,13 +192,48 @@ const ShopPage = () => {
               <div className='shop-filter-title'>Filter by</div>
               <div className='shop-filter-list'>
                 <div className='shop-filter-block'>
-                  <div className='shop-filter-block-title'>Collection</div>
+                  <div className='shop-filter-header'>
+                    <div className='shop-filter-block-title'>Collection</div>
+                    <div
+                      className='shop-filter-svg-container'
+                      onClick={() => {
+                        setIsCollectionsFilterOpen(!isCollectionsFilterOpen);
+                      }}
+                    >
+                      {isCollectionsFilterOpen && (
+                        <svg
+                          className='sp-filter-minus'
+                          width='15'
+                          height='3'
+                          viewBox='0 0 15 3'
+                          fill='none'
+                          xmlns='http://www.w3.org/2000/svg'
+                        >
+                          <path d='M13.4453 1.875H1.44531' stroke='#8D8A8A' stroke-width='2' stroke-linecap='round' />
+                        </svg>
+                      )}
+                      {!isCollectionsFilterOpen && (
+                        <svg
+                          className='sp-filter-plus'
+                          width='14'
+                          height='14'
+                          viewBox='0 0 14 14'
+                          fill='none'
+                          xmlns='http://www.w3.org/2000/svg'
+                        >
+                          <path d='M13 7H1' stroke='#8D8A8A' stroke-width='2' stroke-linecap='round' />
+                          <path d='M7 1L7 13' stroke='#8D8A8A' stroke-width='2' stroke-linecap='round' />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
                   {isLoaded && (
-                    <div className='shop-filter-block-filters'>
+                    <div className={`shop-filter-block-filters${isCollectionsFilterOpen ? '' : ' hidden'}`}>
                       <div
                         className={`shop-filter-block-filter ${activeCollection === null ? 'active' : ''}`}
                         onClick={() => {
                           setActiveCollection(null);
+                          scrollToTop();
                         }}
                       >
                         All
@@ -195,7 +243,42 @@ const ShopPage = () => {
                   )}
                 </div>
                 <div className='shop-filter-block'>
-                  <div className='shop-filter-block-title'>Price</div>
+                  <div className='shop-filter-header'>
+                    <div className='shop-filter-block-title'>Price</div>
+                    <div
+                      className='shop-filter-svg-container'
+                      onClick={() => {
+                        setIsPriceFilterOpen(!isPriceFilterOpen);
+                      }}
+                    >
+                      {isPriceFilterOpen && (
+                        <svg
+                          className='sp-filter-minus'
+                          width='15'
+                          height='3'
+                          viewBox='0 0 15 3'
+                          fill='none'
+                          xmlns='http://www.w3.org/2000/svg'
+                        >
+                          <path d='M13.4453 1.875H1.44531' stroke='#8D8A8A' stroke-width='2' stroke-linecap='round' />
+                        </svg>
+                      )}
+                      {!isPriceFilterOpen && (
+                        <svg
+                          className='sp-filter-plus'
+                          width='14'
+                          height='14'
+                          viewBox='0 0 14 14'
+                          fill='none'
+                          xmlns='http://www.w3.org/2000/svg'
+                        >
+                          <path d='M13 7H1' stroke='#8D8A8A' stroke-width='2' stroke-linecap='round' />
+                          <path d='M7 1L7 13' stroke='#8D8A8A' stroke-width='2' stroke-linecap='round' />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  <div className={`shop-filter-block-filters${isPriceFilterOpen ? '' : ' hidden'}`}>Price</div>
                 </div>
               </div>
             </div>

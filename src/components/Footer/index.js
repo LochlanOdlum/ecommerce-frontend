@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 
 import './index.css';
 
+const onLinkClick = () => {
+  window.scrollTo(0, 0);
+};
+
 const Footer = () => {
   return (
     <div className='footer-container'>
@@ -21,19 +25,19 @@ const Footer = () => {
         <div className='footer-content-right'>
           <div className='footer-right-column'>
             <div className='footer-right-header'>About</div>
-            <Link className='footer-right-column-subtext' to='/'>
+            <Link className='footer-right-column-subtext' to='/' onClick={onLinkClick}>
               Home
             </Link>
-            <Link className='footer-right-column-subtext' to='/shop'>
+            <Link className='footer-right-column-subtext' to='/shop' onClick={onLinkClick}>
               Shop
             </Link>
           </div>
           <div className='footer-right-column'>
             <div className='footer-right-header'>Information</div>
-            <Link to='/myaccount' className='footer-right-column-subtext'>
+            <Link to='/myaccount' className='footer-right-column-subtext' onClick={onLinkClick}>
               Account
             </Link>
-            <Link to='/myphotos' className='footer-right-column-subtext'>
+            <Link to='/myphotos' className='footer-right-column-subtext' onClick={onLinkClick}>
               My Photos
             </Link>
             <div className='footer-right-column-subtext'>Newsletter</div>

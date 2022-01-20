@@ -97,9 +97,17 @@
   cursor: pointer;
 }
 
+.navBar-cart-icon:hover {
+  cursor: pointer;
+}
+
 .nabar-button {
   width: 130px;
   height: 48px;
+}
+
+.nabar-button:hover {
+  cursor: pointer;
 }
 
 .navbar-signup {

@@ -42,6 +42,7 @@
 
 .content-left {
   width: 19.3%;
+  /* margin-bottom: 50%; */
 }
 
 .shop-title {
@@ -51,10 +52,34 @@
   color: black;
 }
 
+.shop-filter-header {
+  /* display: flex; */
+  /* align-items: center; */
+  position: relative;
+}
+
 .shop-filter-title {
   font-family: 'Playfair Display', serif;
   font-size: 18px;
   color: black;
+}
+
+.shop-filter-svg-container {
+  position: absolute;
+  right: 0;
+  width: 15%;
+  top: 5%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 5%;
+  user-select: none;
+}
+
+.shop-filter-svg-container:hover {
+  cursor: pointer;
 }
 
 .shop-filter-container {
@@ -89,6 +114,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+}
+
+.shop-filter-block-filters.hidden {
+  display: none;
 }
 
 .shop-filter-block-filter.active {

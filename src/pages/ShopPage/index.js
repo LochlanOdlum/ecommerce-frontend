@@ -19,6 +19,8 @@ const ShopPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  let filteredProductsLength = 0;
+
   const changePageNum = (amount) => {
     const finalPageNum = Math.floor(products.length / PRODS_PER_PAGE);
     if (pageNum + amount >= 0 && pageNum + amount <= finalPageNum) {
@@ -41,6 +43,8 @@ const ShopPage = () => {
       }
       return prod.collectionId === activeCollection;
     });
+
+    filteredProductsLength = filteredProducts.length;
 
     const renderedProductElements = [];
 
@@ -95,7 +99,7 @@ const ShopPage = () => {
   };
 
   const renderPageArrows = () => {
-    if (products.length <= PRODS_PER_PAGE) {
+    if (filteredProductsLength <= PRODS_PER_PAGE) {
       return null;
     }
 

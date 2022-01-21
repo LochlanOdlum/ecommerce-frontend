@@ -84,7 +84,7 @@
 
 .shop-filter-container {
   position: sticky;
-  top: 60px;
+  top: 7vw;
   margin-bottom: 550px;
   margin-top: 60px;
 }
@@ -109,6 +109,8 @@
 }
 
 .shop-filter-block-filters {
+  display: flex;
+  justify-content: center;
   margin-top: 20px;
   color: black;
   display: flex;

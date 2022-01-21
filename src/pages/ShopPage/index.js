@@ -6,10 +6,14 @@ import useProducts from '../../hooks/useProducts';
 import NavBar from '../../components/NavBar';
 import MailingList from '../../components/MailingList';
 import Footer from '../../components/Footer';
+import TwoPointSlider from '../../components/TwoPointSlider';
 
 import './index.css';
 
 const PRODS_PER_PAGE = 9;
+
+const minValue = 0;
+const maxValue = 300;
 
 const ShopPage = () => {
   const { products, collections, isLoaded, error } = useProducts();
@@ -18,6 +22,8 @@ const ShopPage = () => {
   const [pageNum, setPageNum] = useState(0);
   const [isCollectionsFilterOpen, setIsCollectionsFilterOpen] = useState(true);
   const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(false);
+  const [minPrice, setMinPrice] = useState(minValue);
+  const [maxPrice, setMaxPrice] = useState(maxValue);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -278,7 +284,21 @@ const ShopPage = () => {
                       )}
                     </div>
                   </div>
-                  <div className={`shop-filter-block-filters${isPriceFilterOpen ? '' : ' hidden'}`}>Price</div>
+                  <div className={`shop-filter-block-filters${isPriceFilterOpen ? '' : ' hidden'}`}>
+                    <div className='shop-twopointslider'>
+                      {isPriceFilterOpen && (
+                        <TwoPointSlider
+                          min={minValue}
+                          max={maxValue}
+                          // width={200}
+                          minVal={minPrice}
+                          setMinVal={setMinPrice}
+                          maxVal={maxPrice}
+                          setMaxVal={setMaxPrice}
+                        />
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

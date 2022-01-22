@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AddCartItem } from '../../actions/cartActions';
@@ -6,17 +6,18 @@ import useProducts from '../../hooks/useProducts';
 import NavBar from '../../components/NavBar';
 import MailingList from '../../components/MailingList';
 import Footer from '../../components/Footer';
-import TwoPointSlider from '../../components/TwoPointSlider';
+import TwoPointPriceSlider from '../../components/TwoPointPriceSlider';
 
 import './index.css';
 
 const PRODS_PER_PAGE = 9;
 
-const minValue = 0;
-const maxValue = 300;
-
 const ShopPage = () => {
-  const { products, collections, isLoaded, error } = useProducts();
+  const { products, collections, isLoaded, error, maxProductPrice } = useProducts();
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  //Min and max values for price filter
+  const minValue = 0;
+  const maxValue = Math.ceil(maxProductPrice);
   //Set active collection id for filtering, null means all collections
   const [activeCollection, setActiveCollection] = useState(null);
   const [pageNum, setPageNum] = useState(0);
@@ -24,11 +25,27 @@ const ShopPage = () => {
   const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(false);
   const [minPrice, setMinPrice] = useState(minValue);
   const [maxPrice, setMaxPrice] = useState(maxValue);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  let filteredProductsLength = 0;
+  useEffect(() => {
+    setMaxPrice(Math.ceil(maxProductPrice));
+  }, [maxProductPrice]);
+
+  useEffect(() => {
+    const filterProducts = (prods) => {
+      const filteredProducts = prods.filter((prod) => {
+        const isValidPrice = prod.priceInPounds >= minPrice && prod.priceInPounds <= maxPrice;
+        const isValidCollection = activeCollection === null || prod.collectionId === activeCollection ? true : false;
+
+        return isValidPrice && isValidCollection;
+      });
+
+      return filteredProducts;
+    };
+
+    setFilteredProducts(filterProducts(products));
+  }, [products, activeCollection, minPrice, maxPrice]);
 
   const scrollToTop = () => {
     const scrollPos = window.scrollY || window.scrollTop || document.getElementsByTagName('html')[0].scrollTop;
@@ -54,15 +71,6 @@ const ShopPage = () => {
     if (!isLoaded) {
       return <div>Loading product data!</div>;
     }
-
-    const filteredProducts = products.filter((prod) => {
-      if (activeCollection === null) {
-        return true;
-      }
-      return prod.collectionId === activeCollection;
-    });
-
-    filteredProductsLength = filteredProducts.length;
 
     const renderedProductElements = [];
 
@@ -93,7 +101,7 @@ const ShopPage = () => {
             >
               Add To Cart
             </button>
-            <div className='shop-photo-price'>£{product.price}</div>
+            <div className='shop-photo-price'>£{product.priceInPounds}</div>
           </div>
           {/* <Link to={`/photo/${product.id}`}>Click me!</Link> */}
         </div>
@@ -118,8 +126,9 @@ const ShopPage = () => {
   };
 
   const renderPageArrows = () => {
-    if (filteredProductsLength <= PRODS_PER_PAGE) {
-      return null;
+    if (filteredProducts.length <= PRODS_PER_PAGE) {
+      return <div className='no-filter-arrow-padding'></div>;
+      // return null;
     }
 
     return (
@@ -285,18 +294,19 @@ const ShopPage = () => {
                     </div>
                   </div>
                   <div className={`shop-filter-block-filters${isPriceFilterOpen ? '' : ' hidden'}`}>
-                    <div className='shop-twopointslider'>
-                      {isPriceFilterOpen && (
-                        <TwoPointSlider
-                          min={minValue}
-                          max={maxValue}
-                          // width={200}
-                          minVal={minPrice}
-                          setMinVal={setMinPrice}
-                          maxVal={maxPrice}
-                          setMaxVal={setMaxPrice}
-                        />
-                      )}
+                    <div className='shop-price-slider-container'>
+                      <div className='shop-twopointslider'>
+                        {isPriceFilterOpen && (
+                          <TwoPointPriceSlider
+                            min={minValue}
+                            max={maxValue}
+                            setMinVal={setMinPrice}
+                            setMaxVal={setMaxPrice}
+                            initialMin={minPrice}
+                            initialMax={maxPrice}
+                          />
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -304,7 +314,7 @@ const ShopPage = () => {
             </div>
           </div>
           <div className='content-right'>
-            {renderProducts()}
+            <div className='photo-photo-list'>{renderProducts()}</div>
             {renderPageArrows()}
           </div>
         </div>

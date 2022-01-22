@@ -3,16 +3,20 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // import useProducts from '../../hooks/useProducts';
 import { DeleteCartItem } from '../../actions/cartActions';
-import useCart from '../../hooks/useCart';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
+import useCart from '../../hooks/useCart';
+import useCollections from '../../hooks/useCollections';
 
 import './index.css';
 
 const CartPage = () => {
-  const { cartItems, cartTotal, error, isLoaded } = useCart();
+  const { cartItems, cartTotal, error, isLoaded: isCartLoaded } = useCart();
+  const { collectionMap, isLoaded: isCollectionsLoaded } = useCollections();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const isLoaded = isCartLoaded && isCollectionsLoaded;
 
   if (error) {
     return <div>Error fetching cart data!</div>;
@@ -34,10 +38,10 @@ const CartPage = () => {
             />
             <div className='cp-photo-cell-info'>
               <div className='cp-photo-title'>{item.title}</div>
-              <div className='cp-photo-collection-name'>Wildlife</div>
+              <div className='cp-photo-collection-name'>{collectionMap[item.collectionId]}</div>
             </div>
           </td>
-          <td className='text-center cp-cell'>£{item.price}</td>
+          <td className='text-center cp-cell'>£{item.priceInPounds}</td>
           <td className='text-center cp-cell'>
             <img
               alt='del-icon'

@@ -4,16 +4,14 @@ import './index.css';
 
 let thumbsize = 14;
 
-const TwoPointSlider = ({ minVal, setMinVal, maxVal, setMaxVal, min, max }) => {
+const TwoPointSlider = ({ bouncyMinVal, setbouncyMinVal, bouncyMaxVal, setbouncyMaxVal, min, max }) => {
   const [avg, setAvg] = useState((min + max) / 2);
   const [width, setWidth] = useState(0);
   const minMaxSlider = useRef(null);
-  // const [minVal, setMinVal] = useState(min);
-  // const [maxVal, setMaxVal] = useState(max);
 
   const minWidth = thumbsize + ((avg - min) / (max - min)) * (width - 2 * thumbsize);
-  const minPercent = ((minVal - min) / (avg - min)) * 100;
-  const maxPercent = ((maxVal - avg) / (max - avg)) * 100;
+  const minPercent = ((bouncyMinVal - min) / (avg - min)) * 100;
+  const maxPercent = ((bouncyMaxVal - avg) / (max - avg)) * 100;
   const styles = {
     min: {
       width: minWidth,
@@ -27,13 +25,20 @@ const TwoPointSlider = ({ minVal, setMinVal, maxVal, setMaxVal, min, max }) => {
     },
   };
 
+  //This keeps the width of the component to the same as its parent container.
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    const resize = () => {
       if (!minMaxSlider.current) {
         return;
       }
       setWidth(minMaxSlider.current.parentElement.getBoundingClientRect().width);
-    });
+    };
+
+    window.addEventListener('resize', resize);
+
+    return () => {
+      window.removeEventListener('resize', resize);
+    };
   }, []);
 
   useLayoutEffect(() => {
@@ -43,8 +48,8 @@ const TwoPointSlider = ({ minVal, setMinVal, maxVal, setMaxVal, min, max }) => {
   }, []);
 
   useLayoutEffect(() => {
-    setAvg((maxVal + minVal) / 2);
-  }, [minVal, maxVal]);
+    setAvg((bouncyMaxVal + bouncyMinVal) / 2);
+  }, [bouncyMinVal, bouncyMaxVal]);
 
   return (
     <div
@@ -66,8 +71,8 @@ const TwoPointSlider = ({ minVal, setMinVal, maxVal, setMaxVal, min, max }) => {
         step='1'
         min={min}
         max={avg}
-        value={minVal}
-        onChange={({ target }) => setMinVal(Number(target.value))}
+        value={bouncyMinVal}
+        onChange={({ target }) => setbouncyMinVal(Number(target.value))}
       />
       <label htmlFor='max'>Maximum price</label>
       <input
@@ -79,8 +84,8 @@ const TwoPointSlider = ({ minVal, setMinVal, maxVal, setMaxVal, min, max }) => {
         step='1'
         min={avg}
         max={max}
-        value={maxVal}
-        onChange={({ target }) => setMaxVal(Number(target.value))}
+        value={bouncyMaxVal}
+        onChange={({ target }) => setbouncyMaxVal(Number(target.value))}
       />
     </div>
   );

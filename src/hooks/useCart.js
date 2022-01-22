@@ -3,6 +3,13 @@ import { useSelector } from 'react-redux';
 
 import useProducts from '../hooks/useProducts';
 
+const priceToPounds = (pence) => {
+  const array = Array.from(String(pence));
+  array.splice(array.length - 2, 0, '.');
+
+  return +array.join('');
+};
+
 //Expected output: {items, total}
 const useCart = () => {
   const { products, error, isLoaded } = useProducts();
@@ -28,8 +35,8 @@ const useCart = () => {
     return { error: 'Could not find all products in cart' };
   }
 
-  let cartTotal = cartItemsWithInfo.reduce((accumulator, current) => accumulator + Number(current.price), 0);
-  cartTotal = Math.round(cartTotal * 1e12) / 1e12;
+  let cartTotal = cartItemsWithInfo.reduce((accumulator, current) => accumulator + Number(current.priceInPence), 0);
+  cartTotal = priceToPounds(cartTotal);
 
   return { cartItems: cartItemsWithInfo, cartTotal, error, isLoaded };
 };

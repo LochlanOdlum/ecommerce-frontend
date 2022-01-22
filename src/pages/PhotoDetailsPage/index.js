@@ -35,7 +35,7 @@ const PhotoDetailsPage = (props) => {
       <div>
         {product.title}
         {product.description}
-        {product.price}
+        {product.priceInPounds}
         <img alt='skylight-photography' style={{ width: '500px' }} src={product.mediumWatermarkedImagePublicURL} />
         <button onClick={handleAddToCart}>Add to cart</button>
       </div>

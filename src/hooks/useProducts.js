@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductList } from '../actions/productActions';
 
@@ -11,13 +11,6 @@ import useCollections from './useCollections';
 //TODO: Need to only return when collection and products are loaded. Map products so
 //TODO: collectionid is turned to collection name.
 const useProducts = () => {
-  const priceToPounds = (pence) => {
-    const array = Array.from(String(pence));
-    array.splice(array.length - 2, 0, '.');
-
-    return array.join('');
-  };
-
   const { collections, collectionMap, isLoaded: isCollectionsLoaded, error: collectionsError } = useCollections();
   const {
     products,
@@ -25,6 +18,7 @@ const useProducts = () => {
     isLoaded: isProductsLoaded,
     error: productsError,
   } = useSelector((state) => state.productList);
+  const [maxProductPrice, setMaxProductPrice] = useState(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,23 +28,30 @@ const useProducts = () => {
     // eslint-disable-next-line
   }, []);
 
+  useLayoutEffect(() => {
+    //Get max price of product
+    let maxPrice = products.reduce(
+      (prev, current) => (+current.priceInPounds > prev ? current.priceInPounds : prev),
+      0
+    );
+
+    setMaxProductPrice(maxPrice);
+  }, [products]);
+
   if (isProductsLoaded && isCollectionsLoaded) {
-    const productsWithPriceInPounds = [];
-    products.forEach((prod) => productsWithPriceInPounds.push({ ...prod }));
-    //Ensure product price is converted to pounds from pence
-    productsWithPriceInPounds.forEach((product) => {
-      if (product.price.toString().includes('.')) {
-        return;
-      }
-      const newPrice = priceToPounds(product.price);
-      product.price = newPrice;
-    });
-    return { products: productsWithPriceInPounds, isLoaded: true, error: null, collectionMap, collections };
+    return {
+      products,
+      isLoaded: true,
+      error: null,
+      collectionMap,
+      collections,
+      maxProductPrice: maxProductPrice,
+    };
   }
 
   const error = productsError || collectionsError;
 
-  return { products: [], error, collectionMap: [], collections: [], isLoaded: false };
+  return { products: [], error, collectionMap: [], collections: [], isLoaded: false, maxProductPrice: maxProductPrice };
 };
 
 export default useProducts;

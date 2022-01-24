@@ -3,6 +3,7 @@ input[type='range'] {
   --maxRangePercent: 0%;
   height: 0.4rem;
   min-width: 21px;
+  /* border-radius: 3px; */
 }
 input[type='range']:invalid {
   box-shadow: none;
@@ -49,6 +50,9 @@ input::focus {
     #ddb091 var(--minRangePercent),
     #ddb091 100%
   );
+
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
 }
 
 .min-max-slider > input.max {
@@ -59,6 +63,9 @@ input::focus {
     rgb(241, 217, 200) var(--maxRangePercent),
     rgb(241, 217, 200) 100%
   );
+
+  border-top-right-radius: 2px;
+  border-bottom-left-radius: 2px;
 }
 
 .min-max-slider > input::-webkit-slider-runnable-track,

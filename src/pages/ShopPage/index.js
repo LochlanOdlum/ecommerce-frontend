@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AddCartItem } from '../../actions/cartActions';
 import useProducts from '../../hooks/useProducts';
@@ -7,31 +7,74 @@ import NavBar from '../../components/NavBar';
 import MailingList from '../../components/MailingList';
 import Footer from '../../components/Footer';
 import TwoPointPriceSlider from '../../components/TwoPointPriceSlider';
+import useScrollToPrevious from '../../hooks/useScrollToPrevious';
 
 import './index.css';
 
 const PRODS_PER_PAGE = 9;
 
 const ShopPage = () => {
-  const { products, collections, isLoaded, error, maxProductPrice } = useProducts();
-  const [filteredProducts, setFilteredProducts] = useState(products);
-  //Min and max values for price filter
+  const { products, collections, collectionMap, isLoaded, error, maxProductPrice } = useProducts();
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const location = useLocation();
+  // const [searchParams, setSearchParams] = useSearchParams();
+  //Min and max values possible for price filter
   const minValue = 0;
   const maxValue = Math.ceil(maxProductPrice);
+  //TODO: Messy bellow, figure out cleaner simpler way of managing rehydrating filters
+  let initialMinPrice = 0;
+  let initialMaxPrice = 200;
+  let initialCollection = null;
+  if (location.state) {
+    initialMinPrice = location.state.minPrice ? location.state.minPrice : 0;
+    initialMaxPrice = location.state.maxPrice ? location.state.maxPrice : 200;
+    initialCollection = location.state.collection ? location.state.collection : null;
+  }
   //Set active collection id for filtering, null means all collections
-  const [activeCollection, setActiveCollection] = useState(null);
+  const [activeCollection, setActiveCollection] = useState(initialCollection);
   const [pageNum, setPageNum] = useState(0);
   const [isCollectionsFilterOpen, setIsCollectionsFilterOpen] = useState(true);
   const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(false);
-  const [minPrice, setMinPrice] = useState(minValue);
-  const [maxPrice, setMaxPrice] = useState(maxValue);
+  //Current min and max values to filter products
+  const [minPrice, setMinPrice] = useState(initialMinPrice);
+  const [maxPrice, setMaxPrice] = useState(initialMaxPrice);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  useScrollToPrevious();
 
   useEffect(() => {
     setMaxPrice(Math.ceil(maxProductPrice));
   }, [maxProductPrice]);
 
+  //rehydrates the old filter settings from location state once clicked back from details page
+  useLayoutEffect(() => {
+    if (!location.state) {
+      return;
+    }
+
+    let { collection, minPrice, maxPrice } = location.state;
+
+    if (!collectionMap[collection]) {
+      collection = null;
+    }
+
+    if (!maxPrice || maxPrice > maxProductPrice) {
+      maxPrice = Math.ceil(maxProductPrice);
+    }
+
+    if (!minPrice || minPrice < 0 || minPrice >= maxPrice) {
+      minPrice = 0;
+    }
+
+    setActiveCollection(collection);
+    setMinPrice(minPrice);
+    setMaxPrice(maxPrice);
+
+    // eslint-disable-next-line
+  }, [isLoaded, maxProductPrice, location.state]);
+
+  //Creates filtered products array every time products or filters change
   useEffect(() => {
     const filterProducts = (prods) => {
       const filteredProducts = prods.filter((prod) => {
@@ -45,8 +88,10 @@ const ShopPage = () => {
     };
 
     setFilteredProducts(filterProducts(products));
-  }, [products, activeCollection, minPrice, maxPrice]);
+    // eslint-disable-next-line
+  }, [products.length, activeCollection, minPrice, maxPrice]);
 
+  //Will scroll to top unless already close making it unnecessary
   const scrollToTop = () => {
     const scrollPos = window.scrollY || window.scrollTop || document.getElementsByTagName('html')[0].scrollTop;
 
@@ -61,6 +106,18 @@ const ShopPage = () => {
       window.scrollTo(0, 0);
       setPageNum(pageNum + amount);
     }
+  };
+
+  const handleProductClick = (product) => {
+    const scrollPos = window.scrollY || window.scrollTop || document.getElementsByTagName('html')[0].scrollTop;
+    const navState = {
+      from: '/shop',
+      collection: activeCollection,
+      minPrice,
+      maxPrice,
+      scrollPos,
+    };
+    navigate(`/photo/${product.id}`, { state: navState });
   };
 
   const renderProducts = () => {
@@ -82,19 +139,25 @@ const ShopPage = () => {
 
       renderedProductElements.push(
         <div className='photo-container' key={product.id}>
-          <div className='sp-photo-img-container'>
-            <div
-              className='sp-photo-img'
-              style={{ backgroundImage: `url('${product.mediumCroppedSquareWatermarkedImagePublicURL}')` }}
-              // stlye={{ backgroundImage: product.mediumCroppedSquareWatermarkedImagePublicURL }}
-            />
+          <div
+            className='sp-photo-title-container'
+            onClick={() => {
+              handleProductClick(product);
+            }}
+          >
+            <div className='sp-photo-img-container'>
+              <div
+                className='sp-photo-img'
+                style={{ backgroundImage: `url('${product.mediumCroppedSquareWatermarkedImagePublicURL}')` }}
+                // stlye={{ backgroundImage: product.mediumCroppedSquareWatermarkedImagePublicURL }}
+              />
+            </div>
+            <div className='sp-photo-title'>{product.title}</div>
           </div>
-          <div className='sp-photo-title'>{product.title}</div>
           <div className='shop-photo-bottom'>
             <button
               className='orange-brown-button shop-add-to-cart'
               onClick={() => {
-                console.log('adding to cart');
                 dispatch(AddCartItem(product.id));
                 navigate('/cart');
               }}

@@ -134,6 +134,11 @@
   width: 90%;
 }
 
+.shop-twopointslider {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 .shop-price-slider-prices {
   display: flex;
   margin-bottom: 7px;
@@ -156,6 +161,10 @@
   flex-wrap: wrap;
   column-gap: 27px;
   row-gap: 70px;
+}
+
+.sp-photo-title-container:hover {
+  cursor: pointer;
 }
 
 .photo-container {

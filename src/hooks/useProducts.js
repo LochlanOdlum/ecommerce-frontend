@@ -10,6 +10,9 @@ import useCollections from './useCollections';
 
 //TODO: Need to only return when collection and products are loaded. Map products so
 //TODO: collectionid is turned to collection name.
+
+let currentMaxProductPrice = 0;
+
 const useProducts = () => {
   const { collections, collectionMap, isLoaded: isCollectionsLoaded, error: collectionsError } = useCollections();
   const {
@@ -18,7 +21,7 @@ const useProducts = () => {
     isLoaded: isProductsLoaded,
     error: productsError,
   } = useSelector((state) => state.productList);
-  const [maxProductPrice, setMaxProductPrice] = useState(0);
+  const [maxProductPrice, setMaxProductPrice] = useState(currentMaxProductPrice);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,9 +39,10 @@ const useProducts = () => {
     );
 
     setMaxProductPrice(maxPrice);
+    currentMaxProductPrice = maxPrice;
   }, [products]);
 
-  if (isProductsLoaded && isCollectionsLoaded) {
+  if (isProductsLoaded && isCollectionsLoaded && maxProductPrice) {
     return {
       products,
       isLoaded: true,

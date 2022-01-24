@@ -7,11 +7,13 @@ import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 import useCart from '../../hooks/useCart';
 import useCollections from '../../hooks/useCollections';
+import useScrollToPrevious from '../../hooks/useScrollToPrevious';
 
 import './index.css';
 
 const CartPage = () => {
   const { cartItems, cartTotal, error, isLoaded: isCartLoaded } = useCart();
+  useScrollToPrevious();
   const { collectionMap, isLoaded: isCollectionsLoaded } = useCollections();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,6 +24,11 @@ const CartPage = () => {
     return <div>Error fetching cart data!</div>;
   }
 
+  const handlePhotoClick = (item) => {
+    const scrollPos = window.scrollY || window.scrollTop || document.getElementsByTagName('html')[0].scrollTop;
+    navigate(`/photo/${item.id}`, { state: { from: '/cart', scrollPos } });
+  };
+
   const renderCartTableBody = () => {
     if (!isLoaded) {
       return <div>Loading cart data!</div>;
@@ -30,7 +37,12 @@ const CartPage = () => {
     return cartItems.map((item) => {
       return (
         <tr className='cp-cart-table-row' key={item.id}>
-          <td className='cp-photo-cell'>
+          <td
+            className='cp-photo-cell'
+            onClick={() => {
+              handlePhotoClick(item);
+            }}
+          >
             <img
               className='cp-photo-img'
               alt='cart-item'

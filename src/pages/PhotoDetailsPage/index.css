@@ -1,0 +1,103 @@
+.pd-back-arrow-container {
+  max-width: 1366px;
+  padding-left: 97px;
+  margin: 40px auto 0 auto;
+}
+
+.pd-back-arrow {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 8px;
+  font-size: 18px;
+  user-select: none;
+}
+
+.pd-back-arrow:hover {
+  cursor: pointer;
+}
+
+.pd-details-container {
+  max-width: 1366px;
+  margin: 40px auto 0 auto;
+  padding: 0 97px;
+  display: flex;
+}
+
+.pd-details-image-left {
+  width: 60%;
+}
+
+.pd-details-image {
+  margin: auto;
+  width: 100%;
+}
+
+.pd-details-right {
+  /* margin-left: 3.5%; */
+  margin-left: auto;
+  align-items: flex-start;
+  margin-top: 30px;
+  width: 34%;
+}
+
+.pd-collection {
+  font-family: 'metropolis';
+  font-weight: 400;
+  font-size: 18px;
+  margin: 0;
+  line-height: 12px;
+}
+
+.pd-title {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 60px;
+  margin: 0;
+}
+
+.pd-price {
+  font-family: 'metropolis';
+  font-weight: 400;
+  font-size: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #8d8a8a;
+}
+
+.pd-description {
+  margin-top: 40px;
+  font-family: 'metropolis';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.pd-add-to-basket-button {
+  /* width: 55%; */
+  margin-top: 15px;
+  width: 220px;
+  height: 48px;
+  font-family: 'metropolis';
+  font-size: 15px;
+  /* padding: 10px 0; */
+}
+
+.pd-share-this {
+  display: block;
+  font-family: 'metropolis';
+  margin-top: 20px;
+  color: #8d8a8a;
+  font-size: 18px;
+}
+
+.pd-share-this-buttons {
+  margin-top: 10px;
+  display: flex;
+  column-gap: 10px;
+}
+
+.pd-linked-logo {
+  width: 24px;
+  height: 24px;
+}

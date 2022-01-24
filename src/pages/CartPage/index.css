@@ -68,10 +68,14 @@
   /* align-items: center; */
 }
 
+.cp-photo-cell:hover {
+  cursor: pointer;
+}
+
 .cp-photo-img {
   width: 120px;
   border-radius: 3px;
-  margin-bottom: 55px;
+  /* margin-bottom: 55px; */
   margin-left: 5px;
 }
 

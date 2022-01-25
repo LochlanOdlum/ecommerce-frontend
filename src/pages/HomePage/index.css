@@ -214,7 +214,9 @@
 
 .s3-image-top {
   position: absolute;
-  border: 1.64vw solid white;
+  border: min(20px, 1.64vw) solid white;
+  /* 76.7 */
+  box-sizing: content-box;
   width: 66.14%;
   border-radius: 3px;
   top: min(6.5vw, 87px);

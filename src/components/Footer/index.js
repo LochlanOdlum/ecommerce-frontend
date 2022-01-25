@@ -14,7 +14,7 @@ const Footer = () => {
         <div className='footer-content-left'>
           <img src='/images/logo.png' alt='skylight-photography-logo' />
           <div className='footer-left-text'>
-            It is a long established fact that a reader will be distracted by the readable content
+            Check out our socials below to keep up to date with Skylight Photography
           </div>
           <div className='footer-left-logos'>
             <img src='/images/linked-in-logo-footer.png' alt='linked-in-logo' />

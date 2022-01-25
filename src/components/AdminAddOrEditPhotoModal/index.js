@@ -1,17 +1,27 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 import adminApi from '../../api/adminApi';
+import useCollections from '../../hooks/useCollections';
 
 import './AdminAddOrEditPhotoModal.css';
 
 const AdminAddOrEditPhotoModal = ({ isEditMode = false }) => {
   //If edit mode then set these default values to values passed from props
+  const { collections, isLoaded: isCollectionsLoaded } = useCollections();
   const imageUploadInputLabelEle = useRef(null);
+  const [collectionId, setCollectionId] = useState(null);
   const [photoTitle, setPhotoTitle] = useState('');
   const [photoDescription, setPhotoDescription] = useState('');
   const [photoPrice, setPhotoPrice] = useState(20);
   const [photoURL, setPhotoURL] = useState(null);
   const [photoFile, setPhotoFile] = useState(null);
+  console.log(photoPrice);
+
+  useEffect(() => {
+    if (isCollectionsLoaded) {
+      setCollectionId(collections[0].id);
+    }
+  }, [isCollectionsLoaded, collections]);
 
   const handleImageUploadChange = (e) => {
     if (!e.target.files || !e.target.files[0]) {
@@ -32,12 +42,22 @@ const AdminAddOrEditPhotoModal = ({ isEditMode = false }) => {
   const handleAddOrEditPhoto = () => {
     //Handle adding a new photo
     if (!isEditMode) {
-      adminApi.addPhoto(photoFile, photoTitle, photoDescription, photoPrice * 100);
+      adminApi.addPhoto(photoFile, photoTitle, photoDescription, photoPrice, collectionId);
     }
 
     //Handle editing an existing photo
     if (isEditMode) {
     }
+  };
+
+  const renderCollectionSelect = () => {
+    if (!isCollectionsLoaded) {
+      return null;
+    }
+
+    return collections.map((collection) => {
+      return <option value={collection.id}>{collection.name}</option>;
+    });
   };
 
   return (
@@ -61,6 +81,17 @@ const AdminAddOrEditPhotoModal = ({ isEditMode = false }) => {
       <div>
         <label>Title</label>
         <input type='text' value={photoTitle} onChange={(e) => setPhotoTitle(e.target.value)} />
+      </div>
+      <div>
+        <label>Collection</label>
+        <select
+          value={collectionId}
+          onChange={(e) => {
+            setCollectionId(e.target.value);
+          }}
+        >
+          {renderCollectionSelect()}
+        </select>
       </div>
       <div>
         <label>Description</label>

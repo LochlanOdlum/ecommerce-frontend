@@ -1,57 +1,103 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import useClickOutsideClose from '../../hooks/useClickOutsideClose';
-import AdminAddOrEditPhotoModal from '../../components/AdminAddOrEditPhotoModal';
 import AdminNavSideBar from '../../components/AdminNavSideBar';
+import useCollections from '../../hooks/useCollections';
+import useClickOutsideClose from '../../hooks/useClickOutsideClose';
+import { addCollection } from '../../actions/collectionActions';
 
-import './adminPhotoPage.css';
+import './index.css';
 
-const AdminPhotoPage = () => {
-  const imageUploadModalRef = useRef(null);
-  const [showImageUploadModal, setShowImageUploadModal] = useClickOutsideClose(imageUploadModalRef);
+const AdminCollectionsPage = () => {
+  const dispatch = useDispatch();
+  const collectionAddContainer = useRef(null);
+  const [collectionAddName, setCollectionAddName] = useState('');
+  const [isCollectionAddOpen, setIsCollectionAddOpen] = useClickOutsideClose(collectionAddContainer);
+  const { collections, isLoaded, error } = useCollections();
 
-  const handleAddPhotoButtonClick = () => {
-    setShowImageUploadModal(true);
+  const handleAddCollectionSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addCollection(collectionAddName));
+    setCollectionAddName('');
+    setIsCollectionAddOpen(false);
   };
 
-  const renderImageUploadModal = () => {
+  const renderAddCollection = () => {
     return (
-      showImageUploadModal && (
-        <div className='ap-image-upload-modal-container'>
-          <div ref={imageUploadModalRef}>
-            <AdminAddOrEditPhotoModal />
+      isCollectionAddOpen && (
+        <div className='apc-add-collection-container'>
+          <div className='apc-add-collection' ref={collectionAddContainer}>
+            <form onSubmit={handleAddCollectionSubmit}>
+              <input
+                value={collectionAddName}
+                onChange={(e) => {
+                  setCollectionAddName(e.target.value);
+                }}
+              ></input>
+            </form>
           </div>
         </div>
       )
     );
   };
 
+  const renderCollectionTableRows = () => {
+    if (error) {
+      return <div>Error Fetching Collection data</div>;
+    }
+    if (!isLoaded) {
+      return <div> Loading Collection Data </div>;
+    }
+
+    return collections.map((collection) => {
+      // console.log(collection);
+      const [creationDate, creationTime] = collection.createdAt.split('.')[0].split('T');
+
+      return (
+        <tr className='admin-table-body-row'>
+          <td className='admin-table-cell text-center'>{collection.name}</td>
+          <td className='admin-table-cell text-center'>
+            {creationTime} {creationDate}{' '}
+          </td>
+          <td className='admin-table-cell text-center'>
+            <button className='admin-table-details-button'>Edit</button>
+          </td>
+        </tr>
+      );
+    });
+  };
+
   return (
     <>
       <AdminNavSideBar />
-      {renderImageUploadModal()}
+      {renderAddCollection()}
       <div className='ap-main'>
         <div className='ap-main-inner'>
           <div className='ap-main-users-table card'>
             <div className='ap-main-users-table-header'>
-              Photos
-              <button className='admin-table-add-photo-button' onClick={handleAddPhotoButtonClick}>
-                Add Photo
+              Collections
+              <button
+                className='admin-table-add-photo-button'
+                onClick={() => {
+                  setCollectionAddName('');
+                  setIsCollectionAddOpen(true);
+                }}
+              >
+                Add Collection
               </button>
             </div>
             <table>
               <thead>
                 <tr>
-                  <th className='admin-table-cell'>#</th>
-                  <th className='admin-table-cell text-left'>Title</th>
-                  <th className='admin-table-cell'>Date</th>
-                  <th className='admin-table-cell'>Price</th>
+                  {/* <th className='admin-table-cell'>#</th> */}
+                  <th className='admin-table-cell'>Collection</th>
+                  <th className='admin-table-cell'>Date Added</th>
                   <th className='admin-table-cell'>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className='admin-table-body-row'>
+                {renderCollectionTableRows()}
+                {/* <tr className='admin-table-body-row'>
                   <td className='text-center'>#327</td>
                   <td className='admin-table-cell'>
                     <div className='admin-table-cell-name-wrapper'>
@@ -106,12 +152,12 @@ const AdminPhotoPage = () => {
                   <td className='admin-table-cell text-center'>
                     <button className='admin-table-details-button'>Edit</button>
                   </td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
             <div className='ap-main-users-table-footer'>
               <div className='ap-main-users-table-footer-link'>
-                <Link to='/admin/orders'>{'All Orders >'}</Link>
+                {/* <Link to='/admin/orders'>{'All Orders >'}</Link> */}
               </div>
             </div>
           </div>
@@ -121,4 +167,4 @@ const AdminPhotoPage = () => {
   );
 };
 
-export default AdminPhotoPage;
+export default AdminCollectionsPage;

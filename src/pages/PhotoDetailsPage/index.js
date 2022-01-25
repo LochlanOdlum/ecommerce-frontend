@@ -7,6 +7,7 @@ import Footer from '../../components/Footer';
 import MailingList from '../../components/MailingList';
 
 import useProducts from '../../hooks/useProducts';
+
 import useCollections from '../../hooks/useCollections';
 import { fetchProduct } from '../../actions/productActions';
 import { AddCartItem } from '../../actions/cartActions';
@@ -79,7 +80,7 @@ const PhotoDetailsPage = (props) => {
             <a
               target='_blank'
               rel='noreferrer'
-              href={`https://twitter.com/intent/tweet?url=skylightphotography.co.uk/photo/${product.id}&text=Check+out+this+awesome+photo+from+Skylight+Photography!`}
+              href={`https://twitter.com/intent/tweet?url=https://skylightphotography.co.uk/photo/${product.id}&text=Check+out+this+awesome+photo+from+Skylight+Photography!`}
             >
               <img src='/images/twitter-logo-footer.png' className='pd-linked-logo' alt='twitter-logo' />
             </a>

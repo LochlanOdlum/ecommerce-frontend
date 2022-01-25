@@ -1,49 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../actions/authActions';
 
-import './index.css';
-// import { render } from '@testing-library/react';
+import useClickOutsideClose from '../../hooks/useClickOutsideClose';
 
-/* <Link to='/login'>Login</Link>
-<br />
-<Link to='/cart'>Cart</Link> */
+import './index.css';
 
 const NavBar = () => {
-  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const modalToggleButton = useRef(null);
   const modalRef = useRef(null);
+  const [isUserModalOpen, setIsUserModalOpen] = useClickOutsideClose(modalRef);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const name = useSelector((state) => state.auth.name);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    //Function for closing modal when clicking outside of modal or the text which opens it
-    const handleClick = (event) => {
-      //if modal isn't open
-      if (!modalRef.current) {
-        return;
-      }
-
-      if (modalToggleButton.current.contains(event.target)) {
-        return;
-      }
-
-      setIsUserModalOpen(false);
-    };
-    document.addEventListener('click', handleClick);
-
-    return () => {
-      document.removeEventListener('click', handleClick);
-    };
-  }, []);
-
-  // const handleLogOut = () => {
-  //   dispatch(logout());
-  // };
 
   const renderRightElements = () => {
     const signupElement = (

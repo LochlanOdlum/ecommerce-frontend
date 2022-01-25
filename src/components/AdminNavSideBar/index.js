@@ -16,7 +16,9 @@ const AdminNavSideBar = ({ active }) => {
 
   return (
     <nav className='ap-sidebar'>
-      <div className='ap-sidebar-header'>SKYLIGHT PHOTOGRAPHY</div>
+      <div className='ap-sidebar-header'>
+        <Link to='/'>SKYLIGHT PHOTOGRAPHY </Link>
+      </div>
       <ul className='ap-sidebar-menu'>
         <Link to='/admin/' className={`ap-sidebar-menu-item ${getIsAdminPage() ? 'active' : ''}`}>
           <img className='ap-sidebar-menu-item-icon' alt='dashboard-icon' src='/images/dashboard.svg' />
@@ -25,6 +27,13 @@ const AdminNavSideBar = ({ active }) => {
         <Link to='/admin/photos' className={`ap-sidebar-menu-item ${pathname === '/admin/photos' ? 'active' : ''}`}>
           <img alt='photos-icon' className='ap-sidebar-menu-item-icon' src='/images/photo.svg' />
           Photos
+        </Link>
+        <Link
+          to='/admin/collections'
+          className={`ap-sidebar-menu-item ${pathname === '/admin/collections' ? 'active' : ''}`}
+        >
+          <img alt='collections-icon' className='ap-sidebar-menu-item-icon' src='/images/collection-icon.svg' />
+          Collections
         </Link>
         <Link
           to='/admin/orders'

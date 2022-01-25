@@ -8,12 +8,12 @@ import './index.css';
 
 const featuredPhotos = [
   null,
-  'temp-photo-1.png',
-  'temp-photo-2.png',
-  'temp-photo-3.png',
-  'temp-photo-1.png',
-  'temp-photo-2.png',
-  'temp-photo-3.png',
+
+  'featured-photo-2.png',
+  'featured-photo-3.png',
+  'featured-photo-4.png',
+  'featured-photo-5.png',
+  'featured-photo-1.png',
   null,
 ];
 
@@ -165,9 +165,8 @@ const LandingPage = () => {
             <div className='hp-1-welcome-text'>Welcome To</div>
             <div className='hp-1-sp'>Skylight Photography</div>
             <div className='hp-1-description'>
-              It is a long established fact that a reader will be distracted by the readable content of a page when
-              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
-              letters, as opposed to using 'Content here, content here', mb sity_
+              Proffesional Photography Services centered in the Norfolk Rocklands St Peter. Check out our digital shop
+              or read more about us below.
             </div>
             <button
               className='orange-brown-button hp-1-shop-button'
@@ -185,9 +184,8 @@ const LandingPage = () => {
           <div className='sp-s2-content-left'>
             <div className='sp-s2-title'>Featured Photos</div>
             <div className='sp-s2-description'>
-              It is a long established fact that a reader will be distracted by the readable content of a page when
-              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
-              letters, as opposed to using 'Content here, content
+              We specialise in Landscape Photography which can be seen throughout our shop. We vary from beautfiul river
+              scapes to the streets of Milan. These featured photos can be found in the shop.
             </div>
             <button className='orange-brown-button sp-s2-shop-all-button'>
               <Link to='/shop'>Shop All</Link>
@@ -204,21 +202,20 @@ const LandingPage = () => {
           <div className='s3-about-us-container'>
             <div className='s3-about-us-title'>About Us</div>
             <div className='s3-about-us-text s3-about-us-text-1'>
-              It is a long established fact that a reader will be distracted by the readable content of a page when
-              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
-              letters, as opposed to using 'Content here, content here', making it look like readable English. Many
-              desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
-              search for 'lorem ipsum' will uncover many web sites still in their infancy
+              Skylight Photography is a Proud small business centered in the Norfolk Norfolk Rocklands St Peter area! We
+              not only sell our own photographs but also are avaliable for private event photography. See our contact us
+              section below for more details.
             </div>
             <div className='s3-about-us-text s3-about-us-text-2'>
-              It is a long established fact that a reader will be distracted by the readable content of a page when
-              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
-              letters, as opposed to using 'Content here, content here', making it look like readable English. Ma
+              {/* Skylight Photography isn’t just a business but a family of photographers. We take the wellbeing and
+              happiness of both our staff and clients with great pride. CEO, and Lead Photographer George Ward has been
+              looking after Skylight Photography for nearly 5 years now, and is at the forefront of the business still
+              to this day. */}
             </div>
           </div>
           <div className='s3-images-container'>
-            <img className='s3-image-behind' alt='skylight-photography' src='/images/s3-temp-2.png' />
-            <img className='s3-image-top' alt='skylight-photography' src='/images/s3-temp-1.png' />
+            <img className='s3-image-behind' alt='skylight-photography' src='/images/s3-behind.png' />
+            <img className='s3-image-top' alt='skylight-photography' src='/images/s3-front.png' />
           </div>
         </div>
       </div>
@@ -275,16 +272,13 @@ const LandingPage = () => {
             <div className='s4-cu-right'>
               <div className='s4-cu-subtitle'>Let’s Connect</div>
               <div className='s4-cu-text'>
-                It is a long established fact that a reader will be distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
-                of letters, as opposed to using 'Content here, content here', making it look like readable English. Many
-                desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
-                search for 'lorem ipsum' will uncover many web sites still in their infancy
+                Here at Skylight Photography we provide a range of services including private event photography. We
+                specialise in aerial, weddings, sports, events, product, food and much more! If you have any questions
+                please contact the team now and we will get back to you as soon as possible!
               </div>
               <div className='s4-cu-text'>
-                It is a long established fact that a reader will be distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
-                of letters, as opposed to using 'Content in their infancy
+                If you want to keep up to date with the latest Skylight Photography news then subscribe to our Mailing
+                List below to get Newsletters and more!
               </div>
             </div>
           </div>

@@ -18,6 +18,9 @@ import MyAccountPage from './pages/MyAccountPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminPhotoPage from './pages/AdminPhotoPage';
+import AdminCollectionsPage from './pages/AdminCollectionsPage';
+import AdminOrdersPage from './pages/AdminOrdersPage';
+import AdminUsersPage from './pages/AdminUsersPage';
 
 import './app.css';
 
@@ -28,6 +31,7 @@ const API_URL = 'https://skylight-photography.herokuapp.com/';
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
+//TODO: Route back to original route once logged in
 const ProtectedLoginRoute = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   return isLoggedIn ? <Outlet /> : <LoginPage />;
@@ -75,6 +79,9 @@ const App = () => {
           <Route path='/admin' element={<ProtectedAdminLoginRoutes />}>
             <Route path='/admin' element={<AdminDashboardPage />} />
             <Route path='/admin/photos' element={<AdminPhotoPage />} />
+            <Route path='/admin/collections' element={<AdminCollectionsPage />} />
+            <Route path='/admin/orders' element={<AdminOrdersPage />} />
+            <Route path='/admin/users' element={<AdminUsersPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

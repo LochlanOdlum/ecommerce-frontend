@@ -223,6 +223,11 @@
   margin-bottom: 30px;
 }
 
+.sp-arrow-left:hover,
+.sp-arrow-right:hover {
+  cursor: pointer;
+}
+
 .sp-arrow-right {
   /* transform: rotate(180deg); */
 }

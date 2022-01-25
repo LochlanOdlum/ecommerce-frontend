@@ -1,6 +1,12 @@
-import { COLLECTION_LIST_REQUEST, COLLECTION_LIST_FAIL, COLLECTION_LIST_SUCCESS } from './types';
+import {
+  COLLECTION_LIST_REQUEST,
+  COLLECTION_LIST_FAIL,
+  COLLECTION_LIST_SUCCESS,
+  // COLLECTION_POST_SUCCESS,
+} from './types';
 
 import collectionsApi from '../api/collectionApi';
+import adminApi from '../api/adminApi';
 
 export const fetchCollectionList = () => async (dispatch) => {
   try {
@@ -19,5 +25,15 @@ export const fetchCollectionList = () => async (dispatch) => {
       type: COLLECTION_LIST_FAIL,
       payload: error,
     });
+  }
+};
+
+export const addCollection = (collectionName) => async (dispatch) => {
+  try {
+    await adminApi.postCollection(collectionName);
+
+    dispatch(fetchCollectionList());
+  } catch (error) {
+    console.error(error);
   }
 };

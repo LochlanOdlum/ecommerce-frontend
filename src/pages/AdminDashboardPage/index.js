@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import AdminSummaryWidget from '../../components/AdminSummaryWidget';
-// import AdminNavSideBar from '../../components/AdminNavSideBar';
+import AdminNavSideBar from '../../components/AdminNavSideBar';
 import './adminDashboardPage.css';
 
 const AdminPage = () => {
   return (
     <>
+      <AdminNavSideBar />
       <section className='ap-main'>
         <div className='ap-main-inner'>
           <div className='ap-main-summary-row'>

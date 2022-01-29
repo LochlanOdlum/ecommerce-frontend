@@ -63,7 +63,7 @@ const PhotoDetailsPage = (props) => {
     return (
       <>
         <div className='pd-details-image-left'>
-          <img alt='skylight-photography' className='pd-details-image' src={product.mediumWatermarkedImagePublicURL} />
+          <img alt='skylight-photography' className='pd-details-image' src={product.imageWmarkedMedPublicURL} />
         </div>
         <div className='pd-details-right'>
           <h4 className='pd-collection'>{collectionMap[product.collectionId]}</h4>

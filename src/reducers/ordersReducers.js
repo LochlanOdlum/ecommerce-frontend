@@ -11,6 +11,8 @@ export const OrderListReducer = (state = { orders: [] }, action) => {
     case ORDER_LIST_REQUEST:
       return { isLoading: true, orders: [] };
     case ORDER_LIST_SUCCESS:
+      console.log('order list success');
+      console.log(action.payload);
       return { isLoading: false, isLoaded: true, orders: action.payload };
     case ORDER_LIST_FAIL:
       return { isLoading: false, error: action.payload, orders: [] };
@@ -19,9 +21,9 @@ export const OrderListReducer = (state = { orders: [] }, action) => {
       const oldOrderIndex = state.orders.findIndex((prod) => prod.id === action.payload.id);
       if (oldOrderIndex >= 0) {
         return {
-          isLoading: false,
-          isLoaded: true,
-          ORDERs: [...state.orders.slice(0, oldOrderIndex), action.payload, ...state.orders.slice(oldOrderIndex + 1)],
+          isLoading: state.isLoading,
+          isLoaded: state.isLoaded,
+          orders: [...state.orders.slice(0, oldOrderIndex), action.payload, ...state.orders.slice(oldOrderIndex + 1)],
         };
       } else {
         return { isLoading: false, isLoaded: true, orders: [...state.orders, action.payload] };

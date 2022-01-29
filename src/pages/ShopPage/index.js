@@ -53,7 +53,7 @@ const ShopPage = () => {
       return;
     }
 
-    let { collection, minPrice, maxPrice } = location.state;
+    let { collection, minPrice, maxPrice, pageNum } = location.state;
 
     if (!collectionMap[collection]) {
       collection = null;
@@ -67,9 +67,14 @@ const ShopPage = () => {
       minPrice = 0;
     }
 
+    if (!pageNum) {
+      pageNum = 0;
+    }
+
     setActiveCollection(collection);
     setMinPrice(minPrice);
     setMaxPrice(maxPrice);
+    setPageNum(pageNum);
 
     // eslint-disable-next-line
   }, [isLoaded, maxProductPrice, location.state]);
@@ -116,6 +121,7 @@ const ShopPage = () => {
       minPrice,
       maxPrice,
       scrollPos,
+      pageNum,
     };
     navigate(`/photo/${product.id}`, { state: navState });
   };
@@ -148,7 +154,7 @@ const ShopPage = () => {
             <div className='sp-photo-img-container'>
               <div
                 className='sp-photo-img'
-                style={{ backgroundImage: `url('${product.mediumCroppedSquareWatermarkedImagePublicURL}')` }}
+                style={{ backgroundImage: `url('${product.imageWmarkedMedSquarePublicURL}')` }}
                 // stlye={{ backgroundImage: product.mediumCroppedSquareWatermarkedImagePublicURL }}
               />
             </div>

@@ -196,10 +196,6 @@
   margin-top: min(29px, 2.12vw);
 }
 
-/* .s3-about-us-text-2 {
-
-} */
-
 .s3-images-container {
   margin-left: auto;
   position: relative;
@@ -214,8 +210,10 @@
 
 .s3-image-top {
   position: absolute;
-  border: min(20px, 1.64vw) solid white;
-  /* 76.7 */
+  /* border: min(20px, 1.64vw) solid white; */
+  border-color: white;
+  border-style: solid;
+  border-width: min(20px, 1.64vw);
   box-sizing: content-box;
   width: 66.14%;
   border-radius: 3px;

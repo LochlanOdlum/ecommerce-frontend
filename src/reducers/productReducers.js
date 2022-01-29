@@ -23,8 +23,8 @@ export const productListReducer = (state = { products: [] }, action) => {
       const oldProductIndex = state.products.findIndex((prod) => prod.id === action.payload.id);
       if (oldProductIndex >= 0) {
         return {
-          isLoading: false,
-          isLoaded: true,
+          isLoading: state.isLoading,
+          isLoaded: state.isLoaded,
           products: [
             ...state.products.slice(0, oldProductIndex),
             action.payload,

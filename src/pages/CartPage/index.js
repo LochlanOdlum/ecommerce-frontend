@@ -43,11 +43,7 @@ const CartPage = () => {
               handlePhotoClick(item);
             }}
           >
-            <img
-              className='cp-photo-img'
-              alt='cart-item'
-              src={`${item.mediumCroppedSquareWatermarkedImagePublicURL}`}
-            />
+            <img className='cp-photo-img' alt='cart-item' src={`${item.imageWmarkedMedSquarePublicURL}`} />
             <div className='cp-photo-cell-info'>
               <div className='cp-photo-title'>{item.title}</div>
               <div className='cp-photo-collection-name'>{collectionMap[item.collectionId]}</div>

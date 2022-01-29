@@ -6,6 +6,8 @@ import ordersApi from '../../api/ordersApi';
 import useCart from '../../hooks/useCart';
 import { EmptyCart } from '../../actions/cartActions';
 
+import NavBar from '../../components/NavBar';
+
 const PaymentPage = () => {
   const elements = useElements();
   const stripe = useStripe();
@@ -50,6 +52,7 @@ const PaymentPage = () => {
 
   return (
     <>
+      <NavBar />
       <h1>Payment</h1>
       <form id='payment-form' onSubmit={onPaymentSubmit}>
         <label htmlFor='card-element'>Card</label>

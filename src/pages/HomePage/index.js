@@ -165,8 +165,8 @@ const LandingPage = () => {
             <div className='hp-1-welcome-text'>Welcome To</div>
             <div className='hp-1-sp'>Skylight Photography</div>
             <div className='hp-1-description'>
-              Proffesional Photography Services centered in the Norfolk Rocklands St Peter. Check out our digital shop
-              or read more about us below.
+              Profesional Photography Services centered in the Norfolk Rocklands St Peter area. Check out our digital
+              shop or read more about us below.
             </div>
             <button
               className='orange-brown-button hp-1-shop-button'

@@ -11,8 +11,6 @@ export const OrderListReducer = (state = { orders: [] }, action) => {
     case ORDER_LIST_REQUEST:
       return { isLoading: true, orders: [] };
     case ORDER_LIST_SUCCESS:
-      console.log('order list success');
-      console.log(action.payload);
       return { isLoading: false, isLoaded: true, orders: action.payload };
     case ORDER_LIST_FAIL:
       return { isLoading: false, error: action.payload, orders: [] };

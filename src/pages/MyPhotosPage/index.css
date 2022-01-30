@@ -1,0 +1,87 @@
+.mpp-container {
+  max-width: 1336px;
+  padding: 0 96px;
+  min-height: 70vh;
+  margin: auto;
+}
+
+.mpp-page-title {
+  font-family: 'Playfair Display', serif;
+  /* margin-top: min(105px, 7.86vw); */
+  margin-top: min(80px, 6vw);
+  /* margin-top: 80px; */
+  color: black;
+  font-weight: 700;
+  font-size: 45px;
+}
+
+.mpp-page-desc {
+  font-family: 'metropolis';
+  font-weight: 14px;
+}
+
+.mpp-photos-container {
+  margin-top: min(50px, 3.74vw);
+  width: 88.3%;
+}
+
+.mpp-photo-img-container {
+  flex-shrink: 0;
+  width: 32%;
+  overflow: hidden;
+}
+
+.mpp-photo-img {
+  background-size: cover;
+  background-position: center;
+  min-height: 100%;
+  min-width: 100%;
+  padding-bottom: 84.5%;
+}
+
+.mpp-photo-container {
+  display: flex;
+  padding-bottom: min(33px, 2.47vw);
+}
+
+.mpp-photo-content-right {
+  margin-left: 30px;
+  width: 59.2%;
+  border-bottom: 2px solid #8d8a8a;
+}
+
+.mpp-photo-info-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 100px max-content;
+  row-gap: 10px;
+}
+
+.mpp-photo-info-heading {
+  align-self: center;
+}
+
+.mpp-photo-name {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.mpp-download-button {
+  /* width: 100%; */
+  margin-top: 30px;
+  width: 304px;
+}
+
+.mpp-download-icon {
+  margin-left: 10px;
+}
+
+/* .mpp-photo-info-row {
+  display: flex;
+}
+
+.mpp-photo-info-text {
+  margin-left: min(34px, 2.54vw);
+} */

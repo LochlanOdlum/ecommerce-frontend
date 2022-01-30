@@ -57,11 +57,28 @@ const fetchOrder = async (orderId) => {
   return data.order;
 };
 
+const fetchMedCropped2to1Image = async (key) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      ...authHeader(),
+    },
+  };
+
+  const res = await fetch(`${API_URL}/photoMedCropped2to1/${key}`, requestOptions);
+
+  errorParser(res, { message: 'Could not download image' });
+
+  const blob = await res.blob();
+
+  return URL.createObjectURL(blob);
+};
+
 const ordersApi = {
   startOrder,
-  // orderSuccess,
   fetchOrders,
   fetchOrder,
+  fetchMedCropped2to1Image,
 };
 
 export default ordersApi;

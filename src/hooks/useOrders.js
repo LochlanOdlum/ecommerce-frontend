@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchOrderList } from '../actions/orderActions';
 
@@ -6,6 +6,7 @@ import { fetchOrderList } from '../actions/orderActions';
 //Maybe add optional parm for fetchNewList, if true then will fetch product list from backend and update state
 //first time the component mounts (could be usefull for cart)
 const useOrders = () => {
+  const [orderItems, setOrderItems] = useState([]);
   const { orders, isLoading, isLoaded, error } = useSelector((state) => state.orderList);
   const dispatch = useDispatch();
 
@@ -16,7 +17,21 @@ const useOrders = () => {
     // eslint-disable-next-line
   }, []);
 
-  return { orders, isLoaded, error };
+  useEffect(() => {
+    if (!orders) {
+      return;
+    }
+
+    const newOrderItems = [];
+
+    orders.forEach((order) => {
+      newOrderItems.push(...order.orderItems);
+    });
+
+    setOrderItems(newOrderItems);
+  }, [orders]);
+
+  return { orders, orderItems, isLoaded, error };
 };
 
 export default useOrders;

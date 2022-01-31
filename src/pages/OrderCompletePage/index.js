@@ -11,15 +11,13 @@ const OrderCompletePage = () => {
   const orderId = useParams().orderId;
   const dispatch = useDispatch();
 
-  const order = orders.find((order) => order.id === +orderId);
+  const order = orders?.find((order) => order.id === +orderId);
 
   useEffect(() => {
     dispatch(fetchOrder(orderId));
 
     // eslint-disable-next-line
   }, [orderId]);
-
-  console.log(order);
 
   return (
     <>

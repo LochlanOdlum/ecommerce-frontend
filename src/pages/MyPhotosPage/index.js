@@ -8,10 +8,11 @@ import ordersApi from '../../api/ordersApi';
 import './index.css';
 
 const MyPhotosPage = () => {
-  const { orders, orderItems, isLoading, error } = useOrders();
+  const { orderItems, isLoading, error } = useOrders();
   const [photoURLs, setPhotoURLs] = useState({});
 
   //Purpose is to gather all photos and add them to photoURLs which maps orderitem id to the photo
+  //TODO: 'release' objectURL in return of useEffect to stop potential memory leak
   useEffect(() => {
     const getPhotos = async () => {
       if (!orderItems || !orderItems.length) {
@@ -43,7 +44,7 @@ const MyPhotosPage = () => {
   }, [orderItems]);
 
   const renderMyPhotos = () => {
-    if (isLoading || !orders || !photoURLs) {
+    if (isLoading) {
       return <div>Loading Photos!</div>;
     }
 
@@ -56,9 +57,11 @@ const MyPhotosPage = () => {
     orderItems.forEach((photo) => {
       photosList.push(
         <div className='mpp-photo-container' key={photo.id}>
-          <div className='mpp-photo-img-container'>
-            <div style={{ backgroundImage: `url('${photoURLs[photo.id]}')` }} className='mpp-photo-img' />
-          </div>
+          {photoURLs[photo.id] && (
+            <div className='mpp-photo-img-container'>
+              <div style={{ backgroundImage: `url('${photoURLs[photo.id]}')` }} className='mpp-photo-img' />
+            </div>
+          )}
           <div className='mpp-photo-content-right'>
             <div className='mpp-photo-info-grid'>
               <div className='mpp-photo-info-heading'>Name</div>

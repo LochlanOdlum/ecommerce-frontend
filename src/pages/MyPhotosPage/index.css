@@ -70,6 +70,9 @@
 
 .mpp-download-button {
   /* width: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 30px;
   width: 304px;
 }

@@ -1,0 +1,187 @@
+.pp-container {
+  max-width: 1366px;
+  padding: 0 97px;
+  margin: auto;
+}
+
+.pp-title-checkout {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  font-weight: 700;
+  font-size: 45px;
+}
+
+.pp-subtitle {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.pp-description {
+  /* font-weight: 700; */
+  font-size: 17.5px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  border: 1px solid #7f9296;
+  margin-bottom: 30px;
+  font-size: 24px;
+  padding-left: 3%;
+  user-select: none;
+}
+
+.payment-option:hover {
+  cursor: pointer;
+}
+
+.payment-option-1-text {
+  margin-left: 2.5%;
+}
+
+.payment-option-1-icons {
+  margin-left: auto;
+  margin-right: 2%;
+  display: flex;
+  align-items: center;
+}
+
+.payment-option-1-mastercard-icon {
+  margin-left: 20px;
+}
+
+.stripe-element {
+  font-size: 18px;
+  border: 1px solid #b1adad;
+  padding: 10px 0 10px 15px;
+}
+
+.pp-stripe-card-expiry {
+  /* width: 30%; */
+  flex-grow: 5;
+}
+
+.pp-stripe-card-cvc {
+  margin-left: 2%;
+  /* width: 70%; */
+  flex-grow: 9;
+}
+
+.pp-payment-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.pp-stripe-order-row-2 {
+  margin-top: 20px;
+  display: flex;
+}
+
+.pp-form-container {
+  width: 49%;
+}
+
+.pp-order-summary {
+  width: 43%;
+  background: #fff6ef;
+  padding: 0 39px;
+  margin-left: 7%;
+}
+
+.pp-return-to-store {
+  display: flex;
+  margin-top: 8px;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.pp-back-arrow-returnstore {
+  margin-right: 10px;
+}
+
+#pp-place-order-button {
+  font-size: 20px;
+  margin-top: 20px;
+  height: 73px;
+  width: 100%;
+}
+
+.pp-order-summary-title-container {
+  /* box-sizing: content-box; */
+  display: flex;
+  align-items: center;
+}
+
+.pp-order-summary-title {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.pp-order-summary-edit-text {
+  font-size: 18px;
+  padding-top: 5px;
+  margin-left: 5px;
+  color: #7f9296;
+}
+
+.pp-order-summary-edit-text:visited {
+  color: #7f9296;
+}
+
+.pp-summary-item-title {
+  font-family: 'Playfair Display', serif;
+  color: black;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.pp-order-summary-item {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 2px solid #8d8a8a;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.pp-summary-item-titleandcollection {
+  margin-left: 5%;
+}
+
+.pp-summary-item-price {
+  margin-left: auto;
+}
+
+.pp-order-summary-title {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.pp-summary-item-img {
+  border-radius: 3px;
+  width: 19.9%;
+}
+
+.pp-order-summary-total-info {
+  display: flex;
+  margin: 30px 0 50px 0;
+}
+
+.pp-order-summary-total-title {
+  margin-left: auto;
+}
+
+.pp-order-summary-total-value {
+  margin-left: 10%;
+}
+
+.payment-form {
+  /* max-width: 500px;
+  margin: auto; */
+}

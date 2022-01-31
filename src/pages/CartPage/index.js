@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // import useProducts from '../../hooks/useProducts';
@@ -19,6 +19,10 @@ const CartPage = () => {
   const navigate = useNavigate();
 
   const isLoaded = isCartLoaded && isCollectionsLoaded;
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (error) {
     return <div>Error fetching cart data!</div>;

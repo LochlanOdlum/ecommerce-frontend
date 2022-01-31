@@ -4,10 +4,13 @@ import {
   ORDER_FETCH_SUCCESS,
   ORDER_FETCH_FAIL,
   ORDER_LIST_FAIL,
+  LOGOUT,
 } from '../actions/types';
 
 export const OrderListReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
+    case LOGOUT:
+      return { isLoading: false, orders: [] };
     case ORDER_LIST_REQUEST:
       return { isLoading: true, orders: [] };
     case ORDER_LIST_SUCCESS:

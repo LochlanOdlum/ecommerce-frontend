@@ -59,3 +59,14 @@
 .ap-image-upload-submit-button:hover {
   background: #c5c5c5;
 }
+
+.admin-page-photo-preview {
+  width: 64px;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin: 7px 0;
+}
+
+.admin-photos-table-header {
+  font-size: 16px;
+}

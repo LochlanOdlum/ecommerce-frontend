@@ -41,9 +41,42 @@ const postCollection = async (collectionName) => {
   return data;
 };
 
+const getAdminData = async (endpoint, page, resultsPerPage) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { ...authHeader() },
+  };
+
+  const response = await fetch(
+    `${API_URL}admin/${endpoint}?page=${page}&resultsPerPage=${resultsPerPage}`,
+    requestOptions
+  );
+
+  const data = await response.json();
+
+  errorParser(response, data);
+
+  return data;
+};
+
+const getPhotos = async (page, resultsPerPage) => {
+  return await getAdminData('photos', page, resultsPerPage);
+};
+
+const getOrders = async (page, resultsPerPage) => {
+  return await getAdminData('orders', page, resultsPerPage);
+};
+
+const getUsers = async (page, resultsPerPage) => {
+  return await getAdminData('users', page, resultsPerPage);
+};
+
 const adminApi = {
   addPhoto,
   postCollection,
+  getPhotos,
+  getOrders,
+  getUsers,
 };
 
 export default adminApi;

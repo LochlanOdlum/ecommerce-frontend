@@ -57,7 +57,7 @@ const AdminCollectionsPage = () => {
         <tr className='admin-table-body-row'>
           <td className='admin-table-cell text-center'>{collection.name}</td>
           <td className='admin-table-cell text-center'>
-            {creationTime} {creationDate}{' '}
+            {creationTime} {creationDate.split('-').join('/')}{' '}
           </td>
           <td className='admin-table-cell text-center'>
             <button className='admin-table-details-button'>Edit</button>

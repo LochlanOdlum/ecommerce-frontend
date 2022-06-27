@@ -6,6 +6,8 @@ import AdminAddOrEditPhotoModal from '../../components/AdminAddOrEditPhotoModal'
 import AdminNavSideBar from '../../components/AdminNavSideBar';
 import AdminPageNumberNav from '../../components/AdminPageNumberNav';
 
+import AdminPhotoPositionField from '../../components/AdminPhotoPositionField';
+
 import './adminPhotoPage.css';
 
 const AdminPhotoPage = () => {
@@ -15,18 +17,20 @@ const AdminPhotoPage = () => {
   const [totalPages, setTotalPages] = useState(null);
   const [activePage, setActivePage] = useState(1);
 
-  useEffect(() => {
-    const updatePhotos = async () => {
-      try {
-        const { products: photos, pageCount } = await adminApi.getPhotos(activePage, 8);
-        setTotalPages(pageCount);
-        setPhotos(photos);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const updatePhotos = async () => {
+    try {
+      const { products: photos, pageCount } = await adminApi.getPhotos(activePage, 8);
+      console.log('updating photos');
+      setTotalPages(pageCount);
+      setPhotos(photos);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  useEffect(() => {
     updatePhotos();
+    // eslint-disable-next-line
   }, [activePage]);
 
   const handleAddPhotoButtonClick = () => {
@@ -54,9 +58,20 @@ const AdminPhotoPage = () => {
       const [creationDate, creationTime] = photo.createdAt.split('.')[0].split('T');
 
       return (
-        <tr className='admin-table-body-row'>
+        // <tr className='admin-table-body-row' key={`${photo.id} - ${photo.positionOrder}`}>
+        <tr className='admin-table-body-row' key={Math.random()}>
+          <td className='admin-table-cell text-center'>
+            <AdminPhotoPositionField
+              position={photo.orderPosition}
+              onSubmit={async (newPosition) => {
+                await adminApi.editPhoto(photo.id, { orderPosition: newPosition });
+                updatePhotos();
+              }}
+            />
+            {/* <input className='admin-table-cell-input admin-table-cell-orderPos-input' value={photo.orderPosition} /> */}
+          </td>
           <td className='text-center'>
-            <img className='admin-page-photo-preview' src={photo.imageWmarkedMedSquarePublicURL} />
+            <img className='admin-page-photo-preview' alt='whatever' src={photo.imageWmarkedMedSquarePublicURL} />
           </td>
           <td className='admin-table-cell'>{photo.title}</td>
           <td className='admin-table-cell text-center'>
@@ -87,6 +102,7 @@ const AdminPhotoPage = () => {
             <table>
               <thead>
                 <tr>
+                  <th className='admin-table-cell admin-photos-table-header '>Pos.</th>
                   <th className='admin-table-cell admin-photos-table-header '>Preview</th>
                   <th className='admin-table-cell admin-photos-table-header text-left'>Title</th>
                   <th className='admin-table-cell admin-photos-table-header'>Date</th>

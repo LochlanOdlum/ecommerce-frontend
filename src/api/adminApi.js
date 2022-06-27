@@ -25,6 +25,25 @@ const addPhoto = async (imageFile, title, description, price, collectionId) => {
   errorParser(response, data);
 };
 
+const editPhoto = async (photoId, editedFields) => {
+  //Destructure to ensure only the correct fields get sent in request.
+  const { orderPosition, title, description, collectionId, priceInPence } = editedFields;
+
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...authHeader() },
+    body: JSON.stringify({ editedFields: { orderPosition, title, description, collectionId, priceInPence } }),
+  };
+
+  const response = await fetch(`${API_URL}admin/photo/${photoId}`, requestOptions);
+
+  const data = response.json();
+
+  errorParser(response, data);
+
+  return data;
+};
+
 const postCollection = async (collectionName) => {
   const requestOptions = {
     method: 'POST',
@@ -73,6 +92,7 @@ const getUsers = async (page, resultsPerPage) => {
 
 const adminApi = {
   addPhoto,
+  editPhoto,
   postCollection,
   getPhotos,
   getOrders,

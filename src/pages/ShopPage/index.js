@@ -15,7 +15,7 @@ const PRODS_PER_PAGE = 9;
 
 const ShopPage = () => {
   const { products, collections, collectionMap, isLoaded, error, maxProductPrice } = useProducts();
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredSortedProducts, setfilteredSortedProducts] = useState([]);
 
   const location = useLocation();
   // const [searchParams, setSearchParams] = useSearchParams();
@@ -79,20 +79,26 @@ const ShopPage = () => {
     // eslint-disable-next-line
   }, [isLoaded, maxProductPrice, location.state]);
 
-  //Creates filtered products array every time products or filters change
+  //Creates filtered and sorted products array every time products or filters change
   useEffect(() => {
     const filterProducts = (prods) => {
-      const filteredProducts = prods.filter((prod) => {
+      const filteredSortedProducts = prods.filter((prod) => {
         const isValidPrice = prod.priceInPounds >= minPrice && prod.priceInPounds <= maxPrice;
         const isValidCollection = activeCollection === null || prod.collectionId === activeCollection ? true : false;
 
         return isValidPrice && isValidCollection;
       });
 
-      return filteredProducts;
+      return filteredSortedProducts;
     };
 
-    setFilteredProducts(filterProducts(products));
+    // const sortProducts = (prods) => {
+
+    // }
+
+    // const filteredProducts = filterProducts(products);
+
+    setfilteredSortedProducts(filterProducts(products));
     // eslint-disable-next-line
   }, [products.length, activeCollection, minPrice, maxPrice]);
 
@@ -138,7 +144,7 @@ const ShopPage = () => {
     const renderedProductElements = [];
 
     for (let i = PRODS_PER_PAGE * pageNum; i < PRODS_PER_PAGE * (pageNum + 1); i++) {
-      const product = filteredProducts[i];
+      const product = filteredSortedProducts[i];
       if (!product) {
         continue;
       }
@@ -195,7 +201,7 @@ const ShopPage = () => {
   };
 
   const renderPageArrows = () => {
-    if (filteredProducts.length <= PRODS_PER_PAGE) {
+    if (filteredSortedProducts.length <= PRODS_PER_PAGE) {
       return <div className='no-filter-arrow-padding'></div>;
       // return null;
     }

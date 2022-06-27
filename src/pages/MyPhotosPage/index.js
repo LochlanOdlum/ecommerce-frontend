@@ -1,47 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useOrders from '../../hooks/useOrders';
 import NavBar from '../../components/NavBar';
 import MailingList from '../../components/MailingList';
 import Footer from '../../components/Footer';
 import ordersApi from '../../api/ordersApi';
+import ImageDownload from '../../components/ImageDownload';
 
 import './index.css';
 
 const MyPhotosPage = () => {
   const { orderItems, isLoading, error } = useOrders();
-  const [photoURLs, setPhotoURLs] = useState({});
 
-  //Purpose is to gather all photos and add them to photoURLs which maps orderitem id to the photo
-  //TODO: 'release' objectURL in return of useEffect to stop potential memory leak
-  useEffect(() => {
-    const getPhotos = async () => {
-      if (!orderItems || !orderItems.length) {
-        return;
-      }
+  //TODO: UX for downloading
+  // When downloading have download wheel and disable access to click button. Grey it out a bit etc..
+  const handleDownloadClick = async (title, endpoint) => {
+    console.log('clicked download');
+    const objectURL = await ordersApi.fetchSecureImage(endpoint);
 
-      const imageDownloadPromiseArray = [];
-      const newPhotoUrls = {};
-
-      orderItems.forEach((photo) => {
-        imageDownloadPromiseArray.push(
-          new Promise(async (resolve, reject) => {
-            try {
-              const objectURL = await ordersApi.fetchMedCropped2to1Image(photo.imageMedCropped2to1Key);
-              newPhotoUrls[photo.id] = objectURL;
-              resolve();
-            } catch (error) {
-              reject();
-            }
-          })
-        );
-      });
-
-      await Promise.all(imageDownloadPromiseArray);
-      setPhotoURLs(newPhotoUrls);
-    };
-
-    getPhotos();
-  }, [orderItems]);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = objectURL;
+    // the filename you want
+    a.download = title;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(objectURL);
+  };
 
   const renderMyPhotos = () => {
     if (isLoading) {
@@ -54,14 +38,14 @@ const MyPhotosPage = () => {
 
     const photosList = [];
 
+    console.log(orderItems);
+
     orderItems.forEach((photo) => {
       photosList.push(
         <div className='mpp-photo-container' key={photo.id}>
-          {photoURLs[photo.id] && (
-            <div className='mpp-photo-img-container'>
-              <div style={{ backgroundImage: `url('${photoURLs[photo.id]}')` }} className='mpp-photo-img' />
-            </div>
-          )}
+          <div className='mpp-photo-img-container'>
+            <ImageDownload endpoint={`photoMedCropped2to1/${photo.imageMedCropped2to1Key}`} />
+          </div>
           <div className='mpp-photo-content-right'>
             <div className='mpp-photo-info-grid'>
               <div className='mpp-photo-info-heading'>Name</div>
@@ -76,17 +60,18 @@ const MyPhotosPage = () => {
               <div className='mpp-photo-info-heading'>Total</div>
               <div className='mpp-photo-info-text'>£{photo.priceInPounds}</div>
             </div>
-            <button className='orange-brown-button mpp-download-button'>
+            <button
+              className='orange-brown-button mpp-download-button'
+              onClick={() => {
+                handleDownloadClick(photo.title, `photo/${photo.imageKey}`);
+              }}
+            >
               Download
               <div className='mpp-download-icon'>{downloadIcon} </div>
             </button>
           </div>
         </div>
       );
-
-      // photosList.push(<div className='mpp-photo-container'>
-      //   {order.title}
-      // </div>);
     });
 
     return photosList;

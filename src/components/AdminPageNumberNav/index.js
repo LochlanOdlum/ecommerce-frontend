@@ -20,7 +20,7 @@ const AdminPageNumberNav = ({ maxPage, activePage, setActivePage }) => {
     }
 
     setViewStartingPage(activePage - 2);
-  }, [activePage]);
+  }, [activePage, maxPage]);
 
   const smartSetActivePage = (newPageNum) => {
     //Checks if activePage is within valid range, if not sets it to 1;
@@ -40,7 +40,7 @@ const AdminPageNumberNav = ({ maxPage, activePage, setActivePage }) => {
     const isActivePage = pageNum === activePage ? 'active' : '';
 
     return (
-      <div className={`ap-photos-pageNum ${isActivePage}`} onClick={() => smartSetActivePage(pageNum)}>
+      <div key={pageNum} className={`ap-photos-pageNum ${isActivePage}`} onClick={() => smartSetActivePage(pageNum)}>
         {pageNum}
       </div>
     );

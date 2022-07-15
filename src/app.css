@@ -29,6 +29,25 @@ body {
   background: #7f9296;
 }
 
+.grey-blue-button:hover {
+  background: #707f82;
+}
+
 .orange-brown-button {
   background: #ddb091;
+}
+
+.orange-brown-button:hover {
+  background: #cfa588;
+}
+
+/* Removing arrows off number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import ordersApi from '../../api/ordersApi';
 
-const ImageDownload = ({ endpoint }) => {
+import './ImageDownload.css';
+
+const ImageDownload = ({ endpoint, paddingBottom }) => {
   const [imageObjectURL, setImageObjectURL] = useState(null);
 
   useEffect(() => {
@@ -10,7 +12,6 @@ const ImageDownload = ({ endpoint }) => {
     const fetchImage = async () => {
       objectURL = await ordersApi.fetchSecureImage(endpoint);
       setImageObjectURL(objectURL);
-      console.log(objectURL);
     };
 
     fetchImage();
@@ -20,7 +21,7 @@ const ImageDownload = ({ endpoint }) => {
     };
   }, [endpoint]);
 
-  return <div style={{ backgroundImage: `url('${imageObjectURL}')` }} className='mpp-photo-img' />;
+  return <div style={{ backgroundImage: `url('${imageObjectURL}')`, paddingBottom }} className='mpp-photo-img' />;
 };
 
 export default ImageDownload;

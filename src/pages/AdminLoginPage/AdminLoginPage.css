@@ -1,0 +1,29 @@
+.alip-main {
+  min-width: 100vw;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alip-input {
+  width: 350px;
+  height: 40px;
+  padding-left: 15px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  border-radius: 50px;
+  border: 2px solid rgb(211, 206, 206);
+}
+
+.alip-input::placeholder {
+  color: rgb(223, 219, 219);
+}
+
+.alip-login-form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}

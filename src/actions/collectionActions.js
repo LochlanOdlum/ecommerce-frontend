@@ -37,3 +37,13 @@ export const addCollection = (collectionName) => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const editCollection = (collectionId, updatedCollectionName) => async (dispatch) => {
+  try {
+    await adminApi.editCollection(collectionId, { updatedCollectionName });
+
+    dispatch(fetchCollectionList());
+  } catch (error) {
+    console.error(error);
+  }
+};

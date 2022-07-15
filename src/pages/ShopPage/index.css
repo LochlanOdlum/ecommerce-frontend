@@ -118,6 +118,11 @@
   row-gap: 20px;
 }
 
+.shop-filter-block-filter:hover:not(.active) {
+  color: #656361;
+  /* opacity: 0.6; */
+}
+
 .shop-filter-block-filters.hidden {
   display: none;
 }

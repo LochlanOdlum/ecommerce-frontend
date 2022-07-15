@@ -101,7 +101,7 @@
   cursor: pointer;
 }
 
-.nabar-button {
+.navbar-button {
   width: 130px;
   height: 48px;
 }
@@ -129,4 +129,9 @@
   color: #000000;
   font-weight: 600;
   font-size: 18px;
+}
+
+.navBar-start-item-a:not(.active):hover {
+  /* opacity: 0.6; */
+  color: #676460;
 }

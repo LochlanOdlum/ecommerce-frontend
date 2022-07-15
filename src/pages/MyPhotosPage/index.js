@@ -44,7 +44,7 @@ const MyPhotosPage = () => {
       photosList.push(
         <div className='mpp-photo-container' key={photo.id}>
           <div className='mpp-photo-img-container'>
-            <ImageDownload endpoint={`photoMedCropped2to1/${photo.imageMedCropped2to1Key}`} />
+            <ImageDownload paddingBottom={'84.5%'} endpoint={`photoMedCropped2to1/${photo.imageMedCropped2to1Key}`} />
           </div>
           <div className='mpp-photo-content-right'>
             <div className='mpp-photo-info-grid'>

@@ -5,6 +5,7 @@ import useClickOutsideClose from '../../hooks/useClickOutsideClose';
 import AdminAddOrEditPhotoModal from '../../components/AdminAddOrEditPhotoModal';
 import AdminNavSideBar from '../../components/AdminNavSideBar';
 import AdminPageNumberNav from '../../components/AdminPageNumberNav';
+import AdminGreyBackgroundCenter from '../../components/AdminGreyBackgroundCenter';
 
 import AdminPhotoPositionField from '../../components/AdminPhotoPositionField';
 
@@ -13,6 +14,7 @@ import './adminPhotoPage.css';
 const AdminPhotoPage = () => {
   const imageUploadModalRef = useRef(null);
   const [showImageUploadModal, setShowImageUploadModal] = useClickOutsideClose(imageUploadModalRef);
+  const [currentPhotoBeingEdited, setCurrentPhotoBeingEdited] = useState(null);
   const [photos, setPhotos] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
   const [activePage, setActivePage] = useState(1);
@@ -28,6 +30,14 @@ const AdminPhotoPage = () => {
     }
   };
 
+  //Update Photos whenever image add or edit modal is closed. To ensure photos are up to date with any changes
+  useEffect(() => {
+    if (!showImageUploadModal) {
+      updatePhotos();
+    }
+    // eslint-disable-next-line
+  }, [showImageUploadModal]);
+
   useEffect(() => {
     updatePhotos();
     // eslint-disable-next-line
@@ -37,15 +47,22 @@ const AdminPhotoPage = () => {
     setShowImageUploadModal(true);
   };
 
+  const handleEditPhotoButtonClick = (photo) => {
+    setCurrentPhotoBeingEdited(photo);
+    setShowImageUploadModal(true);
+  };
+
   const renderImageUploadModal = () => {
     return (
-      showImageUploadModal && (
-        <div className='ap-image-upload-modal-container'>
-          <div ref={imageUploadModalRef}>
-            <AdminAddOrEditPhotoModal />
-          </div>
+      <AdminGreyBackgroundCenter>
+        <div ref={imageUploadModalRef}>
+          <AdminAddOrEditPhotoModal
+            currentPhotoBeingEdited={currentPhotoBeingEdited}
+            setCurrentPhotoBeingEdited={setCurrentPhotoBeingEdited}
+            setShowImageUploadModal={setShowImageUploadModal}
+          />
         </div>
-      )
+      </AdminGreyBackgroundCenter>
     );
   };
 
@@ -79,7 +96,14 @@ const AdminPhotoPage = () => {
           </td>
           <td className='admin-table-cell text-center'>£{photo.priceInPounds}</td>
           <td className='admin-table-cell text-center'>
-            <button className='admin-table-details-button'>Edit</button>
+            <button
+              onClick={() => {
+                handleEditPhotoButtonClick(photo);
+              }}
+              className='admin-table-details-button'
+            >
+              Edit
+            </button>
           </td>
         </tr>
       );
@@ -89,7 +113,7 @@ const AdminPhotoPage = () => {
   return (
     <>
       <AdminNavSideBar />
-      {renderImageUploadModal()}
+      {showImageUploadModal && renderImageUploadModal()}
       <div className='ap-main'>
         <div className='ap-main-inner'>
           <div className='ap-main-users-table card'>

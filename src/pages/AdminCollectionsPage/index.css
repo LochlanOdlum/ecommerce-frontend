@@ -13,3 +13,33 @@
 .apc-add-collection {
   margin: auto;
 }
+
+.apc-ac-form {
+  display: flex;
+}
+
+.apc-ac-input {
+  border: none;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+  font-size: 24px;
+  width: 650px;
+  height: 60px;
+  border-radius: 4px 0 0 4px;
+}
+
+.apc-ac-input:focus {
+  outline: none;
+}
+
+.apc-ac-add-button {
+  width: 100px;
+  border: none;
+  border-left: 1px solid #868686;
+  background-color: #fff;
+  border-radius: 0 4px 4px 0;
+}
+
+.apc-ac-add-button:hover {
+  cursor: pointer;
+}

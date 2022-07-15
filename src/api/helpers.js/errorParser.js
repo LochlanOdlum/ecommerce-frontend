@@ -6,7 +6,7 @@ const errorParser = (response, data) => {
     //Server will give status 401 whenever there is no valid authentication
     //403 for when the user is authenticated but not authorized for endpoint
     if (response.status === 401) {
-      return store.dispatch(logout());
+      store.dispatch(logout());
     }
 
     throw new Error(data.message || data.errors || 'Unexpected error');

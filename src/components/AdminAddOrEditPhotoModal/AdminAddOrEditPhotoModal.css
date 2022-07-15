@@ -55,3 +55,37 @@
 .ap-image-upload-submit-button:hover {
   background: #c5c5c5;
 }
+
+.ap-iu-input-grid {
+  margin-top: 30px;
+  display: grid;
+  row-gap: 30px;
+
+  grid-template-columns: 30% 60%;
+}
+
+.ap-iu-input-grid-label {
+  padding-right: 16%;
+  font-size: 18px;
+  justify-self: right;
+}
+
+.ap-iu-input-field {
+  height: 25px;
+}
+
+.ap-iu-input-field-price,
+.ap-iu-input-field-collection {
+  width: 35%;
+}
+
+.ap-iu-input-field-collection {
+  background-color: white;
+  border: 1px solid #9d9da9;
+}
+
+.apiu-description-textarea {
+  height: 100px;
+
+  resize: none;
+}

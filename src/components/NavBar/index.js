@@ -14,13 +14,14 @@ const NavBar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
   const name = useSelector((state) => state.auth.name);
   const dispatch = useDispatch();
 
   const renderRightElements = () => {
     const signupElement = (
       <button
-        className='nabar-button grey-blue-button'
+        className='navbar-button grey-blue-button'
         onClick={() => {
           navigate('/signup');
         }}
@@ -30,7 +31,7 @@ const NavBar = () => {
     );
     const loginElement = (
       <button
-        className='nabar-button orange-brown-button'
+        className='navbar-button orange-brown-button'
         onClick={() => {
           navigate('/login');
         }}
@@ -91,6 +92,11 @@ const NavBar = () => {
                 <div className='nav-user-modal-link'>
                   <Link to='/myaccount'>My Account</Link>{' '}
                 </div>
+                {isAdmin && (
+                  <div className='nav-user-modal-link'>
+                    <Link to='/admin'>Dashboard</Link>{' '}
+                  </div>
+                )}
                 <div className='nav-user-modal-bottom-container'>
                   <div
                     className='nav-user-modal-link nav-user-modal-logout'
@@ -112,7 +118,7 @@ const NavBar = () => {
             Logout
           </button> */}
           <button
-            className='nabar-button orange-brown-button'
+            className='navbar-button orange-brown-button'
             onClick={() => {
               navigate('/myphotos');
             }}

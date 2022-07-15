@@ -1,44 +1,23 @@
 import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 import AdminNavSideBar from '../../components/AdminNavSideBar';
 import useCollections from '../../hooks/useCollections';
 import useClickOutsideClose from '../../hooks/useClickOutsideClose';
-import { addCollection } from '../../actions/collectionActions';
+import AdminAddOrEditCollectionModal from '../../components/AdminAddOrEditCollectionModal';
 
 import './index.css';
 
 const AdminCollectionsPage = () => {
-  const dispatch = useDispatch();
-  const collectionAddContainer = useRef(null);
-  const [collectionAddName, setCollectionAddName] = useState('');
-  const [isCollectionAddOpen, setIsCollectionAddOpen] = useClickOutsideClose(collectionAddContainer);
+  const [editingCollectionName, setEditingCollectionName] = useState(null);
+  const [editingCollectionId, setEditingCollectionId] = useState(null);
+  const collectionAddEditContainer = useRef(null);
+  const [isCollectionAddEditOpen, setIsCollectionAddEditOpen] = useClickOutsideClose(collectionAddEditContainer);
   const { collections, isLoaded, error } = useCollections();
 
-  const handleAddCollectionSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addCollection(collectionAddName));
-    setCollectionAddName('');
-    setIsCollectionAddOpen(false);
-  };
-
-  const renderAddCollection = () => {
-    return (
-      isCollectionAddOpen && (
-        <div className='apc-add-collection-container'>
-          <div className='apc-add-collection' ref={collectionAddContainer}>
-            <form onSubmit={handleAddCollectionSubmit}>
-              <input
-                value={collectionAddName}
-                onChange={(e) => {
-                  setCollectionAddName(e.target.value);
-                }}
-              ></input>
-            </form>
-          </div>
-        </div>
-      )
-    );
+  const handleEditCollectionButtonClick = (collectionId, collectionName) => {
+    setEditingCollectionId(collectionId);
+    setEditingCollectionName(collectionName);
+    setIsCollectionAddEditOpen(true);
   };
 
   const renderCollectionTableRows = () => {
@@ -60,7 +39,14 @@ const AdminCollectionsPage = () => {
             {creationTime} {creationDate.split('-').join('/')}{' '}
           </td>
           <td className='admin-table-cell text-center'>
-            <button className='admin-table-details-button'>Edit</button>
+            <button
+              className='admin-table-details-button'
+              onClick={() => {
+                handleEditCollectionButtonClick(collection.id, collection.name);
+              }}
+            >
+              Edit
+            </button>
           </td>
         </tr>
       );
@@ -70,7 +56,15 @@ const AdminCollectionsPage = () => {
   return (
     <>
       <AdminNavSideBar />
-      {renderAddCollection()}
+      {isCollectionAddEditOpen && (
+        <AdminAddOrEditCollectionModal
+          setIsCollectionAddEditOpen={setIsCollectionAddEditOpen}
+          collectionAddEditContainer={collectionAddEditContainer}
+          editingCollectionId={editingCollectionId}
+          editingCollectionName={editingCollectionName}
+          setEditingCollectionName={setEditingCollectionName}
+        />
+      )}
       <div className='ap-main'>
         <div className='ap-main-inner'>
           <div className='ap-main-users-table card'>
@@ -79,8 +73,7 @@ const AdminCollectionsPage = () => {
               <button
                 className='admin-table-add-photo-button'
                 onClick={() => {
-                  setCollectionAddName('');
-                  setIsCollectionAddOpen(true);
+                  setIsCollectionAddEditOpen(true);
                 }}
               >
                 Add Collection
@@ -95,65 +88,7 @@ const AdminCollectionsPage = () => {
                   <th className='admin-table-cell'>Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                {renderCollectionTableRows()}
-                {/* <tr className='admin-table-body-row'>
-                  <td className='text-center'>#327</td>
-                  <td className='admin-table-cell'>
-                    <div className='admin-table-cell-name-wrapper'>
-                      <img alt='user-icon' src='/images/user.png' className='admin-table-cell-user-icon'></img>
-                      Lochlan Odlum
-                    </div>
-                  </td>
-                  <td className='admin-table-cell text-center'>20:30 01/12/2021 </td>
-                  <td className='admin-table-cell text-center'>£32.99</td>
-                  <td className='admin-table-cell text-center'>
-                    <button className='admin-table-details-button'>Edit</button>
-                  </td>
-                </tr>
-                <tr className='admin-table-body-row'>
-                  <td className='text-center'>#326</td>
-                  <td className='admin-table-cell'>
-                    <div className='admin-table-cell-name-wrapper'>
-                      <img src='/images/user.png' alt='user-icon' className='admin-table-cell-user-icon'></img>
-                      George Ward
-                    </div>
-                  </td>
-                  <td className='admin-table-cell text-center'>20:30 28/11/2021 </td>
-                  <td className='admin-table-cell text-center'>£19.99</td>
-                  <td className='admin-table-cell text-center'>
-                    <button className='admin-table-details-button'>Edit</button>
-                  </td>
-                </tr>
-                <tr className='admin-table-body-row'>
-                  <td className='text-center'>#325</td>
-                  <td className='admin-table-cell'>
-                    <div className='admin-table-cell-name-wrapper'>
-                      <img src='/images/user.png' alt='user-icon' className='admin-table-cell-user-icon'></img>
-                      George Goldsmith
-                    </div>
-                  </td>
-                  <td className='admin-table-cell text-center'>20:30 27/11/2021 </td>
-                  <td className='admin-table-cell text-center'>£26.49</td>
-                  <td className='admin-table-cell text-center'>
-                    <button className='admin-table-details-button'>Edit</button>
-                  </td>
-                </tr>
-                <tr className='admin-table-body-row'>
-                  <td className='text-center'>#324</td>
-                  <td className='admin-table-cell'>
-                    <div className='admin-table-cell-name-wrapper'>
-                      <img src='images/user.png' alt='user-icon' className='admin-table-cell-user-icon'></img>
-                      Eddie Hall
-                    </div>
-                  </td>
-                  <td className='admin-table-cell text-center'>20:30 13/11/2021 </td>
-                  <td className='admin-table-cell text-center'>£129.99</td>
-                  <td className='admin-table-cell text-center'>
-                    <button className='admin-table-details-button'>Edit</button>
-                  </td>
-                </tr> */}
-              </tbody>
+              <tbody>{renderCollectionTableRows()}</tbody>
             </table>
             <div className='ap-main-users-table-footer'>
               <div className='ap-main-users-table-footer-link'>

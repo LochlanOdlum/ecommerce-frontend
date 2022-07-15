@@ -5,30 +5,40 @@ import useCollections from '../../hooks/useCollections';
 
 import './AdminAddOrEditPhotoModal.css';
 
-const AdminAddOrEditPhotoModal = ({ isEditMode = false }) => {
+const AdminAddOrEditPhotoModal = ({
+  currentPhotoBeingEdited = null,
+  setCurrentPhotoBeingEdited,
+  setShowImageUploadModal,
+}) => {
   //If edit mode then set these default values to values passed from props
   const { collections, isLoaded: isCollectionsLoaded } = useCollections();
   const imageUploadInputLabelEle = useRef(null);
-  const [collectionId, setCollectionId] = useState(null);
-  const [photoTitle, setPhotoTitle] = useState('');
-  const [photoDescription, setPhotoDescription] = useState('');
-  const [photoPrice, setPhotoPrice] = useState(20);
-  const [photoURL, setPhotoURL] = useState(null);
-  const [photoFile, setPhotoFile] = useState(null);
-  console.log(photoPrice);
+  const [collectionId, setCollectionId] = useState(currentPhotoBeingEdited?.collectionId || '');
+  const [photoTitle, setPhotoTitle] = useState(currentPhotoBeingEdited?.title || '');
+  const [photoDescription, setPhotoDescription] = useState(currentPhotoBeingEdited?.description || '');
+  const [photoPrice, setPhotoPrice] = useState(currentPhotoBeingEdited?.priceInPence / 100 || '');
+  // const [photoPrice, setPhotoPrice] = useState(4.444 || '');
+  const [photoURL, setPhotoURL] = useState(currentPhotoBeingEdited?.imageWmarkedMedPublicURL || null);
+  const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
-    if (isCollectionsLoaded) {
+    return () => {
+      setCurrentPhotoBeingEdited(null);
+    };
+  }, [setCurrentPhotoBeingEdited]);
+
+  useEffect(() => {
+    if (isCollectionsLoaded && !collectionId) {
       setCollectionId(collections[0].id);
     }
-  }, [isCollectionsLoaded, collections]);
+  }, [isCollectionsLoaded, collections, collectionId]);
 
   const handleImageUploadChange = (e) => {
     if (!e.target.files || !e.target.files[0]) {
       return;
     }
 
-    setPhotoFile(e.target.files[0]);
+    setImageFile(e.target.files[0]);
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -39,15 +49,25 @@ const AdminAddOrEditPhotoModal = ({ isEditMode = false }) => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  const handleAddOrEditPhoto = () => {
-    //Handle adding a new photo
-    if (!isEditMode) {
-      adminApi.addPhoto(photoFile, photoTitle, photoDescription, photoPrice, collectionId);
-    }
+  const handleAddPhoto = () => {
+    const priceInPence = photoPrice * 100;
 
-    //Handle editing an existing photo
-    if (isEditMode) {
-    }
+    adminApi.addPhoto(imageFile, photoTitle, photoDescription, priceInPence, collectionId);
+  };
+
+  const handleEditPhoto = async () => {
+    console.log('t');
+    const priceInPence = photoPrice * 100;
+
+    await adminApi.editPhoto(currentPhotoBeingEdited.id, {
+      imageFile,
+      photoTitle,
+      photoDescription,
+      priceInPence,
+      collectionId,
+    });
+
+    setShowImageUploadModal(false);
   };
 
   const renderCollectionSelect = () => {
@@ -56,7 +76,11 @@ const AdminAddOrEditPhotoModal = ({ isEditMode = false }) => {
     }
 
     return collections.map((collection) => {
-      return <option value={collection.id}>{collection.name}</option>;
+      return (
+        <option value={collection.id} key={collection.id}>
+          {collection.name}
+        </option>
+      );
     });
   };
 
@@ -78,13 +102,18 @@ const AdminAddOrEditPhotoModal = ({ isEditMode = false }) => {
           id='ap-image-upload-input'
         />
       </div>
-      <div>
-        <label>Title</label>
-        <input type='text' value={photoTitle} onChange={(e) => setPhotoTitle(e.target.value)} />
-      </div>
-      <div>
-        <label>Collection</label>
+      <div className='ap-iu-input-grid'>
+        <label className='ap-iu-input-grid-label'>Title</label>
+        <input
+          className='ap-iu-input-field'
+          type='text'
+          value={photoTitle}
+          onChange={(e) => setPhotoTitle(e.target.value)}
+        />
+
+        <label className='ap-iu-input-grid-label'>Collection</label>
         <select
+          className='ap-iu-input-field ap-iu-input-field-collection'
           value={collectionId}
           onChange={(e) => {
             setCollectionId(e.target.value);
@@ -92,18 +121,36 @@ const AdminAddOrEditPhotoModal = ({ isEditMode = false }) => {
         >
           {renderCollectionSelect()}
         </select>
-      </div>
-      <div>
-        <label>Description</label>
-        <input type='text' value={photoDescription} onChange={(e) => setPhotoDescription(e.target.value)} />
-      </div>
-      <div>
-        <label>Price</label>
-        <input type='number' value={photoPrice} onChange={(e) => setPhotoPrice(e.target.value)} />
-      </div>
 
-      <button onClick={handleAddOrEditPhoto} className='ap-image-upload-submit-button'>
-        {isEditMode ? 'Edit' : 'Add Photo'}
+        <label className='ap-iu-input-grid-label'>Price</label>
+        <input
+          className='ap-iu-input-field ap-iu-input-field-price'
+          pattern='d\+\.\d\d$'
+          type='number'
+          step='.01'
+          value={photoPrice}
+          onChange={(e) => {
+            const validated = e.target.value.match(/^(\d*\.{0,1}\d{0,2}$)/);
+            if (validated) {
+              setPhotoPrice(e.target.value);
+            }
+          }}
+        />
+
+        <label className='ap-iu-input-grid-label'>Description</label>
+        <textarea
+          className='ap-iu-input-field apiu-description-textarea'
+          value={photoDescription}
+          onChange={(e) => setPhotoDescription(e.target.value)}
+        />
+      </div>
+      {console.log('#t')}
+      {console.log(currentPhotoBeingEdited ? handleEditPhoto : handleAddPhoto)}
+      <button
+        onClick={currentPhotoBeingEdited ? handleEditPhoto : handleAddPhoto}
+        className='ap-image-upload-submit-button'
+      >
+        {currentPhotoBeingEdited ? 'Edit' : 'Add Photo'}
       </button>
     </div>
   );

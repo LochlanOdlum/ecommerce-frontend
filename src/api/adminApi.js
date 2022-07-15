@@ -3,14 +3,14 @@ import authHeader from './helpers.js/authHeader';
 
 const API_URL = 'https://skylight-photography.herokuapp.com/';
 
-const addPhoto = async (imageFile, title, description, price, collectionId) => {
+const addPhoto = async (imageFile, photoTitle, photoDescription, priceInPence, collectionId) => {
   const formData = new FormData();
-  console.log(price);
+
   formData.append('image', imageFile);
-  formData.append('title', title);
+  formData.append('title', photoTitle);
   formData.append('collectionId', collectionId);
-  formData.append('description', description);
-  formData.append('priceInPounds', price);
+  formData.append('description', photoDescription);
+  formData.append('priceInPence', priceInPence);
 
   const response = await fetch(API_URL + 'admin/photo', {
     method: 'POST',
@@ -26,13 +26,24 @@ const addPhoto = async (imageFile, title, description, price, collectionId) => {
 };
 
 const editPhoto = async (photoId, editedFields) => {
+  console.log(photoId);
+  console.log(editedFields);
   //Destructure to ensure only the correct fields get sent in request.
-  const { orderPosition, title, description, collectionId, priceInPence } = editedFields;
+  const { orderPosition, imageFile, photoTitle, photoDescription, priceInPence, collectionId } = editedFields;
+
+  const formData = new FormData();
+
+  formData.append('image', imageFile);
+  formData.append('orderPosition', orderPosition);
+  formData.append('title', photoTitle);
+  formData.append('collectionId', collectionId);
+  formData.append('description', photoDescription);
+  formData.append('priceInPence', priceInPence);
 
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', ...authHeader() },
-    body: JSON.stringify({ editedFields: { orderPosition, title, description, collectionId, priceInPence } }),
+    headers: { ...authHeader() },
+    body: formData,
   };
 
   const response = await fetch(`${API_URL}admin/photo/${photoId}`, requestOptions);
@@ -56,6 +67,24 @@ const postCollection = async (collectionName) => {
   const data = await response.json();
 
   errorParser(response, data);
+
+  return data;
+};
+
+const editCollection = async (collectionId, editedFields) => {
+  const { updatedCollectionName } = editedFields;
+
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...authHeader() },
+    body: JSON.stringify({ updatedCollectionName }),
+  };
+
+  const res = await fetch(`${API_URL}admin/collection/${collectionId}`, requestOptions);
+
+  const data = await res.json();
+
+  errorParser(res, data);
 
   return data;
 };
@@ -97,6 +126,7 @@ const adminApi = {
   getPhotos,
   getOrders,
   getUsers,
+  editCollection,
 };
 
 export default adminApi;

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import adminApi from '../../api/adminApi';
 import AdminNavSideBar from '../../components/AdminNavSideBar';
 import AdminPageNumberNav from '../../components/AdminPageNumberNav';
+import AdminGreyBackgroundCenter from '../../components/AdminGreyBackgroundCenter';
+import AdminOrderDetailsModal from '../../components/AdminOrderDetailsModal';
 
 import './index.css';
 
@@ -10,11 +12,17 @@ const AdminOrdersPage = () => {
   const [orders, setOrders] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
   const [activePage, setActivePage] = useState(1);
+  const [activeOrderDetailsModalOrder, setactiveOrderDetailsModalOrder] = useState(null);
+
+  const closeOrderDetailsModal = () => {
+    setactiveOrderDetailsModalOrder(null);
+  };
 
   useEffect(() => {
     const updatePhotos = async () => {
       try {
         const { orders, pageCount } = await adminApi.getOrders(activePage, 8);
+        console.log(orders);
         setTotalPages(pageCount);
         setOrders(orders);
       } catch (error) {
@@ -34,7 +42,7 @@ const AdminOrdersPage = () => {
       const [creationDate, creationTime] = order.createdAt.split('.')[0].split('T');
 
       return (
-        <tr className='admin-table-body-row'>
+        <tr className='admin-table-body-row' key={order.id}>
           {/* <td className='text-center'>
             <img className='admin-page-photo-preview' src={photo.imageWmarkedMedSquarePublicURL} />
           </td> */}
@@ -45,7 +53,14 @@ const AdminOrdersPage = () => {
           </td>
           <td className='admin-table-cell text-center'>£{order.totalPriceInPence / 100}</td>
           <td className='admin-table-cell text-center'>
-            <button className='admin-table-details-button'>Details</button>
+            <button
+              className='admin-table-details-button'
+              onClick={() => {
+                setactiveOrderDetailsModalOrder(order);
+              }}
+            >
+              Details
+            </button>
           </td>
         </tr>
       );
@@ -55,10 +70,15 @@ const AdminOrdersPage = () => {
   return (
     <>
       <AdminNavSideBar />
+      {activeOrderDetailsModalOrder && (
+        <AdminGreyBackgroundCenter>
+          <AdminOrderDetailsModal closeModal={closeOrderDetailsModal} order={activeOrderDetailsModalOrder} />
+        </AdminGreyBackgroundCenter>
+      )}
       <div className='ap-main'>
         <div className='ap-main-inner'>
           <div className='ap-main-users-table card'>
-            <div className='ap-main-users-table-header'>Users</div>
+            <div className='ap-main-users-table-header'>Orders</div>
             <table>
               <thead>
                 <tr>

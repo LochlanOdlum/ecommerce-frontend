@@ -16,6 +16,8 @@
 .admin-widget-content-right {
   margin-left: auto;
   font-size: 1.6rem;
+  display: flex;
+  align-items: center;
 }
 
 .admin-widget-content-heading {

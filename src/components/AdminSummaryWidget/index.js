@@ -4,7 +4,7 @@ import './AdminSummaryWidget.css';
 
 console.log('aaaaaaaaaaaaaaaaa');
 
-const AdminSummaryWidget = ({ heading, subheading, number }) => {
+const AdminSummaryWidget = ({ heading, subheading, value }) => {
   return (
     <div className='admin-widget card'>
       <div className='admin-widget-content'>
@@ -12,7 +12,7 @@ const AdminSummaryWidget = ({ heading, subheading, number }) => {
           <div className='admin-widget-content-heading'>{heading}</div>
           <div className='admin-widget-content-subheading'>{subheading}</div>
         </div>
-        <div className='admin-widget-content-right'>{number}</div>
+        <div className='admin-widget-content-right'>{value}</div>
       </div>
     </div>
   );

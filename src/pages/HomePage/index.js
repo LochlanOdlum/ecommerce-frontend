@@ -185,7 +185,7 @@ const LandingPage = () => {
             <div className='sp-s2-title'>Featured Photos</div>
             <div className='sp-s2-description'>
               We specialise in Landscape Photography which can be seen throughout our shop. We vary from beautfiul river
-              scapes to the streets of Milan. These featured photos can be found in the shop.
+              scapes to the streets of Milan. These featured photos are available for purchase in the shop.
             </div>
             <button className='orange-brown-button sp-s2-shop-all-button'>
               <Link to='/shop'>Shop All</Link>
@@ -202,8 +202,8 @@ const LandingPage = () => {
           <div className='s3-about-us-container'>
             <div className='s3-about-us-title'>About Us</div>
             <div className='s3-about-us-text s3-about-us-text-1'>
-              Skylight Photography is a Proud small business centered in the Norfolk Norfolk Rocklands St Peter area! We
-              not only sell our own photographs but also are avaliable for private event photography. See our contact us
+              Skylight Photography is a Proud small business centered in the Norfolk Rocklands St Peter area! We not
+              only sell our own photographs but also are avaliable for private event photography. See our contact us
               section below for more details.
             </div>
             <div className='s3-about-us-text s3-about-us-text-2'>
@@ -274,7 +274,7 @@ const LandingPage = () => {
               <div className='s4-cu-text'>
                 Here at Skylight Photography we provide a range of services including private event photography. We
                 specialise in aerial, weddings, sports, events, product, food and much more! If you have any questions
-                please contact the team now and we will get back to you as soon as possible!
+                please contact the team now and we will get back to you as soon as possible.
               </div>
               <div className='s4-cu-text'>
                 If you want to keep up to date with the latest Skylight Photography news then subscribe to our Mailing

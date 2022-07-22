@@ -3,6 +3,8 @@ import authHeader from './helpers.js/authHeader';
 
 const API_URL = 'https://skylight-photography.herokuapp.com/';
 
+// TODO: Better way of handling failed requests than with errorparser? Just seems a bit odd.
+
 const addPhoto = async (imageFile, photoTitle, photoDescription, priceInPence, collectionId) => {
   const formData = new FormData();
 
@@ -130,6 +132,21 @@ const getOrders = async (page, resultsPerPage) => {
   return await getAdminData('orders', page, resultsPerPage);
 };
 
+const getRecentOrders = async (limit) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { ...authHeader() },
+  };
+
+  const res = await fetch(`${API_URL}admin/recentOrders${limit ? `?limit=${limit}` : ''}`, requestOptions);
+
+  const data = await res.json();
+
+  errorParser(res, data);
+
+  return data;
+};
+
 const getOrderDetails = async (orderId) => {
   const requestOptions = {
     method: 'GET',
@@ -181,6 +198,21 @@ const deleteUser = async (userId) => {
   return data;
 };
 
+const getSummaryData = async () => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { ...authHeader() },
+  };
+
+  const res = await fetch(`${API_URL}admin/summaryDetails`, requestOptions);
+
+  const data = await res.json();
+
+  errorParser(res, data);
+
+  return data;
+};
+
 const adminApi = {
   addPhoto,
   getPhotos,
@@ -193,6 +225,8 @@ const adminApi = {
   getUsers,
   getUserDetails,
   deleteUser,
+  getSummaryData,
+  getRecentOrders,
 };
 
 export default adminApi;

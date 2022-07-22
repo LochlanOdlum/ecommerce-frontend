@@ -6,12 +6,10 @@ export const login = (email, password) => async (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
 
   try {
-    const { token, isAdmin, name } = await authApi.login(email, password);
-    console.log('Logged in ');
-    console.log(token, isAdmin);
+    const { token, isUserAdmin, UsersEmail, UsersName } = await authApi.login(email, password);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: { token, isAdmin, name },
+      payload: { token, isAdmin: isUserAdmin, name: UsersName, email: UsersEmail },
     });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL });

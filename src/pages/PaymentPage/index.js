@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ordersApi from '../../api/ordersApi';
 import useCart from '../../hooks/useCart';
 import { EmptyCart } from '../../actions/cartActions';
@@ -15,6 +15,7 @@ const PaymentPage = () => {
   const stripe = useStripe();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { name, email } = useSelector((state) => state.auth);
   const { cartItems, cartTotal, isLoaded } = useCart();
   const { collectionMap } = useCollections();
 
@@ -39,22 +40,21 @@ const PaymentPage = () => {
           <div className='pp-summary-item-title'>{cartItem.title}</div>
           <div className='pp-summary-item-collection'>{collectionMap[cartItem.collectionId]}</div>
         </div>
-        <div className='pp-summary-item-price'>£{cartItem.priceInPounds}</div>
+        <div className='pp-summary-item-price'>£{cartItem.priceInPence / 100}</div>
       </div>
     ));
-  const onPaymentSubmit = async (e) => {
-    console.log('t');
 
+  const onPaymentSubmit = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) {
       return;
     }
 
     try {
-      const { clientSecret, orderId } = await ordersApi.startOrder(cartItemIds);
+      //TODO: When guest option available will need to conditionally change where email, name come from.
+      const { clientSecret, orderId } = await ordersApi.startOrder(email, name, cartItemIds);
 
       const cardNumberElement = elements.getElement(CardNumberElement);
-      console.log(cardNumberElement);
 
       const { error } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {

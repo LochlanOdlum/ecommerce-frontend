@@ -15,7 +15,7 @@ export const fetchOrderList = () => async (dispatch, getState) => {
       type: ORDER_LIST_REQUEST,
     });
 
-    const orderList = await ordersApi.fetchOrders();
+    const { orders: orderList } = await ordersApi.fetchOrders();
 
     dispatch({
       type: ORDER_LIST_SUCCESS,

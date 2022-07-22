@@ -44,7 +44,7 @@ const MyPhotosPage = () => {
       photosList.push(
         <div className='mpp-photo-container' key={photo.id}>
           <div className='mpp-photo-img-container'>
-            <ImageDownload paddingBottom={'84.5%'} endpoint={`photoMedCropped2to1/${photo.imageMedCropped2to1Key}`} />
+            <ImageDownload paddingBottom={'84.5%'} endpoint={`photoMedCropped2to1/${photo.s3ImagesKey}`} />
           </div>
           <div className='mpp-photo-content-right'>
             <div className='mpp-photo-info-grid'>
@@ -58,7 +58,7 @@ const MyPhotosPage = () => {
               <div className='mpp-photo-info-text'>Confirmed</div>
 
               <div className='mpp-photo-info-heading'>Total</div>
-              <div className='mpp-photo-info-text'>£{photo.priceInPounds}</div>
+              <div className='mpp-photo-info-text'>£{photo.priceInPence / 100}</div>
             </div>
             <button
               className='orange-brown-button mpp-download-button'

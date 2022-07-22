@@ -83,7 +83,7 @@ const ShopPage = () => {
   useEffect(() => {
     const filterProducts = (prods) => {
       const filteredSortedProducts = prods.filter((prod) => {
-        const isValidPrice = prod.priceInPounds >= minPrice && prod.priceInPounds <= maxPrice;
+        const isValidPrice = prod.priceInPence / 100 >= minPrice && prod.priceInPence / 100 <= maxPrice;
         const isValidCollection = activeCollection === null || prod.collectionId === activeCollection ? true : false;
 
         return isValidPrice && isValidCollection;
@@ -91,12 +91,6 @@ const ShopPage = () => {
 
       return filteredSortedProducts;
     };
-
-    // const sortProducts = (prods) => {
-
-    // }
-
-    // const filteredProducts = filterProducts(products);
 
     setfilteredSortedProducts(filterProducts(products));
     // eslint-disable-next-line
@@ -176,7 +170,7 @@ const ShopPage = () => {
             >
               Add To Cart
             </button>
-            <div className='shop-photo-price'>£{product.priceInPounds}</div>
+            <div className='shop-photo-price'>£{product.priceInPence / 100}</div>
           </div>
           {/* <Link to={`/photo/${product.id}`}>Click me!</Link> */}
         </div>

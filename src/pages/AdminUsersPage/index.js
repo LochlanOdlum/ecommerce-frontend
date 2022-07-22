@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import adminApi from '../../api/adminApi';
 import AdminNavSideBar from '../../components/AdminNavSideBar';
 import AdminPageNumberNav from '../../components/AdminPageNumberNav';
+import AdminConfirmDeleteUserModal from '../../components/AdminConfirmDeleteUserModal';
+import AdminModalParent from '../../components/AdminModalParent';
 
 import './index.css';
 
@@ -10,20 +12,33 @@ const AdminUsersPage = () => {
   const [users, setUsers] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
   const [activePage, setActivePage] = useState(1);
+  const [userDeleteConfirmation, setUserDeleteConfirmation] = useState({ isOpen: false, userId: null });
+
+  const closeUserDeleteConfirmationModal = () => {
+    setUserDeleteConfirmation({ isOpen: false, userId: null });
+  };
+
+  const updateUsers = async () => {
+    try {
+      const { users, pageCount } = await adminApi.getUsers(activePage, 8);
+      setTotalPages(pageCount);
+      setUsers(users);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const updatePhotos = async () => {
-      try {
-        const { users, pageCount } = await adminApi.getUsers(activePage, 8);
-        setTotalPages(pageCount);
-        setUsers(users);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    updatePhotos();
+    updateUsers();
+    // eslint-disable-next-line
   }, [activePage]);
+
+  useEffect(() => {
+    if (!userDeleteConfirmation.isOpen) {
+      updateUsers();
+    }
+    // eslint-disable-next-line
+  }, [userDeleteConfirmation]);
 
   const renderTableRows = () => {
     if (!users) {
@@ -44,7 +59,14 @@ const AdminUsersPage = () => {
             {creationTime} {creationDate.split('-').join('/')}
           </td>
           <td className='admin-table-cell text-center'>
-            <button className='admin-table-details-button'>Edit</button>
+            <button
+              className='admin-table-delete-button'
+              onClick={() => {
+                setUserDeleteConfirmation({ isOpen: true, userId: user.id });
+              }}
+            >
+              Delete
+            </button>
           </td>
         </tr>
       );
@@ -54,6 +76,14 @@ const AdminUsersPage = () => {
   return (
     <>
       <AdminNavSideBar />
+      {userDeleteConfirmation.isOpen && (
+        <AdminModalParent closeModal={closeUserDeleteConfirmationModal}>
+          <AdminConfirmDeleteUserModal
+            userId={userDeleteConfirmation.userId}
+            closeModal={closeUserDeleteConfirmationModal}
+          />
+        </AdminModalParent>
+      )}
       <div className='ap-main'>
         <div className='ap-main-inner'>
           <div className='ap-main-users-table card'>

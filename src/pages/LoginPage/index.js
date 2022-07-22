@@ -31,7 +31,7 @@ const LoginPage = () => {
       <NavBar />
       <div className='lip'>
         <img className='lip-image' alt='skylight-photography' src='/images/login-page-img.png' />
-        <form class='lip-form' onSubmit={onLoginSubmit}>
+        <form className='lip-form' onSubmit={onLoginSubmit}>
           <div className='lip-title'>Login</div>
           <div className='lip-email-input-container'>
             <label className='lip-label' htmlFor='emailInput'>

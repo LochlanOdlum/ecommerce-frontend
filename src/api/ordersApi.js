@@ -3,7 +3,7 @@ import errorParser from './helpers.js/errorParser';
 
 const API_URL = 'https://skylight-photography.herokuapp.com/shop/';
 
-const startOrder = async (itemIds) => {
+const startOrder = async (customerEmail, customerName, itemIds) => {
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -11,6 +11,8 @@ const startOrder = async (itemIds) => {
       ...authHeader(),
     },
     body: JSON.stringify({
+      customerEmail,
+      customerName,
       itemIds,
     }),
   };
@@ -37,7 +39,7 @@ const fetchOrders = async () => {
 
   errorParser(res, data);
 
-  return data.orders;
+  return data;
 };
 
 const fetchOrder = async (orderId) => {
@@ -65,7 +67,7 @@ const fetchSecureImage = async (endpoint) => {
     },
   };
 
-  const res = await fetch(`${API_URL}/${endpoint}`, requestOptions);
+  const res = await fetch(`${API_URL}${endpoint}`, requestOptions);
 
   errorParser(res, { message: 'Could not download image' });
 

@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addCollection, editCollection } from '../../actions/collectionActions';
-import AdminGreyBackgroundCenter from '../AdminGreyBackgroundCenter';
 
 const AdminAddOrEditCollectionModal = ({
   setIsCollectionAddEditOpen,
-  collectionAddEditContainer,
   editingCollectionId,
   editingCollectionName,
   setEditingCollectionName,
@@ -33,25 +31,23 @@ const AdminAddOrEditCollectionModal = ({
   };
 
   return (
-    <AdminGreyBackgroundCenter>
-      <div className='apc-add-collection' ref={collectionAddEditContainer}>
-        <form
-          className='apc-ac-form'
-          onSubmit={editingCollectionName ? handleEditCollectionSubmit : handleAddCollectionSubmit}
-        >
-          <input
-            value={collectionAddEditName}
-            className='apc-ac-input'
-            onChange={(e) => {
-              setCollectionAddEditName(e.target.value);
-            }}
-          ></input>
-          <button className='apc-ac-add-button' type='submit'>
-            <div className='apc-ac-add-text'>{editingCollectionName ? 'Edit' : 'Add'}</div>
-          </button>
-        </form>
-      </div>
-    </AdminGreyBackgroundCenter>
+    <div className='apc-add-collection'>
+      <form
+        className='apc-ac-form'
+        onSubmit={editingCollectionName ? handleEditCollectionSubmit : handleAddCollectionSubmit}
+      >
+        <input
+          value={collectionAddEditName}
+          className='apc-ac-input'
+          onChange={(e) => {
+            setCollectionAddEditName(e.target.value);
+          }}
+        ></input>
+        <button className='apc-ac-add-button' type='submit'>
+          <div className='apc-ac-add-text'>{editingCollectionName ? 'Edit' : 'Add'}</div>
+        </button>
+      </form>
+    </div>
   );
 };
 

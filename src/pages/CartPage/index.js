@@ -53,7 +53,7 @@ const CartPage = () => {
               <div className='cp-photo-collection-name'>{collectionMap[item.collectionId]}</div>
             </div>
           </td>
-          <td className='text-center cp-cell'>£{item.priceInPounds}</td>
+          <td className='text-center cp-cell'>£{item.priceInPence / 100}</td>
           <td className='text-center cp-cell'>
             <img
               alt='del-icon'

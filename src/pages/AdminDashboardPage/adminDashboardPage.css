@@ -20,10 +20,8 @@
 
 .card {
   border-radius: 5px;
-  box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03),
-    0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
-    0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05),
-    0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+  box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
+    0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
 }
 
 .ap-main-summary-row {
@@ -85,6 +83,19 @@
   user-select: none;
 }
 
+.admin-table-delete-button {
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+  border: 0px solid transparent;
+  font-size: 0.9rem;
+  border-radius: 0.2rem;
+  padding: 0.4rem 0.7rem;
+  background: #dc3232;
+  vertical-align: middle;
+  user-select: none;
+}
+
 .ap-main-users-table-footer {
   border-top: 1px solid #e7e9f2;
   display: flex;
@@ -110,9 +121,8 @@ body {
   margin: 0;
   color: #495057;
   font-size: 0.88rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 a:link {

@@ -55,6 +55,21 @@ const editPhoto = async (photoId, editedFields) => {
   return data;
 };
 
+const deletePhoto = async (photoId) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { ...authHeader() },
+  };
+
+  const res = await fetch(`${API_URL}admin/photo/${photoId}`, requestOptions);
+
+  const data = await res.json();
+
+  errorParser(res, data);
+
+  return data;
+};
+
 const postCollection = async (collectionName) => {
   const requestOptions = {
     method: 'POST',
@@ -115,18 +130,69 @@ const getOrders = async (page, resultsPerPage) => {
   return await getAdminData('orders', page, resultsPerPage);
 };
 
+const getOrderDetails = async (orderId) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { ...authHeader() },
+  };
+
+  const res = await fetch(`${API_URL}admin/orderDetails/${orderId}`, requestOptions);
+
+  const data = await res.json();
+
+  console.log(data);
+
+  errorParser(res, data);
+
+  return data;
+};
+
 const getUsers = async (page, resultsPerPage) => {
   return await getAdminData('users', page, resultsPerPage);
 };
 
+const getUserDetails = async (userId) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { ...authHeader() },
+  };
+
+  const res = await fetch(`${API_URL}admin/userDetails/${userId}`, requestOptions);
+
+  const data = await res.json();
+
+  errorParser(res, data);
+
+  return data;
+};
+
+const deleteUser = async (userId) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { ...authHeader() },
+  };
+
+  const res = await fetch(`${API_URL}admin/user/${userId}`, requestOptions);
+
+  const data = await res.json();
+
+  errorParser(res, data);
+
+  return data;
+};
+
 const adminApi = {
   addPhoto,
-  editPhoto,
-  postCollection,
   getPhotos,
-  getOrders,
-  getUsers,
+  editPhoto,
+  deletePhoto,
+  postCollection,
   editCollection,
+  getOrders,
+  getOrderDetails,
+  getUsers,
+  getUserDetails,
+  deleteUser,
 };
 
 export default adminApi;

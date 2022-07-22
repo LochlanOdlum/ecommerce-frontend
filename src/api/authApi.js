@@ -26,11 +26,11 @@ const login = async (email, password) => {
   });
 
   const data = await response.json();
-  const { token, isAdmin, name } = data;
+  const { token, isUserAdmin, UsersEmail, UsersName } = data;
 
   errorParser(response, data);
 
-  return { token, isAdmin, name };
+  return { token, isUserAdmin, UsersEmail, UsersName };
 };
 
 // signup('Loch', 'Odlum', 'lodlum5@gmail.com', 'password');

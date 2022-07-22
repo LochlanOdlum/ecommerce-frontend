@@ -1,28 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ImageDownload from '../ImageDownload';
+import adminApi from '../../api/adminApi';
 
 import './AdminOrderDetailsModal.css';
 
-const AdminOrderDetailsModal = ({ order, closeModal }) => {
-  const [userCreationDate] = order.user.createdAt.split('.')[0].split('T');
+const AdminOrderDetailsModal = ({ orderId, closeModal }) => {
+  const [order, setOrder] = useState(null);
 
-  console.log(order);
+  useEffect(() => {
+    const getOrderDetails = async () => {
+      const { order: orderRes } = await adminApi.getOrderDetails(orderId);
+      setOrder(orderRes);
+    };
+
+    getOrderDetails();
+  }, [orderId]);
+
+  const userCreationDate = order?.user?.createdAt?.split('.')[0]?.split('T')[0];
+
   const renderOrderItems = () => {
     return order.orderItems.map((orderItem) => {
       return (
         <div key={orderItem.id} className='aodm-orderItem'>
           <div className='aodm-orderItem-image'>
-            <ImageDownload
-              paddingBottom={'100%'}
-              endpoint={`photoMedCropped2to1/${orderItem.imageMedCropped2to1Key}`}
-            />
+            <ImageDownload paddingBottom={'100%'} endpoint={`photoMedCropped2to1/${orderItem.s3ImagesKey}`} />
           </div>
           <div className='aodm-oi-info-1'>
             <div className='aodm-oi-title'>{orderItem.title}</div>
             <div className='aodm-oi-price'>£{orderItem.priceInPence / 100}</div>
           </div>
-          {/* <div className='aodm-oi-info-2'>{orderItem.title}</div> */}
         </div>
       );
     });
@@ -30,40 +37,82 @@ const AdminOrderDetailsModal = ({ order, closeModal }) => {
 
   return (
     <div className='aodm'>
-      <div className='aodm-header'>
-        <div className='aodm-order-num'>{`Order #${order.id}`}</div>
-        <div className='aodm-header-close-cross' onClick={closeModal}>
-          {closeCross}
-        </div>
-      </div>
-      <div className='aodm-content'>
-        <div className='aodm-content-main'>
-          <div className='aodm-content-left'>
-            <div className='aodm-customer-info'>
-              <div className='aodm-customer-title'>Customer</div>
-              <div className='aodm-customer-data'>
-                <div className='aodm-customer-data-row'>
-                  <div className='aodm-customer-data-key'>Name:</div>
-                  <div className='aodm-customer-data-value'>{order.user.name}</div>
-                </div>
-                <div className='aodm-customer-data-row'>
-                  <div className='aodm-customer-data-key'>Email:</div>
-                  <div className='aodm-customer-data-value'> {order.user.email}</div>
-                </div>
-                <div className='aodm-customer-data-row'>
-                  <div className='aodm-customer-data-key'>Account Creation Date:</div>
-                  <div className='aodm-customer-data-value'>{userCreationDate}</div>
-                </div>
-              </div>
+      {/* Not Loaded  */}
+      {!order && (
+        <>
+          <div className='aodm-header'></div>
+          <div className='aodm-content'>Loading</div>
+        </>
+      )}
+
+      {/* Loaded */}
+      {order && (
+        <>
+          <div className='aodm-header'>
+            <div className='aodm-order-num'>{`Order #${order.id}`}</div>
+            <div className='aodm-header-close-cross' onClick={closeModal}>
+              {closeCross}
             </div>
           </div>
-          <div className='aodm-seperator-bar' />
-          <div className='aodm-content-right'>{renderOrderItems()}</div>
-        </div>
-        <div className='aodm-content-lower'>
-          <div className='aodm-order-total'>Total: £{order.totalPriceInPence / 100}</div>
-        </div>
-      </div>
+          <div className='aodm-content'>
+            <div className='aodm-content-main'>
+              <div className='aodm-content-left'>
+                {order.user && (
+                  <div className='aodm-customer-info'>
+                    <div className='aodm-customer-title'>Customer</div>
+                    <div className='aodm-customer-data'>
+                      <div className='aodm-customer-data-row'>
+                        <div className='aodm-customer-data-key'>Account linked:</div>
+                        <div className='aodm-customer-data-value'>true</div>
+                      </div>
+                      <div className='aodm-customer-data-row'>
+                        <div className='aodm-customer-data-key'>Account Name:</div>
+                        <div className='aodm-customer-data-value'>{order.user.name}</div>
+                      </div>
+                      <div className='aodm-customer-data-row'>
+                        <div className='aodm-customer-data-key'>Account Email:</div>
+                        <div className='aodm-customer-data-value'> {order.user.email}</div>
+                      </div>
+                      <div className='aodm-customer-data-row'>
+                        <div className='aodm-customer-data-key'>Account Creation Date:</div>
+                        <div className='aodm-customer-data-value'>{userCreationDate}</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {!order.user && (
+                  <div className='aodm-customer-info'>
+                    <div className='aodm-customer-title'>Customer</div>
+                    <div className='aodm-customer-data-row'>
+                      <div className='aodm-customer-data-key'>Account linked:</div>
+                      <div className='aodm-customer-data-value'>false</div>
+                    </div>
+                    <div className='aodm-customer-data'>
+                      <div className='aodm-customer-data-row'>
+                        <div className='aodm-customer-data-key'>Purchase name:</div>
+                        <div className='aodm-customer-data-value'>{order.customerName}</div>
+                      </div>
+                      <div className='aodm-customer-data-row'>
+                        <div className='aodm-customer-data-key'>Purchase email:</div>
+                        <div className='aodm-customer-data-value'> {order.customerEmail}</div>
+                      </div>
+                      {/* <div className='aodm-customer-data-row'>
+                        <div className='aodm-customer-data-key'>Account Creation Date:</div>
+                        <div className='aodm-customer-data-value'>{userCreationDate}</div>
+                      </div> */}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className='aodm-seperator-bar' />
+              <div className='aodm-content-right'>{renderOrderItems()}</div>
+            </div>
+            <div className='aodm-content-lower'>
+              <div className='aodm-order-total'>Total: £{order.totalPriceInPence / 100}</div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

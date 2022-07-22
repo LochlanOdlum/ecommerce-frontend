@@ -5,11 +5,7 @@ import useCollections from '../../hooks/useCollections';
 
 import './AdminAddOrEditPhotoModal.css';
 
-const AdminAddOrEditPhotoModal = ({
-  currentPhotoBeingEdited = null,
-  setCurrentPhotoBeingEdited,
-  setShowImageUploadModal,
-}) => {
+const AdminAddOrEditPhotoModal = ({ currentPhotoBeingEdited = null, closeModal }) => {
   //If edit mode then set these default values to values passed from props
   const { collections, isLoaded: isCollectionsLoaded } = useCollections();
   const imageUploadInputLabelEle = useRef(null);
@@ -17,15 +13,16 @@ const AdminAddOrEditPhotoModal = ({
   const [photoTitle, setPhotoTitle] = useState(currentPhotoBeingEdited?.title || '');
   const [photoDescription, setPhotoDescription] = useState(currentPhotoBeingEdited?.description || '');
   const [photoPrice, setPhotoPrice] = useState(currentPhotoBeingEdited?.priceInPence / 100 || '');
-  // const [photoPrice, setPhotoPrice] = useState(4.444 || '');
   const [photoURL, setPhotoURL] = useState(currentPhotoBeingEdited?.imageWmarkedMedPublicURL || null);
   const [imageFile, setImageFile] = useState(null);
 
+  //Insures the closeModal function gets called when component unmounts.
+  //closeModal helps with cleanup so is important to insure it runs
   useEffect(() => {
     return () => {
-      setCurrentPhotoBeingEdited(null);
+      closeModal();
     };
-  }, [setCurrentPhotoBeingEdited]);
+  }, [closeModal]);
 
   useEffect(() => {
     if (isCollectionsLoaded && !collectionId) {
@@ -43,20 +40,20 @@ const AdminAddOrEditPhotoModal = ({
     const reader = new FileReader();
     reader.onload = () => {
       setPhotoURL(reader.result);
-      console.log('t');
     };
 
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  const handleAddPhoto = () => {
+  const handleAddPhoto = async () => {
     const priceInPence = photoPrice * 100;
 
-    adminApi.addPhoto(imageFile, photoTitle, photoDescription, priceInPence, collectionId);
+    await adminApi.addPhoto(imageFile, photoTitle, photoDescription, priceInPence, collectionId);
+
+    closeModal();
   };
 
   const handleEditPhoto = async () => {
-    console.log('t');
     const priceInPence = photoPrice * 100;
 
     await adminApi.editPhoto(currentPhotoBeingEdited.id, {
@@ -67,7 +64,7 @@ const AdminAddOrEditPhotoModal = ({
       collectionId,
     });
 
-    setShowImageUploadModal(false);
+    closeModal();
   };
 
   const renderCollectionSelect = () => {
@@ -144,8 +141,6 @@ const AdminAddOrEditPhotoModal = ({
           onChange={(e) => setPhotoDescription(e.target.value)}
         />
       </div>
-      {console.log('#t')}
-      {console.log(currentPhotoBeingEdited ? handleEditPhoto : handleAddPhoto)}
       <button
         onClick={currentPhotoBeingEdited ? handleEditPhoto : handleAddPhoto}
         className='ap-image-upload-submit-button'

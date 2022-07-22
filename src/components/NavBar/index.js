@@ -1,22 +1,26 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../actions/authActions';
 
-import useClickOutsideClose from '../../hooks/useClickOutsideClose';
+import useOnClickOutsideElement from '../../hooks/useOnClickOutsideElement';
 
 import './index.css';
 
 const NavBar = () => {
   const modalToggleButton = useRef(null);
   const modalRef = useRef(null);
-  const [isUserModalOpen, setIsUserModalOpen] = useClickOutsideClose(modalRef);
+  // const [isUserModalOpen, setIsUserModalOpen] = useClickOutsideClose(modalRef);
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isAdmin = useSelector((state) => state.auth.isAdmin);
   const name = useSelector((state) => state.auth.name);
   const dispatch = useDispatch();
+  useOnClickOutsideElement(modalRef, () => setIsUserModalOpen(false));
+
+  console.log(isUserModalOpen);
 
   const renderRightElements = () => {
     const signupElement = (

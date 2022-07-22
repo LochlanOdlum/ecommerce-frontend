@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import AdminNavSideBar from '../../components/AdminNavSideBar';
 import useCollections from '../../hooks/useCollections';
-import useClickOutsideClose from '../../hooks/useClickOutsideClose';
+import AdminModalParent from '../../components/AdminModalParent';
 import AdminAddOrEditCollectionModal from '../../components/AdminAddOrEditCollectionModal';
 
 import './index.css';
@@ -10,8 +10,7 @@ import './index.css';
 const AdminCollectionsPage = () => {
   const [editingCollectionName, setEditingCollectionName] = useState(null);
   const [editingCollectionId, setEditingCollectionId] = useState(null);
-  const collectionAddEditContainer = useRef(null);
-  const [isCollectionAddEditOpen, setIsCollectionAddEditOpen] = useClickOutsideClose(collectionAddEditContainer);
+  const [isCollectionAddEditOpen, setIsCollectionAddEditOpen] = useState(false);
   const { collections, isLoaded, error } = useCollections();
 
   const handleEditCollectionButtonClick = (collectionId, collectionName) => {
@@ -57,13 +56,14 @@ const AdminCollectionsPage = () => {
     <>
       <AdminNavSideBar />
       {isCollectionAddEditOpen && (
-        <AdminAddOrEditCollectionModal
-          setIsCollectionAddEditOpen={setIsCollectionAddEditOpen}
-          collectionAddEditContainer={collectionAddEditContainer}
-          editingCollectionId={editingCollectionId}
-          editingCollectionName={editingCollectionName}
-          setEditingCollectionName={setEditingCollectionName}
-        />
+        <AdminModalParent closeModal={() => setIsCollectionAddEditOpen(false)}>
+          <AdminAddOrEditCollectionModal
+            setIsCollectionAddEditOpen={setIsCollectionAddEditOpen}
+            editingCollectionId={editingCollectionId}
+            editingCollectionName={editingCollectionName}
+            setEditingCollectionName={setEditingCollectionName}
+          />
+        </AdminModalParent>
       )}
       <div className='ap-main'>
         <div className='ap-main-inner'>

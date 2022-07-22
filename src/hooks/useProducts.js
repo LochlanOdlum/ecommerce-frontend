@@ -33,10 +33,8 @@ const useProducts = () => {
 
   useLayoutEffect(() => {
     //Get max price of product
-    let maxPrice = products.reduce(
-      (prev, current) => (+current.priceInPounds > prev ? current.priceInPounds : prev),
-      0
-    );
+    let maxPrice =
+      products.reduce((prev, current) => (+current.priceInPence > prev ? current.priceInPence : prev), 0) / 100;
 
     setMaxProductPrice(maxPrice);
     currentMaxProductPrice = maxPrice;

@@ -68,7 +68,7 @@ const PhotoDetailsPage = (props) => {
         <div className='pd-details-right'>
           <h4 className='pd-collection'>{collectionMap[product.collectionId]}</h4>
           <h1 className='pd-title'>{product.title}</h1>
-          <h2 className='pd-price'>£{product.priceInPounds}</h2>
+          <h2 className='pd-price'>£{product.priceInPence / 100}</h2>
           <p className='pd-description'>{product.description}</p>
 
           <button onClick={handleAddToCart} className='grey-blue-button pd-add-to-basket-button'>

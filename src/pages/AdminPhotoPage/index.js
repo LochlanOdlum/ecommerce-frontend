@@ -1,28 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import adminApi from '../../api/adminApi';
-import useClickOutsideClose from '../../hooks/useClickOutsideClose';
+import AdminModalParent from '../../components/AdminModalParent';
 import AdminAddOrEditPhotoModal from '../../components/AdminAddOrEditPhotoModal';
 import AdminNavSideBar from '../../components/AdminNavSideBar';
 import AdminPageNumberNav from '../../components/AdminPageNumberNav';
-import AdminGreyBackgroundCenter from '../../components/AdminGreyBackgroundCenter';
 
 import AdminPhotoPositionField from '../../components/AdminPhotoPositionField';
 
 import './adminPhotoPage.css';
 
 const AdminPhotoPage = () => {
-  const imageUploadModalRef = useRef(null);
-  const [showImageUploadModal, setShowImageUploadModal] = useClickOutsideClose(imageUploadModalRef);
+  const [showImageAddOrEditModal, setShowImageAddOrEditModal] = useState(false);
   const [currentPhotoBeingEdited, setCurrentPhotoBeingEdited] = useState(null);
   const [photos, setPhotos] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
   const [activePage, setActivePage] = useState(1);
 
+  const closeImageAddOrEditModal = () => {
+    setCurrentPhotoBeingEdited(null);
+    setShowImageAddOrEditModal(false);
+  };
+
   const updatePhotos = async () => {
     try {
       const { products: photos, pageCount } = await adminApi.getPhotos(activePage, 8);
-      console.log('updating photos');
       setTotalPages(pageCount);
       setPhotos(photos);
     } catch (error) {
@@ -32,11 +34,11 @@ const AdminPhotoPage = () => {
 
   //Update Photos whenever image add or edit modal is closed. To ensure photos are up to date with any changes
   useEffect(() => {
-    if (!showImageUploadModal) {
+    if (!showImageAddOrEditModal) {
       updatePhotos();
     }
     // eslint-disable-next-line
-  }, [showImageUploadModal]);
+  }, [showImageAddOrEditModal]);
 
   useEffect(() => {
     updatePhotos();
@@ -44,26 +46,17 @@ const AdminPhotoPage = () => {
   }, [activePage]);
 
   const handleAddPhotoButtonClick = () => {
-    setShowImageUploadModal(true);
+    setShowImageAddOrEditModal(true);
   };
 
   const handleEditPhotoButtonClick = (photo) => {
     setCurrentPhotoBeingEdited(photo);
-    setShowImageUploadModal(true);
+    setShowImageAddOrEditModal(true);
   };
 
-  const renderImageUploadModal = () => {
-    return (
-      <AdminGreyBackgroundCenter>
-        <div ref={imageUploadModalRef}>
-          <AdminAddOrEditPhotoModal
-            currentPhotoBeingEdited={currentPhotoBeingEdited}
-            setCurrentPhotoBeingEdited={setCurrentPhotoBeingEdited}
-            setShowImageUploadModal={setShowImageUploadModal}
-          />
-        </div>
-      </AdminGreyBackgroundCenter>
-    );
+  const handleDeletePhotoButtonClick = async (photoId) => {
+    await adminApi.deletePhoto(photoId);
+    updatePhotos();
   };
 
   const renderTableRows = () => {
@@ -74,18 +67,15 @@ const AdminPhotoPage = () => {
     return photos.map((photo) => {
       const [creationDate, creationTime] = photo.createdAt.split('.')[0].split('T');
 
+      const handlePhotoPositionChange = async (newPosition) => {
+        await adminApi.editPhoto(photo.id, { orderPosition: newPosition });
+        updatePhotos();
+      };
+
       return (
-        // <tr className='admin-table-body-row' key={`${photo.id} - ${photo.positionOrder}`}>
         <tr className='admin-table-body-row' key={Math.random()}>
           <td className='admin-table-cell text-center'>
-            <AdminPhotoPositionField
-              position={photo.orderPosition}
-              onSubmit={async (newPosition) => {
-                await adminApi.editPhoto(photo.id, { orderPosition: newPosition });
-                updatePhotos();
-              }}
-            />
-            {/* <input className='admin-table-cell-input admin-table-cell-orderPos-input' value={photo.orderPosition} /> */}
+            <AdminPhotoPositionField position={photo.orderPosition} onSubmit={handlePhotoPositionChange} />
           </td>
           <td className='text-center'>
             <img className='admin-page-photo-preview' alt='whatever' src={photo.imageWmarkedMedSquarePublicURL} />
@@ -94,7 +84,7 @@ const AdminPhotoPage = () => {
           <td className='admin-table-cell text-center'>
             {creationTime} {creationDate.split('-').join('/')}
           </td>
-          <td className='admin-table-cell text-center'>£{photo.priceInPounds}</td>
+          <td className='admin-table-cell text-center'>£{photo.priceInPence / 100}</td>
           <td className='admin-table-cell text-center'>
             <button
               onClick={() => {
@@ -103,6 +93,14 @@ const AdminPhotoPage = () => {
               className='admin-table-details-button'
             >
               Edit
+            </button>
+            <button
+              onClick={() => {
+                handleDeletePhotoButtonClick(photo.id);
+              }}
+              className='admin-table-delete-button admin-photos-page-delete-button'
+            >
+              Delete
             </button>
           </td>
         </tr>
@@ -113,7 +111,15 @@ const AdminPhotoPage = () => {
   return (
     <>
       <AdminNavSideBar />
-      {showImageUploadModal && renderImageUploadModal()}
+      {showImageAddOrEditModal && (
+        <AdminModalParent closeModal={closeImageAddOrEditModal}>
+          <AdminAddOrEditPhotoModal
+            currentPhotoBeingEdited={currentPhotoBeingEdited}
+            setCurrentPhotoBeingEdited={setCurrentPhotoBeingEdited}
+            closeModal={closeImageAddOrEditModal}
+          />
+        </AdminModalParent>
+      )}
       <div className='ap-main'>
         <div className='ap-main-inner'>
           <div className='ap-main-users-table card'>

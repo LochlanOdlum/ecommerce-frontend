@@ -98,7 +98,7 @@ const NavBar = () => {
                 </div>
                 {isAdmin && (
                   <div className='nav-user-modal-link'>
-                    <Link to='/admin'>Dashboard</Link>{' '}
+                    <a href='https://admin.skylightphotography.co.uk'>Dashboard</a>
                   </div>
                 )}
                 <div className='nav-user-modal-bottom-container'>

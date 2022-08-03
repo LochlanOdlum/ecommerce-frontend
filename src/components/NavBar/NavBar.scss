@@ -101,9 +101,16 @@
   cursor: pointer;
 }
 
+.navbar-button-container {
+  color: #fff;
+}
+
 .navbar-button {
   width: 130px;
   height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nabar-button:hover {

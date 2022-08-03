@@ -1,3 +1,5 @@
+@use '../styles/colors.scss';
+
 * {
   box-sizing: border-box;
 }
@@ -10,6 +12,7 @@ body {
   overflow-x: hidden;
   font-family: 'Metropolis';
   color: black;
+  margin: unset;
 }
 
 a:link,
@@ -23,32 +26,35 @@ a:visited {
   text-align: center;
 }
 
-.grey-blue-button,
-.orange-brown-button {
+//Change grey-blue -> cadet
+//change orange-brown -> orange
+
+.button-cadet,
+.button-orange {
   border: none;
   color: #ffffff;
   border-radius: 3px;
   font-size: 16px;
 }
 
-.grey-blue-button:hover,
-.orange-brown-button:hover {
+.button-cadet:hover,
+.button-orange:hover {
   cursor: pointer;
 }
 
-.grey-blue-button {
+.button-cadet {
   background: #7f9296;
 }
 
-.grey-blue-button:hover {
+.button-cadet:hover {
   background: #707f82;
 }
 
-.orange-brown-button {
+.button-orange {
   background: #ddb091;
 }
 
-.orange-brown-button:hover {
+.button-orange:hover {
   background: #cfa588;
 }
 

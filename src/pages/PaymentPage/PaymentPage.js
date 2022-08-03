@@ -2,12 +2,12 @@ import React from 'react';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ordersApi from '../../api/ordersApi';
+import { startOrderRequest } from '../../api/ordersApi';
 import useCart from '../../hooks/useCart';
 import { EmptyCart } from '../../actions/cartActions';
 
-import NavBar from '../../components/NavBar';
-import './index.css';
+import NavBar from '../../components/NavBar/NavBar';
+import './PaymentPage.scss';
 import useCollections from '../../hooks/useCollections';
 
 const PaymentPage = () => {
@@ -52,7 +52,7 @@ const PaymentPage = () => {
 
     try {
       //TODO: When guest option available will need to conditionally change where email, name come from.
-      const { clientSecret, orderId } = await ordersApi.startOrder(email, name, cartItemIds);
+      const { clientSecret, orderId } = await startOrderRequest(email, name, cartItemIds);
 
       const cardNumberElement = elements.getElement(CardNumberElement);
 
@@ -135,7 +135,7 @@ const PaymentPage = () => {
                   }}
                 />
               </div>
-              <button type='submit' id='pp-place-order-button' className='orange-brown-button'>
+              <button type='submit' id='pp-place-order-button' className='button-orange'>
                 Place Order
               </button>
               <Link to='/shop' className='pp-return-to-store'>

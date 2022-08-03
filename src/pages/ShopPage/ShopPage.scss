@@ -10,31 +10,6 @@
   flex-grow: 1;
 }
 
-.shop-sort-by-button {
-  background: none;
-  border: 1px solid #8d8a8a;
-  font-size: 18px;
-  margin-left: auto;
-  border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 150px;
-  height: 46px;
-  position: relative;
-}
-
-.shop-sort-by-text {
-  position: absolute;
-  /* margin: auto 0; */
-  left: 19px;
-}
-
-.shop-sort-by-arrow {
-  position: absolute;
-  right: 20px;
-}
-
 .shop-lower {
   margin-top: 22px;
   display: flex;
@@ -197,11 +172,6 @@
   align-items: center;
 }
 
-.orange-brown-button {
-  width: 133px;
-  height: 48px;
-}
-
 .sp-photo-title {
   margin-top: 18px;
   font-size: 24px;
@@ -210,6 +180,8 @@
 
 .shop-add-to-cart {
   font-weight: 16px;
+  width: 133px;
+  height: 48px;
 }
 
 .shop-photo-price {

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 
 import { login } from '../../actions/authActions';
 
-import './index.css';
+import './LoginPage.scss';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -71,7 +71,7 @@ const LoginPage = () => {
               }}
             />
           </div>
-          <button type='submit' className='orange-brown-button lip-login-button'>
+          <button type='submit' className='button-orange lip-login-button'>
             Login
           </button>
           <br />

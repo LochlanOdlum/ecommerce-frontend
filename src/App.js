@@ -3,24 +3,23 @@ import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { API_URL } from './util/config';
 
-import HomePage from './pages/HomePage';
-import ShopPage from './pages/ShopPage';
-import PhotoDetailsPage from './pages/PhotoDetailsPage';
-import CartPage from './pages/CartPage';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import PaymentPage from './pages/PaymentPage';
-import OrderCompletePage from './pages/OrderCompletePage';
-import MyPhotosPage from './pages/MyPhotosPage';
-import MyAccountPage from './pages/MyAccountPage';
+import HomePage from './pages/HomePage/HomePage';
+import ShopPage from './pages/ShopPage/ShopPage';
+import PhotoDetailsPage from './pages/PhotoDetailsPage/PhotoDetailsPage';
+import CartPage from './pages/CartPage/CartPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import SignupPage from './pages/SignupPage/SignupPage';
+import PaymentPage from './pages/PaymentPage/PaymentPage';
+import OrderCompletePage from './pages/OrderCompletePage/OrderCompletePage';
+import MyPhotosPage from './pages/MyPhotosPage/MyPhotosPage';
+import MyAccountPage from './pages/MyAccountPage/MyAccountPage';
 
-import './app.css';
+import './styles/global.scss';
 
 const STRIPE_PUBLISHABLE_KEY =
   'pk_test_51JmjyLBxc7UTHklpkl2msXfRPXO5UmEfW2b33xIk4S0y5Pc9oKObZibwotF3S626UWjGdGFQSJ7JGRZfVIwITrt800sVddKcVx';
-
-const API_URL = 'https://skylight-photography.herokuapp.com/';
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
@@ -33,7 +32,8 @@ const ProtectedLoginRoute = () => {
 const App = () => {
   //Wake up backend server if it's asleep
   useEffect(() => {
-    fetch(`${API_URL}ping`);
+    console.log(API_URL);
+    fetch(`${API_URL}/ping`);
   }, []);
 
   return (

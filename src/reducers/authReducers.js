@@ -18,7 +18,6 @@ import {
 const initialState = { isLoggedIn: false, token: null, isAdmin: false, name: null };
 
 export const authReducer = (state = initialState, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case SIGNUP_REQUEST:
       return {

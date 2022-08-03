@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import ordersApi from '../../api/ordersApi';
+import { fetchSecureImageRequest } from '../../api/ordersApi';
 
-import './ImageDownload.css';
+import './ImageDownload.scss';
 
 const ImageDownload = ({ endpoint, paddingBottom }) => {
   const [imageObjectURL, setImageObjectURL] = useState(null);
@@ -10,7 +10,7 @@ const ImageDownload = ({ endpoint, paddingBottom }) => {
     let objectURL;
 
     const fetchImage = async () => {
-      objectURL = await ordersApi.fetchSecureImage(endpoint);
+      objectURL = await fetchSecureImageRequest(endpoint);
       setImageObjectURL(objectURL);
     };
 

@@ -1,14 +1,13 @@
-import authHeader from './helpers.js/authHeader';
-import errorParser from './helpers.js/errorParser';
+import { makeRequest } from '../util/util.js';
+import { API_URL } from '../util/config';
+import { getAuthHeader, errorParser } from '../util/util';
+import { saveAs } from 'file-saver';
 
-const API_URL = 'https://skylight-photography.herokuapp.com/shop/';
-
-const startOrder = async (customerEmail, customerName, itemIds) => {
+export const startOrderRequest = async (customerEmail, customerName, itemIds) => {
   const requestOptions = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...authHeader(),
     },
     body: JSON.stringify({
       customerEmail,
@@ -16,58 +15,67 @@ const startOrder = async (customerEmail, customerName, itemIds) => {
       itemIds,
     }),
   };
-  const res = await fetch(`${API_URL}startOrder`, requestOptions);
 
-  const data = await res.json();
-
-  errorParser(res, data);
-
-  return { clientSecret: data.clientSecret, orderId: data.orderId };
+  return await makeRequest('/shop/startOrder', requestOptions);
 };
 
-const fetchOrders = async () => {
+export const fetchOrdersRequest = async () => {
+  return await makeRequest('/shop/myorders');
+};
+
+export const fetchOrderRequest = async (orderId) => {
+  return await makeRequest(`/shop/myorder/${orderId}`);
+};
+
+export const downloadImage = async (key) => {
+  const { url } = await makeRequest(`/shop/photoTempURL/${key}`);
+
+  // const a = document.createElement('a');
+  // a.style.display = 'none';
+  // a.href = url;
+  // document.body.appendChild(a);
+  // console.log('clicking download');
+  // a.click();
+
+  console.log('saving url');
+  saveAs(url);
+
+  // saveAs(blob, filename);
+
+  // const requestOptions = {
+  //   method: 'GET',
+  //   headers: {
+  //     ...getAuthHeader(),
+  //   },
+  // };
+
+  // const res = await fetch(`${API_URL}/shop${path}`, requestOptions);
+
+  // errorParser(res, { message: 'Could not download image' });
+
+  // const blob = await res.blob();
+
+  // const objectURL = URL.createObjectURL(blob);
+  // const a = document.createElement('a');
+  // a.style.display = 'none';
+  // a.href = objectURL;
+  // // the filename you want
+  // a.download = filename;
+  // document.body.appendChild(a);
+  // a.click();
+  // window.URL.revokeObjectURL(objectURL);
+  // // saveAs(blob, filename);
+};
+
+export const fetchSecureImageRequest = async (path) => {
   const requestOptions = {
     method: 'GET',
     headers: {
-      ...authHeader(),
+      ...getAuthHeader(),
     },
   };
 
-  const res = await fetch(`${API_URL}myOrders`, requestOptions);
-
-  const data = await res.json();
-
-  errorParser(res, data);
-
-  return data;
-};
-
-const fetchOrder = async (orderId) => {
-  const requestOptions = {
-    method: 'GET',
-    headers: {
-      ...authHeader(),
-    },
-  };
-
-  const res = await fetch(`${API_URL}myOrder/${orderId}`, requestOptions);
-
-  const data = await res.json();
-
-  errorParser(res, data);
-
-  return data.order;
-};
-
-const fetchSecureImage = async (endpoint) => {
-  const requestOptions = {
-    method: 'GET',
-    headers: {
-      ...authHeader(),
-    },
-  };
-
-  const res = await fetch(`${API_URL}${endpoint}`, requestOptions);
+  const res = await fetch(`${API_URL}/shop${path}`, requestOptions);
 
   errorParser(res, { message: 'Could not download image' });
 
@@ -75,12 +83,3 @@ const fetchSecureImage = async (endpoint) => {
 
   return URL.createObjectURL(blob);
 };
-
-const ordersApi = {
-  startOrder,
-  fetchOrders,
-  fetchOrder,
-  fetchSecureImage,
-};
-
-export default ordersApi;

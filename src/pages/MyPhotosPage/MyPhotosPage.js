@@ -1,30 +1,20 @@
 import React from 'react';
 import useOrders from '../../hooks/useOrders';
-import NavBar from '../../components/NavBar';
-import MailingList from '../../components/MailingList';
-import Footer from '../../components/Footer';
-import ordersApi from '../../api/ordersApi';
-import ImageDownload from '../../components/ImageDownload';
+import NavBar from '../../components/NavBar/NavBar';
+import MailingList from '../../components/MailingList/MailingList';
+import Footer from '../../components/Footer/Footer';
+import { downloadImage } from '../../api/ordersApi';
+import ImageDownload from '../../components/ImageDownload/ImageDownload';
 
-import './index.css';
+import './MyPhotosPage.scss';
 
 const MyPhotosPage = () => {
   const { orderItems, isLoading, error } = useOrders();
 
   //TODO: UX for downloading
   // When downloading have download wheel and disable access to click button. Grey it out a bit etc..
-  const handleDownloadClick = async (title, endpoint) => {
-    console.log('clicked download');
-    const objectURL = await ordersApi.fetchSecureImage(endpoint);
-
-    const a = document.createElement('a');
-    a.style.display = 'none';
-    a.href = objectURL;
-    // the filename you want
-    a.download = title;
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(objectURL);
+  const handleDownloadClick = async (s3ImagesKey) => {
+    downloadImage(s3ImagesKey);
   };
 
   const renderMyPhotos = () => {
@@ -44,7 +34,7 @@ const MyPhotosPage = () => {
       photosList.push(
         <div className='mpp-photo-container' key={photo.id}>
           <div className='mpp-photo-img-container'>
-            <ImageDownload paddingBottom={'84.5%'} endpoint={`photoMedCropped2to1/${photo.s3ImagesKey}`} />
+            <ImageDownload paddingBottom={'84.5%'} endpoint={`/photoMedCropped2to1/${photo.s3ImagesKey}`} />
           </div>
           <div className='mpp-photo-content-right'>
             <div className='mpp-photo-info-grid'>
@@ -61,13 +51,15 @@ const MyPhotosPage = () => {
               <div className='mpp-photo-info-text'>£{photo.priceInPence / 100}</div>
             </div>
             <button
-              className='orange-brown-button mpp-download-button'
+              className='button-orange mpp-download-button'
               onClick={() => {
-                handleDownloadClick(photo.title, `photo/${photo.imageKey}`);
+                handleDownloadClick(photo.s3ImagesKey);
               }}
             >
               Download
-              <div className='mpp-download-icon'>{downloadIcon} </div>
+              <div className='mpp-download-icon'>
+                <img src='/images/download-icon-white.svg' alt='download img icon' />
+              </div>
             </button>
           </div>
         </div>
@@ -92,24 +84,5 @@ const MyPhotosPage = () => {
     </>
   );
 };
-
-const downloadIcon = (
-  <svg width='19' height='17' viewBox='0 0 19 17' fill='none' xmlns='http://www.w3.org/2000/svg'>
-    <path
-      d='M9.40649 10.8158L12.5708 7.71152M9.40649 10.8158V1.50293V10.8158ZM9.40649 10.8158L6.24219 7.71152L9.40649 10.8158Z'
-      stroke='white'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-linejoin='round'
-    />
-    <path
-      d='M1.49609 12.3682L1.98735 14.2967C2.07291 14.6324 2.27041 14.9305 2.54848 15.1436C2.82655 15.3566 3.16922 15.4723 3.52203 15.4724H15.2916C15.6444 15.4723 15.9871 15.3566 16.2652 15.1436C16.5432 14.9305 16.7407 14.6324 16.8263 14.2967L17.3175 12.3682'
-      stroke='white'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-linejoin='round'
-    />
-  </svg>
-);
 
 export default MyPhotosPage;

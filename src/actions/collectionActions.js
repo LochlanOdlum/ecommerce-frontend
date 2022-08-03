@@ -5,7 +5,7 @@ import {
   // COLLECTION_POST_SUCCESS,
 } from './types';
 
-import collectionsApi from '../api/collectionApi';
+import { fetchCollectionsRequest } from '../api/collectionApi';
 
 export const fetchCollectionList = () => async (dispatch) => {
   try {
@@ -13,7 +13,7 @@ export const fetchCollectionList = () => async (dispatch) => {
       type: COLLECTION_LIST_REQUEST,
     });
 
-    const productList = await collectionsApi.fetchCollections();
+    const productList = await fetchCollectionsRequest();
 
     dispatch({
       type: COLLECTION_LIST_SUCCESS,

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import NavBar from '../../components/NavBar';
-import MailingList from '../../components/MailingList';
-import Footer from '../../components/Footer';
+import NavBar from '../../components/NavBar/NavBar';
+import MailingList from '../../components/MailingList/MailingList';
+import Footer from '../../components/Footer/Footer';
 
-import './index.css';
+import './HomePage.scss';
 
 const featuredPhotos = [
   null,
@@ -19,7 +19,7 @@ const featuredPhotos = [
 
 // const animationTime = 500;
 
-const LandingPage = () => {
+const HomePage = () => {
   const navigate = useNavigate();
 
   const [imageSliderState, setImageSliderState] = useState({
@@ -169,7 +169,7 @@ const LandingPage = () => {
               shop or read more about us below.
             </div>
             <button
-              className='orange-brown-button hp-1-shop-button'
+              className='button-orange hp-1-shop-button'
               onClick={() => {
                 navigate('/shop');
               }}
@@ -187,7 +187,7 @@ const LandingPage = () => {
               We specialise in Landscape Photography which can be seen throughout our shop. We vary from beautfiul river
               scapes to the streets of Milan. These featured photos are available for purchase in the shop.
             </div>
-            <button className='orange-brown-button sp-s2-shop-all-button'>
+            <button className='button-orange sp-s2-shop-all-button'>
               <Link to='/shop'>Shop All</Link>
             </button>
           </div>
@@ -265,7 +265,7 @@ const LandingPage = () => {
                   setFormMessage(e.target.value);
                 }}
               />
-              <button className='orange-brown-button s4-cu-submit-button' type='submit'>
+              <button className='button-orange s4-cu-submit-button' type='submit'>
                 Send
               </button>
             </form>
@@ -291,4 +291,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default HomePage;

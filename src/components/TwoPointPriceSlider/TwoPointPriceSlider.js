@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import TwoPointSlider from '../TwoPointSlider';
 
+import './TwoPointPriceSlider.scss';
+
 //Purpose of component is to display values of slider instantly as prices, but debounce the change for any other components to use
 const TwoPointPriceSlider = ({ setMinVal, setMaxVal, min, max, initialMin, initialMax }) => {
   const [bouncyMinVal, setBouncyMinVal] = useState(initialMin);

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { signup } from '../../actions/authActions';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 
-import './index.css';
+import './SignupPage.scss';
 
 const SignupPage = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -123,7 +123,7 @@ const SignupPage = () => {
               }}
             />
           </div>
-          <button type='submit' className='grey-blue-button sup-login-button'>
+          <button type='submit' className='button-cadet sup-login-button'>
             Sign up
           </button>
           <br />

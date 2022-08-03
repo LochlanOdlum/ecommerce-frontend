@@ -1,0 +1,105 @@
+@use '../../styles/colors.scss';
+
+.oc-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oc-page-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50vw;
+  max-width: 690px;
+}
+
+.oc-order-success-tick {
+  margin-top: min(5.3vw, 75px);
+}
+
+.oc-order-thank-you {
+  margin-top: min(3.1vw, 40px);
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.oc-text-desc {
+  margin-top: min(2vw, 30px);
+  width: 80%;
+  font-size: 14px;
+}
+
+.oc-nav-buttons-container {
+  width: 55%;
+  display: flex;
+  color: #fff;
+}
+
+.oc-nav-button {
+  // width: 200px;
+  width: 50%;
+  height: 48px;
+  margin: 40px 2% 0 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oc-orderItems-container {
+  margin-top: min(8vw, 110px);
+  display: flex;
+  flex-direction: column;
+}
+
+.oc-orderItems {
+  display: flex;
+  flex-direction: column;
+  width: min(60vw, 800px);
+}
+
+.oc-orderItem {
+  display: flex;
+  border-bottom: 1px solid colors.$orange_color;
+  padding: 20px 0;
+  align-items: center;
+}
+
+.oc-orderItem-title {
+  margin-left: 5%;
+  font-size: 1.2rem;
+}
+
+.oc-orderItem:first-of-type {
+  border-top: 1px solid colors.$orange_color;
+}
+
+.oc-orderItem-img-container {
+  margin-left: 2%;
+  border-radius: 4px;
+  overflow: hidden;
+  // width: 8%;
+  width: 64px;
+}
+
+.oc-download-image-button {
+  margin-left: auto;
+  margin-right: 2%;
+  width: 3%;
+}
+
+.oc-download-image-button:hover {
+  cursor: pointer;
+}
+
+.oc-download-all-button {
+  margin-left: auto;
+  color: #8d8a8a;
+  margin-bottom: 10px;
+}
+
+.oc-download-all-button:hover {
+  cursor: pointer;
+  color: #646262;
+}

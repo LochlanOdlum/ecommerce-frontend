@@ -6,7 +6,8 @@ import {
   ORDER_FETCH_FAIL,
   ORDER_FETCH_SUCCESS,
 } from './types';
-import ordersApi from '../api/ordersApi';
+
+import { fetchOrderRequest, fetchOrdersRequest } from '../api/ordersApi';
 
 //Fetches list of orders from backend, orderList.orders is set to result
 export const fetchOrderList = () => async (dispatch, getState) => {
@@ -15,7 +16,7 @@ export const fetchOrderList = () => async (dispatch, getState) => {
       type: ORDER_LIST_REQUEST,
     });
 
-    const { orders: orderList } = await ordersApi.fetchOrders();
+    const { orders: orderList } = await fetchOrdersRequest();
 
     dispatch({
       type: ORDER_LIST_SUCCESS,
@@ -36,7 +37,7 @@ export const fetchOrder = (id) => async (dispatch) => {
       type: ORDER_FETCH_REQUEST,
     });
 
-    const order = await ordersApi.fetchOrder(id);
+    const { order } = await fetchOrderRequest(id);
 
     dispatch({
       type: ORDER_FETCH_SUCCESS,

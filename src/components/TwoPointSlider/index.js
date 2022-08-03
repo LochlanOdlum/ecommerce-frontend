@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState, useRef, useEffect } from 'react';
 
-import './index.css';
+import './TwoPointSlider.scss';
 
 let thumbsize = 14;
 

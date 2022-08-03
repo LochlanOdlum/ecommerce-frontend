@@ -1,22 +1,5 @@
-import errorParser from './helpers.js/errorParser';
+import { makeRequest } from '../util/util.js';
 
-const API_URL = 'https://skylight-photography.herokuapp.com/';
-
-const fetchCollections = async () => {
-  const requestOptions = {
-    method: 'GET',
-  };
-
-  const res = await fetch(`${API_URL}shop/collections`, requestOptions);
-  const collections = await res.json();
-
-  errorParser(res, collections);
-
-  return collections;
+export const fetchCollectionsRequest = async () => {
+  return await makeRequest('/shop/collections');
 };
-
-const collectionApi = {
-  fetchCollections,
-};
-
-export default collectionApi;

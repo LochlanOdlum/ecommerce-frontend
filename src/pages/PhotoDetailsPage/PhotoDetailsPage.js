@@ -2,9 +2,9 @@ import React, { useEffect, useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
-import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer';
-import MailingList from '../../components/MailingList';
+import NavBar from '../../components/NavBar/NavBar';
+import Footer from '../../components/Footer/Footer';
+import MailingList from '../../components/MailingList/MailingList';
 
 import useProducts from '../../hooks/useProducts';
 
@@ -12,7 +12,7 @@ import useCollections from '../../hooks/useCollections';
 import { fetchProduct } from '../../actions/productActions';
 import { AddCartItem } from '../../actions/cartActions';
 
-import './index.css';
+import './PhotoDetailsPage.scss';
 
 const PhotoDetailsPage = (props) => {
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ const PhotoDetailsPage = (props) => {
           <h2 className='pd-price'>£{product.priceInPence / 100}</h2>
           <p className='pd-description'>{product.description}</p>
 
-          <button onClick={handleAddToCart} className='grey-blue-button pd-add-to-basket-button'>
+          <button onClick={handleAddToCart} className='button-cadet pd-add-to-basket-button'>
             Add to Basket
           </button>
           <p4 className='pd-share-this'>Share this</p4>

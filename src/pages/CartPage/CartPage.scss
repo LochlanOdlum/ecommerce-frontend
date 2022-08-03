@@ -1,8 +1,3 @@
-.cp-container {
-  /* display: flex;
-  justify-content: center; */
-}
-
 .cp {
   margin-top: 73px;
   padding: 0 95px;
@@ -29,6 +24,7 @@
   table-layout: fixed;
   margin-right: 40px;
   width: 65%;
+  border-collapse: collapse;
 }
 
 .cp-thead {
@@ -143,4 +139,8 @@
 .cp-order-checkout-button {
   margin-top: auto;
   height: 52px;
+}
+
+.cart-del-icon:hover {
+  cursor: pointer;
 }

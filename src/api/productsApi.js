@@ -1,32 +1,9 @@
-const API_URL = 'https://skylight-photography.herokuapp.com/shop/products/';
+import { makeRequest } from '../util/util.js';
 
-const fetchProducts = async () => {
-  // console.log('Getting products');
-  const requestOptions = {
-    method: 'GET',
-  };
-
-  const res = await fetch(`${API_URL}`, requestOptions);
-  const products = await res.json();
-
-  return products;
+export const fetchProductsRequest = async () => {
+  return await makeRequest('/shop/products');
 };
 
-const fetchProduct = async (id) => {
-  console.log('Getting product');
-  const requestOptions = {
-    method: 'GET',
-  };
-
-  const res = await fetch(`${API_URL}${id}`, requestOptions);
-  const product = await res.json();
-
-  return product;
+export const fetchProductRequest = async (id) => {
+  return await makeRequest(`/shop/products/${id}`);
 };
-
-const productsApi = {
-  fetchProducts,
-  fetchProduct,
-};
-
-export default productsApi;

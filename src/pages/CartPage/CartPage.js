@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // import useProducts from '../../hooks/useProducts';
 import { DeleteCartItem } from '../../actions/cartActions';
-import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer';
+import NavBar from '../../components/NavBar/NavBar';
+import Footer from '../../components/Footer/Footer';
 import useCart from '../../hooks/useCart';
 import useCollections from '../../hooks/useCollections';
 import useScrollToPrevious from '../../hooks/useScrollToPrevious';
 
-import './index.css';
+import './CartPage.scss';
 
 const CartPage = () => {
   const { cartItems, cartTotal, error, isLoaded: isCartLoaded } = useCart();
@@ -57,6 +57,7 @@ const CartPage = () => {
           <td className='text-center cp-cell'>
             <img
               alt='del-icon'
+              className='cart-del-icon'
               src='/images/del-icon.png'
               onClick={() => {
                 dispatch(DeleteCartItem(item.id));
@@ -106,7 +107,7 @@ const CartPage = () => {
               </div>
             </div>
             <button
-              className='grey-blue-button cp-order-checkout-button'
+              className='button-cadet cp-order-checkout-button'
               onClick={() => {
                 navigate('/checkout');
               }}

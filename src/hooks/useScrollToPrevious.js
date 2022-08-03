@@ -5,7 +5,6 @@ const useScrollToPrevious = () => {
   const location = useLocation();
 
   useLayoutEffect(() => {
-    console.log('hey');
     if (location?.state?.scrollPos) {
       const { scrollPos } = location.state;
       console.log('scrolling to');

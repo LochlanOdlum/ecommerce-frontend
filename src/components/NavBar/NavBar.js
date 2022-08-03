@@ -5,7 +5,7 @@ import { logout } from '../../actions/authActions';
 
 import useOnClickOutsideElement from '../../hooks/useOnClickOutsideElement';
 
-import './index.css';
+import './NavBar.scss';
 
 const NavBar = () => {
   const modalToggleButton = useRef(null);
@@ -20,12 +20,10 @@ const NavBar = () => {
   const dispatch = useDispatch();
   useOnClickOutsideElement(modalRef, () => setIsUserModalOpen(false));
 
-  console.log(isUserModalOpen);
-
   const renderRightElements = () => {
     const signupElement = (
       <button
-        className='navbar-button grey-blue-button'
+        className='navbar-button button-cadet'
         onClick={() => {
           navigate('/signup');
         }}
@@ -35,7 +33,7 @@ const NavBar = () => {
     );
     const loginElement = (
       <button
-        className='navbar-button orange-brown-button'
+        className='navbar-button button-orange'
         onClick={() => {
           navigate('/login');
         }}
@@ -121,14 +119,11 @@ const NavBar = () => {
           >
             Logout
           </button> */}
-          <button
-            className='navbar-button orange-brown-button'
-            onClick={() => {
-              navigate('/myphotos');
-            }}
-          >
-            My Photos
-          </button>
+          <div className='navbar-button-container'>
+            <Link to='/myphotos' className='navbar-button button-orange'>
+              My Photos
+            </Link>
+          </div>
           {cartElement}
         </>
       );

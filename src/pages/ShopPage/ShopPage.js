@@ -3,22 +3,70 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AddCartItem } from '../../actions/cartActions';
 import useProducts from '../../hooks/useProducts';
-import NavBar from '../../components/NavBar';
-import MailingList from '../../components/MailingList';
-import Footer from '../../components/Footer';
-import TwoPointPriceSlider from '../../components/TwoPointPriceSlider';
+import NavBar from '../../components/NavBar/NavBar';
+import MailingList from '../../components/MailingList/MailingList';
+import Footer from '../../components/Footer/Footer';
+import TwoPointPriceSlider from '../../components/TwoPointPriceSlider/TwoPointPriceSlider';
 import useScrollToPrevious from '../../hooks/useScrollToPrevious';
+import SortBySelect from '../../components/SortBySelect/SortBySelect';
 
-import './index.css';
+import './ShopPage.scss';
 
 const PRODS_PER_PAGE = 9;
 
+const sortByOptions = [
+  {
+    id: 1,
+    description: 'Featured',
+    sortFunc(a, b) {
+      return a.orderPosition - b.orderPosition;
+    },
+  },
+  {
+    id: 2,
+    description: 'Price: Low to High',
+    sortFunc(a, b) {
+      return a.priceInPence - b.priceInPence;
+    },
+  },
+  {
+    id: 3,
+    description: 'Price: High to Low',
+    sortFunc(a, b) {
+      return b.priceInPence - a.priceInPence;
+    },
+  },
+  {
+    id: 4,
+    description: 'Newest',
+    sortFunc(a, b) {
+      const aTimeStamp = new Date(a.createdAt).getTime();
+      const bTimeStamp = new Date(b.createdAt).getTime();
+
+      return bTimeStamp - aTimeStamp;
+    },
+  },
+  {
+    id: 5,
+    description: 'Oldest',
+    sortFunc(a, b) {
+      const aTimeStamp = new Date(a.createdAt).getTime();
+      const bTimeStamp = new Date(b.createdAt).getTime();
+
+      return aTimeStamp - bTimeStamp;
+    },
+  },
+];
+
 const ShopPage = () => {
   const { products, collections, collectionMap, isLoaded, error, maxProductPrice } = useProducts();
-  const [filteredSortedProducts, setfilteredSortedProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredSortedProducts, setFilteredSortedProducts] = useState([]);
 
   const location = useLocation();
   // const [searchParams, setSearchParams] = useSearchParams();
+  const [activeSortBy, setActiveSortBy] = useState(sortByOptions[0]);
+
   //Min and max values possible for price filter
   const minValue = 0;
   const maxValue = Math.ceil(maxProductPrice);
@@ -79,7 +127,7 @@ const ShopPage = () => {
     // eslint-disable-next-line
   }, [isLoaded, maxProductPrice, location.state]);
 
-  //Creates filtered and sorted products array every time products or filters change
+  //Filteres products
   useEffect(() => {
     const filterProducts = (prods) => {
       const filteredSortedProducts = prods.filter((prod) => {
@@ -92,9 +140,15 @@ const ShopPage = () => {
       return filteredSortedProducts;
     };
 
-    setfilteredSortedProducts(filterProducts(products));
+    setFilteredProducts(filterProducts(products));
     // eslint-disable-next-line
   }, [products.length, activeCollection, minPrice, maxPrice]);
+
+  //This then sorts the filtered Products, then ready for rendering.
+  useEffect(() => {
+    const filteredProductsShallowCopy = [...filteredProducts];
+    setFilteredSortedProducts(filteredProductsShallowCopy.sort(activeSortBy.sortFunc));
+  }, [filteredProducts, activeSortBy]);
 
   //Will scroll to top unless already close making it unnecessary
   const scrollToTop = () => {
@@ -162,7 +216,7 @@ const ShopPage = () => {
           </div>
           <div className='shop-photo-bottom'>
             <button
-              className='orange-brown-button shop-add-to-cart'
+              className='button-orange shop-add-to-cart'
               onClick={() => {
                 dispatch(AddCartItem(product.id));
                 navigate('/cart');
@@ -249,23 +303,7 @@ const ShopPage = () => {
       <NavBar />
       <div className='main-shop'>
         <div className='shop-top'>
-          <button className='shop-sort-by-button'>
-            <div className='shop-sort-by-text'> Sort By</div>
-
-            <svg
-              className='shop-sort-by-arrow'
-              width='15'
-              height='7'
-              viewBox='0 0 15 7'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                d='M1.31714 0.299609C1.72031 0.117605 2.19299 0.191547 2.52133 0.487982L5.50846 3.18491C6.65044 4.21595 8.38728 4.21595 9.52925 3.18491L12.5164 0.487982C12.8447 0.191547 13.3174 0.117605 13.7206 0.299609C14.4524 0.629951 14.6045 1.60271 14.0086 2.14075L9.52925 6.18492C8.38728 7.21595 6.65044 7.21595 5.50846 6.18491L1.02912 2.14075C0.43319 1.60271 0.585362 0.629951 1.31714 0.299609Z'
-                fill='#8D8A8A'
-              />
-            </svg>
-          </button>
+          <SortBySelect sortByOptions={sortByOptions} setActiveSortBy={setActiveSortBy} activeSortBy={activeSortBy} />
         </div>
         <div className='shop-lower'>
           <div className='content-left'>

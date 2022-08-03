@@ -1,44 +1,25 @@
-import errorParser from './helpers.js/errorParser';
+import { makeRequest } from '../util/util.js';
 
-const API_URL = 'https://skylight-photography.herokuapp.com/';
-
-const signup = async (name, email, password) => {
-  const response = await fetch(API_URL + 'signup', {
+export const signupRequest = async (name, email, password) => {
+  const requestOptions = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ name, email, password }),
-  });
+  };
 
-  const data = await response.json();
-
-  errorParser(response, data);
+  return await makeRequest('/signup', requestOptions);
 };
 
-const login = async (email, password) => {
-  const response = await fetch(API_URL + 'login', {
+export const loginRequest = async (email, password) => {
+  const requestOptions = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
-  });
+  };
 
-  const data = await response.json();
-  const { token, isUserAdmin, UsersEmail, UsersName } = data;
-
-  errorParser(response, data);
-
-  return { token, isUserAdmin, UsersEmail, UsersName };
+  return await makeRequest('/login', requestOptions);
 };
-
-// signup('Loch', 'Odlum', 'lodlum5@gmail.com', 'password');
-// login('lodlum5@gmail.com', 'password');=
-
-const authApi = {
-  signup,
-  login,
-};
-
-export default authApi;

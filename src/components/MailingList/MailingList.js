@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './index.css';
+import './MailingList.scss';
 
 const MailingList = () => {
   const [email, setEmail] = useState();
@@ -23,7 +23,7 @@ const MailingList = () => {
             placeholder='E-mail Address'
             type='email'
           />
-          <button className='orange-brown-button mail-list-email-signup-button' type='submit'>
+          <button className='button-orange mail-list-email-signup-button' type='submit'>
             Sign Up
           </button>
         </form>

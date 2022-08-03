@@ -22,9 +22,6 @@ const useOrders = () => {
       return;
     }
 
-    console.log('tttttttttttttt');
-    console.log(orders);
-
     const newOrderItems = [];
 
     orders.forEach((order) => {

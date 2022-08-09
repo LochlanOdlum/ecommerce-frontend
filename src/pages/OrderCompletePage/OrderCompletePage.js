@@ -11,6 +11,8 @@ import MailingList from '../../components/MailingList/MailingList';
 import Footer from '../../components/Footer/Footer';
 import NavBar from '../../components/NavBar/NavBar';
 
+// mail-circle-icon.svg
+
 import './OrderCompletePage.scss';
 
 const OrderCompletePage = () => {

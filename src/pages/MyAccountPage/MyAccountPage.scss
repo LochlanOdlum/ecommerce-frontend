@@ -1,0 +1,105 @@
+.ma-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ma-page-inner {
+  max-width: 1366px;
+  padding: 0 98px;
+  width: 100%;
+}
+
+.ma-header {
+  font-size: 2.4rem;
+  font-family: 'Playfair Display', serif;
+  margin-top: 5%;
+}
+
+.ma-subheader {
+  // font-size: 16px;
+  padding-left: 0.4%;
+}
+
+.ma-hr {
+  width: 60%;
+  // color: #8d8a8a;
+  margin: unset;
+  margin-top: 1.5%;
+  border: 1px solid #8d8a8a;
+}
+
+.ma-personal-info-container {
+  margin-top: 3%;
+}
+
+.ma-personal-info-inputs {
+  display: grid;
+  grid-template-columns: 34% 34%;
+  grid-column-gap: 10%;
+  column-gap: 8%;
+  margin-top: 4%;
+}
+
+.ma-input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ma-input-element-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 16% 0;
+  height: 0;
+  position: relative;
+  margin-top: 2%;
+  margin-bottom: 6%;
+}
+
+.ma-input {
+  height: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding-left: 3%;
+  // padding: 0 0 16% 0;
+
+  border-color: rgba(141, 138, 138, 1);
+  border-radius: 4px;
+  border-style: solid;
+  font-size: 1.4rem;
+}
+
+.ma-input-label {
+  font-size: 1.2rem;
+}
+
+.ma-update-button {
+  width: fit-content;
+  padding: 0.7rem 1.2rem;
+  height: fit-content;
+}
+
+.ma-change-password-container {
+  margin-top: 8%;
+}
+
+.ma-change-password-inputs {
+  display: grid;
+  grid-template-columns: 34% 34%;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-column-gap: 10%;
+  column-gap: 8%;
+  margin-top: 4%;
+}
+
+.ma-confirm-new-password-container {
+  grid-column: 2;
+}
+
+.ma-change-password-button {
+  // margin: auto 0 auto auto;
+  margin-left: auto;
+  grid-column: 2;
+  grid-row: 3;
+}

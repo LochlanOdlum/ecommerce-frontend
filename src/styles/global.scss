@@ -68,3 +68,11 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+.form-error-inline-text {
+  position: absolute;
+  color: #ea001b;
+  font-size: 0.9rem;
+  margin-top: 0.5%;
+  padding-left: 2%;
+}

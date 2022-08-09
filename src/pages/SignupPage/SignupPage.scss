@@ -11,19 +11,20 @@
   align-items: flex-start;
 }
 
-/* .sup-name-input-container {
-  margin-top: 55px;
-} */
+.sup-input-outer-container {
+  position: relative;
+}
 
 .sup-input-container {
   height: 48px;
   display: flex;
   align-items: center;
   border-bottom: 2px solid #b1adad;
+  margin-top: 25px;
 }
 
-.sup-input-container {
-  margin-top: 20px;
+.sup-input-container.error {
+  border-color: #e86a6a;
 }
 
 .supInput {

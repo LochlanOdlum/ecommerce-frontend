@@ -40,14 +40,14 @@ const Footer = () => {
             <Link to='/myphotos' className='footer-right-column-subtext' onClick={onLinkClick}>
               My Photos
             </Link>
-            <div className='footer-right-column-subtext'>Newsletter</div>
+            {/* <div className='footer-right-column-subtext'>Newsletter</div> */}
           </div>
           <div className='footer-right-column'>
             <div className='footer-right-header'>Get In Touch</div>
-            <div className='get-in-touch-row footer-right-column-subtext'>
-              <div>Telephone:</div>
-              <div className='get-in-touch-value'>07585 952895</div>
-            </div>
+            {/* <div className='get-in-touch-row footer-right-column-subtext'> */}
+            {/* <div>Telephone:</div>
+              <div className='get-in-touch-value'>07585 952895</div> */}
+            {/* </div> */}
             <div className='get-in-touch-row footer-right-column-subtext'>
               <div>E-mail:</div>
               <div className='get-in-touch-value'>skylightphotography@gmail.com</div>

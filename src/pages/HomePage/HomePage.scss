@@ -160,6 +160,8 @@
 
 .sp-s2-shop-all-button {
   margin-top: min(27px, 2.02vw);
+  width: fit-content;
+  padding: 4% 9%;
 }
 
 .section-3-container {
@@ -310,6 +312,11 @@
 
 .s4-cu-text {
   margin-top: min(24px, 1.98vw);
+}
+
+.s4-cu-submit-button {
+  width: fit-content;
+  padding: 3.4% 10%;
 }
 
 @media (min-width: 1366px) {

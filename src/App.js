@@ -15,6 +15,8 @@ import PaymentPage from './pages/PaymentPage/PaymentPage';
 import OrderCompletePage from './pages/OrderCompletePage/OrderCompletePage';
 import MyPhotosPage from './pages/MyPhotosPage/MyPhotosPage';
 import MyAccountPage from './pages/MyAccountPage/MyAccountPage';
+import ForgotPasswordPage from './pages/ForgotPassword/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPassword/ResetPasswordPage';
 
 import './styles/global.scss';
 
@@ -46,6 +48,8 @@ const App = () => {
           <Route path='/cart' element={<CartPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignupPage />} />
+          <Route path='/ForgotPassword' element={<ForgotPasswordPage />} />
+          <Route path='/ResetPassword' element={<ResetPasswordPage />} />
 
           {/* Routes requiring user to be logged in */}
           <Route path='/' element={<ProtectedLoginRoute />}>

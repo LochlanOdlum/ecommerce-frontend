@@ -6,6 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  USER_DETAILS_FETCH_SUCCESS,
 } from '../actions/types';
 
 //TODO: IDEA?
@@ -15,7 +16,7 @@ import {
 
 //then just write ...getDefaultAuthValues(),
 
-const initialState = { isLoggedIn: false, token: null, isAdmin: false, name: null };
+const initialState = { isLoggedIn: false, token: null, isAdmin: false, name: null, phoneNumber: null, email: null };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -27,6 +28,7 @@ export const authReducer = (state = initialState, action) => {
         token: null,
         isAdmin: null,
         email: null,
+        phoneNumber: null,
       };
     case SIGNUP_SUCCESS:
       return {
@@ -36,6 +38,7 @@ export const authReducer = (state = initialState, action) => {
         token: null,
         isAdmin: null,
         email: null,
+        phoneNumber: null,
       };
     case SIGNUP_FAIL:
       return {
@@ -45,6 +48,7 @@ export const authReducer = (state = initialState, action) => {
         token: null,
         isAdmin: null,
         email: null,
+        phoneNumber: null,
       };
     case LOGIN_REQUEST:
       return {
@@ -54,6 +58,7 @@ export const authReducer = (state = initialState, action) => {
         token: null,
         isAdmin: null,
         email: null,
+        phoneNumber: null,
       };
     case LOGIN_SUCCESS:
       return {
@@ -63,6 +68,7 @@ export const authReducer = (state = initialState, action) => {
         token: action.payload.token,
         isAdmin: action.payload.isAdmin,
         email: action.payload.email,
+        phoneNumber: action.payload.phoneNumber,
       };
     case LOGIN_FAIL:
       return {
@@ -72,6 +78,7 @@ export const authReducer = (state = initialState, action) => {
         token: null,
         isAdmin: null,
         email: null,
+        phoneNumber: null,
       };
     case LOGOUT:
       return {
@@ -81,6 +88,14 @@ export const authReducer = (state = initialState, action) => {
         token: null,
         isAdmin: null,
         email: null,
+        phoneNumber: null,
+      };
+    case USER_DETAILS_FETCH_SUCCESS:
+      return {
+        ...state,
+        email: action.payload.email,
+        phoneNumber: action.payload.phoneNumber,
+        name: action.payload.name,
       };
     default:
       return state;

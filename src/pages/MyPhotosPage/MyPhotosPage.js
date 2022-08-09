@@ -28,8 +28,6 @@ const MyPhotosPage = () => {
 
     const photosList = [];
 
-    console.log(orderItems);
-
     orderItems.forEach((photo) => {
       photosList.push(
         <div className='mpp-photo-container' key={photo.id}>

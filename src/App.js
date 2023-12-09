@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { API_URL } from './util/config';
 
 import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/ShopPage/ShopPage';

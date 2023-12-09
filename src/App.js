@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Elements } from '@stripe/react-stripe-js';
@@ -32,12 +32,6 @@ const ProtectedLoginRoute = () => {
 };
 
 const App = () => {
-  //Wake up backend server if it's asleep
-  useEffect(() => {
-    console.log(API_URL);
-    fetch(`${API_URL}/ping`);
-  }, []);
-
   return (
     <Elements stripe={stripePromise}>
       <BrowserRouter>

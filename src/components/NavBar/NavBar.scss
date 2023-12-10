@@ -1,9 +1,20 @@
 @use '../../styles/constants.scss';
 
+$text_color: #000;
+
 .navBar-container {
-  display: flex;
   background: #fff6ef;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.navBar-container.navBar-burger-menu-active {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
 }
 
 .navBar {
@@ -19,6 +30,33 @@
 
 .navBar-mobile {
   display: none;
+}
+
+.navBar-burger-menu {
+  row-gap: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff6ef;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 7;
+  padding: 5% 0 5% 5%;
+  border-bottom-right-radius: 3%;
+  border-bottom-left-radius: 3%;
+}
+
+.navBar-burger-item {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+}
+
+.navBar-burger-menu-overlay {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
 }
 
 .navBar-start-desktop {

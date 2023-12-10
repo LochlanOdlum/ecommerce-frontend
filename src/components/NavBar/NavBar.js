@@ -10,8 +10,9 @@ import './NavBar.scss';
 const NavBar = () => {
   const modalToggleButton = useRef(null);
   const modalRef = useRef(null);
-  // const [isUserModalOpen, setIsUserModalOpen] = useClickOutsideClose(modalRef);
+  const burgerMenuRef = useRef(null);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -19,6 +20,7 @@ const NavBar = () => {
   const name = useSelector((state) => state.auth.name);
   const dispatch = useDispatch();
   useOnClickOutsideElement(modalRef, () => setIsUserModalOpen(false));
+  useOnClickOutsideElement(burgerMenuRef, () => setIsBurgerMenuOpen(false));
 
   const renderRightElements = () => {
     const signupElement = (
@@ -134,59 +136,112 @@ const NavBar = () => {
     }
   };
 
-  return (
-    <div className="navBar-container">
-      <div className="navBar">
-        {/* Regular left side menu */}
-        <div className="navBar-desktop navBar-start-desktop">
-          <div className="navBar-start-item-container">
-            <Link
-              to="/"
-              className={`navBar-start-item-a ${
-                pathname === '/' ? 'active' : ''
-              }`}
-            >
-              Home
-            </Link>
-          </div>
-          <div className="navBar-start-item-container">
-            <Link
-              to="/shop"
-              className={`navBar-start-item-a ${
-                pathname === '/shop' ? 'active' : ''
-              }`}
-            >
-              Shop
-            </Link>
-          </div>
-        </div>
+  const renderBurgerMenuElements = () => {
+    const signupElement = (
+      <button
+        className="navBar-button button-cadet"
+        onClick={() => {
+          navigate('/signup');
+        }}
+      >
+        Sign Up
+      </button>
+    );
+    const loginElement = (
+      <button
+        className="navBar-button button-orange"
+        onClick={() => {
+          navigate('/login');
+        }}
+      >
+        Login
+      </button>
+    );
 
-        {/* Mobile Burger menu */}
-        <div className="navBar-mobile navBar-start-mobile">
+    return (
+      <>
+        <Link
+          to="/"
+          className={`navBar-burger-item ${pathname === '/' ? 'active' : ''}`}
+        >
+          Home
+        </Link>
+        <Link
+          to="/shop"
+          className={`navBar-burger-item ${
+            pathname === '/shop' ? 'active' : ''
+          }`}
+        >
+          Shop
+        </Link>
+        {signupElement}
+        {loginElement}
+      </>
+    );
+  };
+
+  return (
+    <>
+      <div className="navBar-container">
+        <div className="navBar">
+          {/* Regular left side menu */}
+          <div className="navBar-desktop navBar-start-desktop">
+            <div className="navBar-start-item-container">
+              <Link
+                to="/"
+                className={`navBar-start-item-a ${
+                  pathname === '/' ? 'active' : ''
+                }`}
+              >
+                Home
+              </Link>
+            </div>
+            <div className="navBar-start-item-container">
+              <Link
+                to="/shop"
+                className={`navBar-start-item-a ${
+                  pathname === '/shop' ? 'active' : ''
+                }`}
+              >
+                Shop
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile Burger menu */}
+          <div className="navBar-mobile navBar-start-mobile">
+            <img
+              className="navBar-burger-menu-icon"
+              src="/images/menu.svg"
+              alt="burger-menu-icon"
+              onClick={() => {
+                setIsBurgerMenuOpen(true);
+              }}
+            />
+          </div>
+
+          {/* Central logo image */}
           <img
-            className="navBar-burger-menu-icon"
-            src="/images/menu.svg"
-            alt="burger-menu-icon"
+            alt="skylight-photography-logo"
+            src="/images/logo.png"
+            className="navBar-logo"
             onClick={() => {
-              navigate('/cart');
+              navigate('/');
             }}
           />
+
+          {/* Regular right side menu */}
+          <div className="navBar-end">{renderRightElements()}</div>
         </div>
 
-        {/* Central logo image */}
-        <img
-          alt="skylight-photography-logo"
-          src="/images/logo.png"
-          className="navBar-logo"
-          onClick={() => {
-            navigate('/');
-          }}
-        />
-
-        {/* Regular right side menu */}
-        <div className="navBar-end">{renderRightElements()}</div>
+        {isBurgerMenuOpen && (
+          <div className="navBar-burger-menu" ref={burgerMenuRef}>
+            {renderBurgerMenuElements()}
+          </div>
+        )}
       </div>
-    </div>
+      {isBurgerMenuOpen && <div className="navBar-burger-menu-overlay" />}
+    </>
   );
 };
 

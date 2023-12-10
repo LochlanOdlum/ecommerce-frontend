@@ -1,4 +1,4 @@
-@use '../../styles/colors.scss';
+@use '../../styles/constants.scss';
 
 .lip-container {
   min-height: 100vh;
@@ -112,6 +112,6 @@
 }
 
 .lip-signup-forgot-password {
-  color: colors.$text_color_faded;
+  color: constants.$text_color_faded;
   margin-left: auto;
 }

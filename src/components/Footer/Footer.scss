@@ -1,3 +1,5 @@
+@use '../../styles/constants.scss';
+
 .footer-container {
   background: #fff6ef;
 }
@@ -7,8 +9,9 @@
   display: flex;
   max-width: 1366px;
   /* padding-top: min(117px, 8.76vw); */
-  padding: min(117px, 8.76vw) min(97px, 7.1vw) 0 min(97px, 7.1vw);
-  height: min(400px, 29.94vw);
+  padding: min(117px, 8.76vw) min(97px, 7.1vw) 3% min(97px, 7.1vw);
+  overflow-x: hidden;
+  // height: min(400px, 29.94vw);
 }
 
 .footer-content-left {
@@ -37,9 +40,11 @@
   margin-left: auto;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .footer-right-column {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   color: black;
@@ -51,13 +56,13 @@
   font-family: 'Playfair Display', serif;
   color: black;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 1.875rem;
 }
 
 .footer-right-column-subtext {
   margin-top: 15px;
   margin-bottom: 15px;
-  font-size: 17px;
+  font-size: 1.06rem;
   color: black;
 }
 
@@ -68,7 +73,7 @@
 
 .get-in-touch-value {
   margin-top: auto;
-  font-size: 17px;
+  font-size: 1.06rem;
 }
 
 .footer-copyright {
@@ -77,4 +82,32 @@
   padding: 6px 0;
   font-size: 15px;
   background: #7f9296;
+}
+
+@media (max-width: constants.$breakpoint-xl) {
+}
+
+@media (max-width: constants.$breakpoint-lg) {
+}
+
+@media (max-width: constants.$breakpoint-md) {
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .footer-content-left {
+    width: 75%;
+  }
+
+  .footer-content-right {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .footer-right-git {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: constants.$breakpoint-sm) {
 }

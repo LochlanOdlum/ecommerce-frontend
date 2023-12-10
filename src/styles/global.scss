@@ -1,4 +1,4 @@
-@use '../styles/colors.scss';
+@use '../styles/constants.scss';
 
 * {
   box-sizing: border-box;
@@ -6,6 +6,7 @@
 
 html {
   width: 100vw;
+  font-size: 16px;
 }
 
 body {
@@ -75,4 +76,28 @@ input[type='number'] {
   font-size: 0.9rem;
   margin-top: 0.5%;
   padding-left: 2%;
+}
+
+@media (max-width: constants.$breakpoint-xl) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: constants.$breakpoint-lg) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: constants.$breakpoint-md) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: constants.$breakpoint-sm) {
+  html {
+    font-size: 11px;
+  }
 }

@@ -1,3 +1,5 @@
+@use '../../styles/constants.scss';
+
 .mail-list-container {
   background: white;
 }
@@ -43,4 +45,31 @@
 .mail-list-email-signup-button {
   margin-left: auto;
   width: 13.6%;
+}
+
+@media (max-width: constants.$breakpoint-xl) {
+}
+
+@media (max-width: constants.$breakpoint-lg) {
+}
+
+@media (max-width: constants.$breakpoint-md) {
+  .mail-list-form {
+    flex-direction: column;
+    align-items: stretch;
+    row-gap: 1rem;
+  }
+
+  .mail-list-email-input {
+    width: 100%;
+  }
+
+  .mail-list-email-signup-button {
+    margin: 0;
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+}
+
+@media (max-width: constants.$breakpoint-sm) {
 }

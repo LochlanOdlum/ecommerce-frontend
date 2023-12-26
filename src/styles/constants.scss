@@ -18,6 +18,8 @@ $table_row_alternate_color: #f7f7f7;
 
 $input_background_color_default: #f6f6f5;
 
+// Ensure these match styles in constants.js
+// We define mobile as <=$breakpoint-md, desktop > $breakpoint-md
 $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;

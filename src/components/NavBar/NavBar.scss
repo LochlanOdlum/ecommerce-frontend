@@ -6,6 +6,7 @@ $text_color: #000;
   background: #fff6ef;
   display: flex;
   flex-direction: column;
+  align-items: center;
   position: relative;
 }
 
@@ -79,10 +80,11 @@ $text_color: #000;
 .navBar-end {
   display: flex;
   column-gap: 24px;
-  color: #b1adad;
+  // column-gap: 8%;
+  // color: #b1adad;
   position: absolute;
   align-items: center;
-  right: 97.6px;
+  right: 7%;
 }
 
 .nav-user-container {
@@ -155,8 +157,6 @@ $text_color: #000;
 }
 
 .navBar-button {
-  width: 130px;
-  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -193,22 +193,34 @@ $text_color: #000;
 }
 
 @media (max-width: constants.$breakpoint-xl) {
+  .navBar-end {
+    right: 4.5%;
+    column-gap: 20px;
+  }
+
+  .navBar-start-desktop {
+    left: 4.5%;
+  }
 }
 
 @media (max-width: constants.$breakpoint-lg) {
+  .navBar-logo {
+    width: 115px;
+  }
+
+  .navBar-end {
+    right: 3.5%;
+    column-gap: 16px;
+  }
+
+  .navBar-start-desktop {
+    left: 3.5%;
+  }
 }
 
 @media (max-width: constants.$breakpoint-md) {
   .navBar-logo {
     width: 110px;
-  }
-
-  .navBar-desktop {
-    display: none;
-  }
-
-  .navBar-end {
-    right: 6%;
   }
 
   .navBar-mobile {
@@ -217,7 +229,4 @@ $text_color: #000;
 }
 
 @media (max-width: constants.$breakpoint-sm) {
-  .navBar-logo {
-    width: 90px;
-  }
 }

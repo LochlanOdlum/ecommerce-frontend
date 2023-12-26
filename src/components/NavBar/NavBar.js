@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../actions/authActions';
+// import MobileOnly from '../MobileOnly/MobileOnly';
+import DesktopOnly from '../DesktopOnly/DesktopOnly';
 
 import useOnClickOutsideElement from '../../hooks/useOnClickOutsideElement';
 
@@ -24,24 +26,28 @@ const NavBar = () => {
 
   const renderRightElements = () => {
     const signupElement = (
-      <button
-        className="navBar-desktop navBar-button button-cadet"
-        onClick={() => {
-          navigate('/signup');
-        }}
-      >
-        Sign Up
-      </button>
+      <DesktopOnly>
+        <button
+          className="navBar-desktop sp-small-button navBar-button button-cadet"
+          onClick={() => {
+            navigate('/signup');
+          }}
+        >
+          Sign Up
+        </button>
+      </DesktopOnly>
     );
     const loginElement = (
-      <button
-        className="navBar-desktop navBar-button button-orange"
-        onClick={() => {
-          navigate('/login');
-        }}
-      >
-        Login
-      </button>
+      <DesktopOnly>
+        <button
+          className="navBar-desktop sp-small-button navBar-button button-orange"
+          onClick={() => {
+            navigate('/login');
+          }}
+        >
+          Login
+        </button>
+      </DesktopOnly>
     );
 
     const cartElement = (
@@ -125,11 +131,16 @@ const NavBar = () => {
           >
             Logout
           </button> */}
-          <div className="naBbar-button-container">
-            <Link to="/myphotos" className="navBar-button button-orange">
-              My Photos
-            </Link>
-          </div>
+          <DesktopOnly>
+            <div className="naBbar-button-container">
+              <Link
+                to="/myphotos"
+                className="sp-small-button navBar-button button-orange"
+              >
+                My Photos
+              </Link>
+            </div>
+          </DesktopOnly>
           {cartElement}
         </>
       );
@@ -139,7 +150,7 @@ const NavBar = () => {
   const renderBurgerMenuElements = () => {
     const signupElement = (
       <button
-        className="navBar-button button-cadet"
+        className="sp-small-button navBar-button button-cadet"
         onClick={() => {
           navigate('/signup');
         }}
@@ -149,7 +160,7 @@ const NavBar = () => {
     );
     const loginElement = (
       <button
-        className="navBar-button button-orange"
+        className="sp-small-button navBar-button button-orange"
         onClick={() => {
           navigate('/login');
         }}
@@ -184,29 +195,31 @@ const NavBar = () => {
     <>
       <div className="navBar-container">
         <div className="navBar">
-          {/* Regular left side menu */}
-          <div className="navBar-desktop navBar-start-desktop">
-            <div className="navBar-start-item-container">
-              <Link
-                to="/"
-                className={`navBar-start-item-a ${
-                  pathname === '/' ? 'active' : ''
-                }`}
-              >
-                Home
-              </Link>
+          {/* Desktop left side menu */}
+          <DesktopOnly>
+            <div className="navBar-desktop navBar-start-desktop">
+              <div className="navBar-start-item-container">
+                <Link
+                  to="/"
+                  className={`navBar-start-item-a ${
+                    pathname === '/' ? 'active' : ''
+                  }`}
+                >
+                  Home
+                </Link>
+              </div>
+              <div className="navBar-start-item-container">
+                <Link
+                  to="/shop"
+                  className={`navBar-start-item-a ${
+                    pathname === '/shop' ? 'active' : ''
+                  }`}
+                >
+                  Shop
+                </Link>
+              </div>
             </div>
-            <div className="navBar-start-item-container">
-              <Link
-                to="/shop"
-                className={`navBar-start-item-a ${
-                  pathname === '/shop' ? 'active' : ''
-                }`}
-              >
-                Shop
-              </Link>
-            </div>
-          </div>
+          </DesktopOnly>
 
           {/* Mobile Burger menu */}
           <div className="navBar-mobile navBar-start-mobile">

@@ -30,12 +30,24 @@ a:visited {
 //Change grey-blue -> cadet
 //change orange-brown -> orange
 
+.sp-small-button {
+  width: 130px;
+  height: 48px;
+}
+
 .button-cadet,
 .button-orange {
   border: none;
   color: #ffffff;
-  border-radius: 3px;
-  font-size: 16px;
+  border-radius: 4%;
+  font-size: 1rem;
+}
+
+.button-cadet:visited,
+.button-cadet:link,
+.button-orange:visited,
+.button-orange:link {
+  color: #ffffff;
 }
 
 .button-cadet:hover,
@@ -82,17 +94,38 @@ input[type='number'] {
   html {
     font-size: 14px;
   }
+
+  .sp-small-button {
+    width: 127px;
+    height: 47px;
+  }
 }
 
 @media (max-width: constants.$breakpoint-lg) {
   html {
     font-size: 13px;
   }
+
+  .sp-small-button {
+    width: 116px;
+    height: 43px;
+  }
 }
 
 @media (max-width: constants.$breakpoint-md) {
   html {
     font-size: 12px;
+  }
+
+  .sp-small-button {
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
   }
 }
 

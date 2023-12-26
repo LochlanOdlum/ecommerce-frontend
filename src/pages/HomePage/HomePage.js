@@ -188,7 +188,7 @@ const HomePage = () => {
               below.
             </div>
             <button
-              className="button-orange hp-1-shop-button"
+              className="button-orange sp-small-button hp-1-shop-button"
               onClick={() => {
                 navigate('/shop');
               }}
@@ -208,7 +208,7 @@ const HomePage = () => {
               streets of Milan. These featured photos are available for purchase
               in the shop.
             </div>
-            <button className="button-orange sp-s2-shop-all-button">
+            <button className="button-orange sp-small-button sp-s2-shop-all-button">
               <Link to="/shop">Shop All</Link>
             </button>
           </div>
@@ -298,7 +298,7 @@ const HomePage = () => {
                 }}
               />
               <button
-                className="button-orange s4-cu-submit-button"
+                className="button-orange sp-small-button s4-cu-submit-button"
                 type="submit"
               >
                 Send
